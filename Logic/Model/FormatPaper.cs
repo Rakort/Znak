@@ -10,5 +10,14 @@ namespace Logic.Model
     {
         public int Width { get; set; }
         public int Height { get; set; }
+
+        public FormatPaper() { }
+        
+        public FormatPaper(int width, int height)
+        {
+            Width = width;
+            Height = height;    
+        }
+        
     }
 }

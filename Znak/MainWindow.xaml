@@ -20,19 +20,19 @@
         <Label x:Name="LB" Content="ВЫБОР БУМАГИ" HorizontalAlignment="Left" Margin="103,200,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LB_ProductFormat_Copy" Content="ЛИСТЫ" HorizontalAlignment="Left" Margin="62,301,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LB_ProductFormat_Copy1" Content="ИЗДЕЛИЯ" HorizontalAlignment="Left" Margin="62,351,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="TB_Sheets" HorizontalAlignment="Left" Margin="157,304,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="78" Height="20"/>
+        <TextBox x:Name="TB_Sheets" Text="{Binding SheetsCount}" HorizontalAlignment="Left" Margin="157,304,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="78" Height="20"/>
         <TextBox x:Name="TB_Products" HorizontalAlignment="Left" Margin="157,354,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="78" Height="20"/>
         <CheckBox x:Name="CB_Dealers" Content="ДЛЯ ДИЛЛЕРОВ" HorizontalAlignment="Left" Margin="503,362,0,0" VerticalAlignment="Top"/>
         <Button x:Name="But_Price" Content="РАСЧЕТ" HorizontalAlignment="Left" Margin="331,447,0,0" VerticalAlignment="Top" Width="52" Click="But_Price_Click"/>
         <Label x:Name="LB_price_per_sheet" Content="ЦЕНА ЗА ЛИСТ" HorizontalAlignment="Left" Margin="219,444,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LB_price_per_circulation" Content="ЦЕНА ЗА ТИРАЖ" HorizontalAlignment="Left" Margin="396,444,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="TB_price_per_sheet" HorizontalAlignment="Left" Margin="226,485,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="78" Height="20"/>
-        <TextBox x:Name="TB_price_per_circulation" HorizontalAlignment="Left" Margin="408,485,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="78" Height="20"/>
+        <TextBox x:Name="TB_price_tirag" HorizontalAlignment="Left" Margin="408,485,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="78" Height="20"/>
 
-        <RadioButton x:Name="RB_4_0" Content="4+0" GroupName="Color" HorizontalAlignment="Left" Margin="265,306,0,0" VerticalAlignment="Top" Checked="RB_4_0_Checked" />
-        <RadioButton x:Name="RB_4_4" Content="4+4" GroupName="Color" HorizontalAlignment="Left" Margin="329,306,0,0" VerticalAlignment="Top" Checked="RB_4_4_Checked" />
-        <RadioButton x:Name="RB_1_0" Content="1+0" GroupName="Color" HorizontalAlignment="Left" Margin="265,357,0,0" VerticalAlignment="Top" Checked="RB_1_0_Checked"/>
-        <RadioButton x:Name="RB_1_1" Content="1+1" GroupName="Color" HorizontalAlignment="Center" Margin="0,356,0,0" VerticalAlignment="Top" Checked="RB_1_1_Checked"/>
+        <RadioButton x:Name="RB_4_0" Content="4+0" GroupName="Color" HorizontalAlignment="Left" Margin="265,306,0,0" VerticalAlignment="Top"  />
+        <RadioButton x:Name="RB_4_4" Content="4+4" GroupName="Color" HorizontalAlignment="Left" Margin="329,306,0,0" VerticalAlignment="Top"  />
+        <RadioButton x:Name="RB_1_0" Content="1+0" GroupName="Color" HorizontalAlignment="Left" Margin="265,357,0,0" VerticalAlignment="Top" />
+        <RadioButton x:Name="RB_1_1" Content="1+1" GroupName="Color" HorizontalAlignment="Center" Margin="0,356,0,0" VerticalAlignment="Top" />
 
         <RadioButton x:Name="RB_PaperFormatA4" Content="A4" GroupName="PaperFormat" HorizontalAlignment="Left" Margin="34,155,0,0" VerticalAlignment="Top"/>
         <RadioButton x:Name="RB_PaperFormatA3" Content="A3" GroupName="PaperFormat" HorizontalAlignment="Left" Margin="115,155,0,0" VerticalAlignment="Top"/>
@@ -45,7 +45,7 @@
         <RadioButton x:Name="RB_ProductFormat_A5" Content="A5" GroupName="ProductFormat" HorizontalAlignment="Left" Margin="186,69,0,0" VerticalAlignment="Top"/>
         <RadioButton x:Name="RB_ProductFormat_A4" Content="A4" GroupName="ProductFormat" HorizontalAlignment="Left" Margin="252,69,0,0" VerticalAlignment="Top"/>
         <RadioButton x:Name="RB_ProductFormat_A3" Content="A3" GroupName="ProductFormat" HorizontalAlignment="Left" Margin="319,69,0,0" VerticalAlignment="Top"/>
-        
+
 
     </Grid>
 </Window>

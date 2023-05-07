@@ -30,9 +30,20 @@ namespace Znak
             // уточнить у Саши!!!
             DataContext = this; 
         }
-        public Price PaperType { get; set; }// тип бумаги выбранный пользователем в ComboBox
-        
-        public bool a4 = false; // A4 или А3 лист "false == a3"
+        /// <summary>
+        /// тип бумаги выбранный пользователем в ComboBox
+        /// </summary>
+        public Price PaperType { get; set; }
+
+        /// <summary>
+        /// количество листов в тираже
+        /// </summary>
+        public int SheetsCount { get; set; }
+
+        /// <summary>
+        /// A4 или А3 лист "false == a3"
+        /// </summary>
+        public bool a4 = false; 
 
         /// <summary>
         /// прайс лист
@@ -41,52 +52,6 @@ namespace Znak
 
         Calculations calculations = new Calculations();
 
- 
-
-        #region сторонность и цветность печати, методы radio button
-
-        /// <summary>
-        /// изменение сторонности печати "fals"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void RB_4_0_Checked(object sender, RoutedEventArgs e)
-        {
-            calculations.color = true;
-            calculations.sidePrint = false;          
-        }
-        /// <summary>
-        /// изменение сторонности печати "true"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void RB_4_4_Checked(object sender, RoutedEventArgs e)
-        {
-            calculations.color = true;
-            calculations.sidePrint = true;
-        }
-        /// <summary>
-        /// изменение цветности печати "fals"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void RB_1_0_Checked(object sender, RoutedEventArgs e)
-        {
-            calculations.color = false;
-            calculations.sidePrint = false;
-        }
-        /// <summary>
-        /// изменение цветности печати "true"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void RB_1_1_Checked(object sender, RoutedEventArgs e)
-        {
-            calculations.color = false;
-            calculations.sidePrint = true;
-        }
-        #endregion
-
         /// <summary>
         /// метод расчета стоимости
         /// </summary>
@@ -94,9 +59,38 @@ namespace Znak
         /// <param name="e"></param>
         private void But_Price_Click(object sender, RoutedEventArgs e)
         {
-            decimal priceInList = calculations.MainPrice(PaperType, int.Parse(TB_Sheets.Text), a4);
-            TB_price_per_circulation.Text = (priceInList * decimal.Parse(TB_Sheets.Text)).ToString();
+            //устанавливаем значение цаетности и сторонности в зависимости от активных radioButton
+            calculations.color = (RB_4_0.IsChecked ?? false) || (RB_4_4.IsChecked ?? false);
+            calculations.sidePrint = (RB_1_1.IsChecked ?? false) || (RB_4_4.IsChecked ?? false);
+
+            //устанавливаем значение дилерской цены в зависимости от активности checkBox
+            calculations.diler = CB_Dealers.IsChecked ?? false;
+
+            decimal priceInList = calculations.MainPrice(PaperType, SheetsCount, a4);
+            TB_price_tirag.Text = (priceInList * SheetsCount).ToString();
             TB_price_per_sheet.Text = priceInList.ToString();
         }
+
+        /// <summary>
+        /// определение формата изделия
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <returns></returns>
+        public FormatPaper FromatProduct()
+        {
+            int width=0;
+            int height=0;
+
+            var formatPaper = new FormatPaper();
+           // if (RB_ProductFormat_A7.IsChecked) formatPaper(width, height);
+
+            return formatPaper;
+        }
+        // 74, 105 
+        //105, 148
+        // 148, 210
+        //210, 297      
+        //420, 297
     }
 }
