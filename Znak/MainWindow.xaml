@@ -6,46 +6,78 @@
         xmlns:local="clr-namespace:Znak"
         mc:Ignorable="d"
         Title="MainWindow" Height="580" Width="705">
-    <Grid Margin="0,0,0,3" Opacity="1.2">
-        <Label x:Name="LB_ProductFormat" Content="ФОРМАТ ИЗДЕЛИЯ" HorizontalAlignment="Left" Margin="91,25,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="height" HorizontalAlignment="Left" Margin="441,63,0,0" TextWrapping="Wrap" Text="высота в мм." VerticalAlignment="Top" Width="78"/>
-        <Label x:Name="LB_SpecialFormat" Content="СВОЙ ФОРМАТ" HorizontalAlignment="Left" Margin="494,25,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="width" HorizontalAlignment="Left" Margin="558,63,0,0" TextWrapping="Wrap" Text="ширина в мм." VerticalAlignment="Top" Width="84"/>
-        <Label x:Name="PaperFormat" Content="ФОРМАТ БУМАГИ" HorizontalAlignment="Center" Margin="0,107,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="LB_Number_of_products_per_sheet" Content="КОЛИЧЕСТВО ИЗДЕЛИЙ НА ЛИСТЕ" HorizontalAlignment="Left" Margin="439,200,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="Quantity_per_sheet" HorizontalAlignment="Left" Margin="503,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="78" Height="20"/>
-
-        <ComboBox x:Name="CB_Materials" ItemsSource="{Binding PriceList}" SelectedItem="{Binding PaperType}" DisplayMemberPath="NamePaper" HorizontalAlignment="Left" Margin="62,246,0,0" VerticalAlignment="Top" Width="186"/>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
         
-        <Label x:Name="LB" Content="ВЫБОР БУМАГИ" HorizontalAlignment="Left" Margin="103,200,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="LB_ProductFormat_Copy" Content="ЛИСТЫ" HorizontalAlignment="Left" Margin="62,301,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="LB_ProductFormat_Copy1" Content="ИЗДЕЛИЯ" HorizontalAlignment="Left" Margin="62,351,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="TB_Sheets" Text="{Binding SheetsCount}" HorizontalAlignment="Left" Margin="157,304,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="78" Height="20"/>
-        <TextBox x:Name="TB_Products" HorizontalAlignment="Left" Margin="157,354,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="78" Height="20"/>
-        <CheckBox x:Name="CB_Dealers" Content="ДЛЯ ДИЛЛЕРОВ" HorizontalAlignment="Left" Margin="503,362,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="But_Price" Content="РАСЧЕТ" HorizontalAlignment="Left" Margin="331,447,0,0" VerticalAlignment="Top" Width="52" Click="But_Price_Click"/>
-        <Label x:Name="LB_price_per_sheet" Content="ЦЕНА ЗА ЛИСТ" HorizontalAlignment="Left" Margin="219,444,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="LB_price_per_circulation" Content="ЦЕНА ЗА ТИРАЖ" HorizontalAlignment="Left" Margin="396,444,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="TB_price_per_sheet" HorizontalAlignment="Left" Margin="226,485,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="78" Height="20"/>
-        <TextBox x:Name="TB_price_tirag" HorizontalAlignment="Left" Margin="408,485,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="78" Height="20"/>
+        <StackPanel Grid.Column="0">
+            <Label x:Name="LB_ProductFormat" Content="ФОРМАТ ИЗДЕЛИЯ" HorizontalAlignment="Center" Margin="20"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                <RadioButton x:Name="RB_ProductFormat_A7" Content="A7" GroupName="ProductFormat" Margin="20,0"/>
+                <RadioButton x:Name="RB_ProductFormat_A6" Content="A6" GroupName="ProductFormat" Margin="20,0"/>
+                <RadioButton x:Name="RB_ProductFormat_A5" Content="A5" GroupName="ProductFormat" Margin="20,0"/>
+                <RadioButton x:Name="RB_ProductFormat_A4" Content="A4" GroupName="ProductFormat" Margin="20,0"/>
+                <RadioButton x:Name="RB_ProductFormat_A3" Content="A3" GroupName="ProductFormat" Margin="20,0"/>
+            </StackPanel>
 
-        <RadioButton x:Name="RB_4_0" Content="4+0" GroupName="Color" HorizontalAlignment="Left" Margin="265,306,0,0" VerticalAlignment="Top"  />
-        <RadioButton x:Name="RB_4_4" Content="4+4" GroupName="Color" HorizontalAlignment="Left" Margin="329,306,0,0" VerticalAlignment="Top"  />
-        <RadioButton x:Name="RB_1_0" Content="1+0" GroupName="Color" HorizontalAlignment="Left" Margin="265,357,0,0" VerticalAlignment="Top" />
-        <RadioButton x:Name="RB_1_1" Content="1+1" GroupName="Color" HorizontalAlignment="Center" Margin="0,356,0,0" VerticalAlignment="Top" />
+            <Label x:Name="PaperFormat" Content="ФОРМАТ БУМАГИ" HorizontalAlignment="Center" Margin="20"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <RadioButton x:Name="RB_PaperFormatA4" Content="A4" GroupName="PaperFormat" Margin="15,0"/>
+                <RadioButton x:Name="RB_PaperFormatA3" Content="A3" GroupName="PaperFormat" Margin="15,0"/>
+                <RadioButton x:Name="RB_PaperFormatSRA3" Content="SRA3" GroupName="PaperFormat" Margin="15,0" />
+                <RadioButton x:Name="RB_PaperFormat_325X470" Content="325x470" GroupName="PaperFormat" Margin="15,0" />
+                <RadioButton x:Name="RB_PaperFormat_330X485" Content="330x485" GroupName="PaperFormat" Margin="15,0" />
+            </StackPanel>
 
-        <RadioButton x:Name="RB_PaperFormatA4" Content="A4" GroupName="PaperFormat" HorizontalAlignment="Left" Margin="34,155,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="RB_PaperFormatA3" Content="A3" GroupName="PaperFormat" HorizontalAlignment="Left" Margin="115,155,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="RB_PaperFormatSRA3" Content="SRA3" GroupName="PaperFormat" HorizontalAlignment="Left" Margin="179,155,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="RB_PaperFormat_325X470" Content="325x470" GroupName="PaperFormat" HorizontalAlignment="Left" Margin="262,155,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="RB_PaperFormat_330X485" Content="330x485" GroupName="PaperFormat" HorizontalAlignment="Left" Margin="365,155,0,0" VerticalAlignment="Top"/>
-        
-        <RadioButton x:Name="RB_ProductFormat_A7" Content="A7" GroupName="ProductFormat" HorizontalAlignment="Left" Margin="34,69,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="RB_ProductFormat_A6" Content="A6" GroupName="ProductFormat" HorizontalAlignment="Left" Margin="115,69,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="RB_ProductFormat_A5" Content="A5" GroupName="ProductFormat" HorizontalAlignment="Left" Margin="186,69,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="RB_ProductFormat_A4" Content="A4" GroupName="ProductFormat" HorizontalAlignment="Left" Margin="252,69,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="RB_ProductFormat_A3" Content="A3" GroupName="ProductFormat" HorizontalAlignment="Left" Margin="319,69,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="LB" Content="ВЫБОР БУМАГИ" HorizontalAlignment="Center" Margin="20"/>
+            <ComboBox x:Name="CB_Materials" ItemsSource="{Binding PriceList}" SelectedItem="{Binding PaperType}" DisplayMemberPath="NamePaper"
+                      HorizontalAlignment="Center" Width="186"/>
 
+            <StackPanel Orientation="Horizontal">
+                <Label x:Name="LB_ProductFormat_Copy" Content="ЛИСТЫ" Margin="10" Width="80"/>
+                <TextBox x:Name="TB_Sheets" Text="{Binding SheetsCount}" Margin="10" Width="80"/>
+                <RadioButton x:Name="RB_4_0" Content="4+0" GroupName="Color" Margin="10" VerticalAlignment="Center"/>
+                <RadioButton x:Name="RB_4_4" Content="4+4" GroupName="Color" Margin="10" VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label x:Name="LB_ProductFormat_Copy1" Content="ИЗДЕЛИЯ" Margin="10" Width="80"/>
+                <TextBox x:Name="TB_Products" HorizontalAlignment="Left" Margin="10" Width="80" />
+                <RadioButton x:Name="RB_1_0" Content="1+0" GroupName="Color" Margin="10" VerticalAlignment="Center"/>
+                <RadioButton x:Name="RB_1_1" Content="1+1" GroupName="Color" Margin="10" VerticalAlignment="Center"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1">
+            <Label x:Name="LB_SpecialFormat" Content="СВОЙ ФОРМАТ" HorizontalAlignment="Center" Margin="20"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBox x:Name="height" Text="высота в мм." Margin="10" />
+                <TextBox x:Name="width" Text="ширина в мм." Margin="10" />
+            </StackPanel>
+
+            <Label x:Name="LB_Number_of_products_per_sheet" Content="КОЛИЧЕСТВО ИЗДЕЛИЙ НА ЛИСТЕ" HorizontalAlignment="Center" Margin="20" />
+            <TextBox x:Name="Quantity_per_sheet" HorizontalAlignment="Center" Width="80" />
+
+            <CheckBox x:Name="CB_Dealers" Content="ДЛЯ ДИЛЛЕРОВ" Margin="20"/>
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label x:Name="LB_price_per_sheet" Content="ЦЕНА ЗА ЛИСТ" Margin="10"/>
+                <Button x:Name="But_Price" Content="РАСЧЕТ" Margin="10" Width="52" Click="But_Price_Click" />
+                <Label x:Name="LB_price_per_circulation" Content="ЦЕНА ЗА ТИРАЖ" Margin="10" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBox x:Name="TB_price_per_sheet" Margin="55,0"  Width="78" />
+                <TextBox x:Name="TB_price_tirag" Margin="55,0"  Width="78" />
+            </StackPanel>
+        </StackPanel>
 
     </Grid>
 </Window>
