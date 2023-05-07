@@ -34,23 +34,38 @@ namespace Znak
             
         }
         /// <summary>
+        /// сохранение формата бумаги отностиельно активных radioButton
+        /// </summary>
+        FormatPaper formatPaper = new();
+
+        /// <summary>
         /// тип бумаги выбранный пользователем в ComboBox
         /// </summary>
         public Price PaperType { get; set; }
 
+        //int? со значением null, для отсутствия ноля в TextBox до присвоения значения полю
         /// <summary>
         /// ширина изделия, поле биндится к TB_width
         /// </summary>
-        public int WidthP { get; set; }
+        public int? WidthNull { get; set; }   
+        public int WidthP => WidthNull ?? 0;
+
         /// <summary>
         /// высота изделия, поле биндится к TB_height
         /// </summary>
-        public int HeightP { get; set; }
+        //int? со значением null, для отсутствия ноля в TextBox до присвоения значения полю
+        public int? HeightNull { get; set; }   
+        public int HeightP => HeightNull ?? 0;
 
         /// <summary>
         /// количество листов в тираже
         /// </summary>
-        public int SheetsCount { get; set; }
+        // int? со значением null, для отсутствия ноля в TextBox до присвоения значения полю
+        public int? SheetsCountNull { get; set; }
+        /// <summary>
+        /// количество листов в тираже
+        /// </summary>
+        public int SheetsCount => SheetsCountNull ?? 0;
 
         /// <summary>
         /// A4 или А3 лист "false == a3"
@@ -104,18 +119,33 @@ namespace Znak
         /// <param name="e"></param>
         private void RB_ProductFormat_Checked(object sender, RoutedEventArgs e)
         {
-            if (RB_ProductFormat_A7.IsChecked == true) { WidthP = 74; HeightP = 105;}
-            
+            if (RB_ProductFormat_A7.IsChecked == true) { WidthNull = 74;  HeightNull = 105; }
+            if (RB_ProductFormat_A6.IsChecked == true) { WidthNull = 105; HeightNull = 148; }
+            if (RB_ProductFormat_A5.IsChecked == true) { WidthNull = 148; HeightNull = 210; }
+            if (RB_ProductFormat_A4.IsChecked == true) { WidthNull = 210; HeightNull = 297; }
+            if (RB_ProductFormat_A3.IsChecked == true) { WidthNull = 420; HeightNull = 297; }
         }
 
+        /// <summary>
+        /// определение формата бумаги отностиельно активных radioButton
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RB_PaperFormat_Checked(object sender, RoutedEventArgs e)
+        {          
+            if (RB_PaperFormatA4.IsChecked == true) formatPaper = new FormatPaper(200, 287);
+            if (RB_PaperFormatA3.IsChecked == true) formatPaper = new FormatPaper(410, 287);
+            if (RB_PaperFormat_325X470.IsChecked == true) formatPaper = new FormatPaper(315, 460);
+            if (RB_PaperFormat_330X485.IsChecked == true) formatPaper = new FormatPaper(320, 475);
+            //оределяет выбран лист А4 или нет
+            a4 = RB_PaperFormatA4.IsChecked ?? false;
+        }
+     
         private void TB_height_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
-        // 74, 105 
-        //105, 148
-        // 148, 210
-        //210, 297      
-        //420, 297
+
+        
     }
 }

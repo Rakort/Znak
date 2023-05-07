@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Znak"
+        d:DataContext="{d:DesignInstance Type=local:MainWindow}"
         mc:Ignorable="d"
         Title="MainWindow" Height="580" Width="705">
     <Grid>
@@ -19,20 +20,20 @@
         <StackPanel Grid.Column="0">
             <Label x:Name="LB_ProductFormat" Content="ФОРМАТ ИЗДЕЛИЯ" HorizontalAlignment="Center" Margin="20"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
-                <RadioButton x:Name="RB_ProductFormat_A7" Content="A7" GroupName="ProductFormat" Margin="20,0"/>
-                <RadioButton x:Name="RB_ProductFormat_A6" Content="A6" GroupName="ProductFormat" Margin="20,0"/>
-                <RadioButton x:Name="RB_ProductFormat_A5" Content="A5" GroupName="ProductFormat" Margin="20,0"/>
-                <RadioButton x:Name="RB_ProductFormat_A4" Content="A4" GroupName="ProductFormat" Margin="20,0"/>
-                <RadioButton x:Name="RB_ProductFormat_A3" Content="A3" GroupName="ProductFormat" Margin="20,0"/>
+                <RadioButton x:Name="RB_ProductFormat_A7" Content="A7" GroupName="ProductFormat" Margin="20,0" Checked="RB_ProductFormat_Checked"/>
+                <RadioButton x:Name="RB_ProductFormat_A6" Content="A6" GroupName="ProductFormat" Margin="20,0" Checked="RB_ProductFormat_Checked"/>
+                <RadioButton x:Name="RB_ProductFormat_A5" Content="A5" GroupName="ProductFormat" Margin="20,0" Checked="RB_ProductFormat_Checked"/>
+                <RadioButton x:Name="RB_ProductFormat_A4" Content="A4" GroupName="ProductFormat" Margin="20,0" Checked="RB_ProductFormat_Checked"/>
+                <RadioButton x:Name="RB_ProductFormat_A3" Content="A3" GroupName="ProductFormat" Margin="20,0" Checked="RB_ProductFormat_Checked"/>
             </StackPanel>
 
             <Label x:Name="PaperFormat" Content="ФОРМАТ БУМАГИ" HorizontalAlignment="Center" Margin="20"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <RadioButton x:Name="RB_PaperFormatA4" Content="A4" GroupName="PaperFormat" Margin="15,0"/>
-                <RadioButton x:Name="RB_PaperFormatA3" Content="A3" GroupName="PaperFormat" Margin="15,0"/>
-                <RadioButton x:Name="RB_PaperFormatSRA3" Content="SRA3" GroupName="PaperFormat" Margin="15,0" />
-                <RadioButton x:Name="RB_PaperFormat_325X470" Content="325x470" GroupName="PaperFormat" Margin="15,0" />
-                <RadioButton x:Name="RB_PaperFormat_330X485" Content="330x485" GroupName="PaperFormat" Margin="15,0" />
+                <RadioButton x:Name="RB_PaperFormatA4" Content="A4" GroupName="PaperFormat" Margin="15,0" Checked="RB_PaperFormat_Checked"/>
+                <RadioButton x:Name="RB_PaperFormatA3" Content="A3" GroupName="PaperFormat" Margin="15,0" Checked="RB_PaperFormat_Checked"/>
+                <RadioButton x:Name="RB_PaperFormatSRA3" Content="SRA3" GroupName="PaperFormat" Margin="15,0" Checked="RB_PaperFormat_Checked"/>
+                <RadioButton x:Name="RB_PaperFormat_325X470" Content="325x470" GroupName="PaperFormat" Margin="15,0" Checked="RB_PaperFormat_Checked"/>
+                <RadioButton x:Name="RB_PaperFormat_330X485" Content="330x485" GroupName="PaperFormat" Margin="15,0" Checked="RB_PaperFormat_Checked"/>
             </StackPanel>
 
             <Label x:Name="LB" Content="ВЫБОР БУМАГИ" HorizontalAlignment="Center" Margin="20"/>
@@ -41,7 +42,7 @@
 
             <StackPanel Orientation="Horizontal">
                 <Label x:Name="LB_ProductFormat_Copy" Content="ЛИСТЫ" Margin="10" Width="80"/>
-                <TextBox x:Name="TB_Sheets" Text="{Binding SheetsCount}" Margin="10" Width="80"/>
+                <TextBox x:Name="TB_Sheets" Text="{Binding SheetsCountNull, UpdateSourceTrigger=PropertyChanged}" Margin="10" Width="80"/>
                 <RadioButton x:Name="RB_4_0" Content="4+0" GroupName="Color" Margin="10" VerticalAlignment="Center"/>
                 <RadioButton x:Name="RB_4_4" Content="4+4" GroupName="Color" Margin="10" VerticalAlignment="Center"/>
             </StackPanel>
@@ -56,8 +57,8 @@
         <StackPanel Grid.Column="1">
             <Label x:Name="LB_SpecialFormat" Content="СВОЙ ФОРМАТ" HorizontalAlignment="Center" Margin="20"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBox x:Name="height" Text="высота в мм." Margin="10" />
-                <TextBox x:Name="width" Text="ширина в мм." Margin="10" />
+                <TextBox x:Name="TB_height" Text="{Binding HeightNull, UpdateSourceTrigger=PropertyChanged}"  Margin="10" Width="80"/>
+                <TextBox x:Name="TB_width"  Text="{Binding WidthNull, UpdateSourceTrigger=PropertyChanged}" Margin="10" Width="80"/>
             </StackPanel>
 
             <Label x:Name="LB_Number_of_products_per_sheet" Content="КОЛИЧЕСТВО ИЗДЕЛИЙ НА ЛИСТЕ" HorizontalAlignment="Center" Margin="20" />
