@@ -8,9 +8,9 @@
         Title="MainWindow" Height="580" Width="705">
     <Grid Margin="0,0,0,3" Opacity="1.2">
         <Label x:Name="LB_ProductFormat" Content="ФОРМАТ ИЗДЕЛИЯ" HorizontalAlignment="Left" Margin="91,25,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="height" HorizontalAlignment="Left" Margin="441,63,0,0" TextWrapping="Wrap" Text="высота в мм." VerticalAlignment="Top" Width="78"/>
+        <TextBox x:Name="TB_height" Text="{Binding HeightP}" HorizontalAlignment="Left" Margin="441,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="78" TextChanged="TB_height_TextChanged"/>
         <Label x:Name="LB_SpecialFormat" Content="СВОЙ ФОРМАТ" HorizontalAlignment="Left" Margin="494,25,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="width" HorizontalAlignment="Left" Margin="558,63,0,0" TextWrapping="Wrap" Text="ширина в мм." VerticalAlignment="Top" Width="84"/>
+        <TextBox x:Name="TB_width" Text="{Binding WidthP}" HorizontalAlignment="Left" Margin="558,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="84"/>
         <Label x:Name="PaperFormat" Content="ФОРМАТ БУМАГИ" HorizontalAlignment="Center" Margin="0,107,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LB_Number_of_products_per_sheet" Content="КОЛИЧЕСТВО ИЗДЕЛИЙ НА ЛИСТЕ" HorizontalAlignment="Left" Margin="439,200,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="Quantity_per_sheet" HorizontalAlignment="Left" Margin="503,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="78" Height="20"/>
@@ -39,12 +39,12 @@
         <RadioButton x:Name="RB_PaperFormatSRA3" Content="SRA3" GroupName="PaperFormat" HorizontalAlignment="Left" Margin="179,155,0,0" VerticalAlignment="Top"/>
         <RadioButton x:Name="RB_PaperFormat_325X470" Content="325x470" GroupName="PaperFormat" HorizontalAlignment="Left" Margin="262,155,0,0" VerticalAlignment="Top"/>
         <RadioButton x:Name="RB_PaperFormat_330X485" Content="330x485" GroupName="PaperFormat" HorizontalAlignment="Left" Margin="365,155,0,0" VerticalAlignment="Top"/>
-        
-        <RadioButton x:Name="RB_ProductFormat_A7" Content="A7" GroupName="ProductFormat" HorizontalAlignment="Left" Margin="34,69,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="RB_ProductFormat_A6" Content="A6" GroupName="ProductFormat" HorizontalAlignment="Left" Margin="115,69,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="RB_ProductFormat_A5" Content="A5" GroupName="ProductFormat" HorizontalAlignment="Left" Margin="186,69,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="RB_ProductFormat_A4" Content="A4" GroupName="ProductFormat" HorizontalAlignment="Left" Margin="252,69,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="RB_ProductFormat_A3" Content="A3" GroupName="ProductFormat" HorizontalAlignment="Left" Margin="319,69,0,0" VerticalAlignment="Top"/>
+
+        <RadioButton x:Name="RB_ProductFormat_A7" Content="A7" GroupName="ProductFormat" HorizontalAlignment="Left" Margin="34,69,0,0" VerticalAlignment="Top"  Checked="RB_ProductFormat_Checked"/>
+        <RadioButton x:Name="RB_ProductFormat_A6" Content="A6" GroupName="ProductFormat" HorizontalAlignment="Left" Margin="115,69,0,0" VerticalAlignment="Top" Checked="RB_ProductFormat_Checked"/>
+        <RadioButton x:Name="RB_ProductFormat_A5" Content="A5" GroupName="ProductFormat" HorizontalAlignment="Left" Margin="186,69,0,0" VerticalAlignment="Top" Checked="RB_ProductFormat_Checked"/>
+        <RadioButton x:Name="RB_ProductFormat_A4" Content="A4" GroupName="ProductFormat" HorizontalAlignment="Left" Margin="252,69,0,0" VerticalAlignment="Top" Checked="RB_ProductFormat_Checked"/>
+        <RadioButton x:Name="RB_ProductFormat_A3" Content="A3" GroupName="ProductFormat" HorizontalAlignment="Left" Margin="319,69,0,0" VerticalAlignment="Top" Checked="RB_ProductFormat_Checked"/>
 
 
     </Grid>

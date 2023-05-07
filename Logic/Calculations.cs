@@ -93,20 +93,5 @@ namespace Logic
             catch (Exception e) { return 0; }
         }
 
-        /// <summary>
-        /// определение формата изделия
-        /// </summary>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        /// <returns></returns>
-        public FormatPaper FromatProduct(int width, int height) 
-        {
-            return new FormatPaper(width,height);
-        }
-       // 74, 105 
-       //105, 148
-       // 148, 210
-       //210, 297      
-       //420, 297
     }
 }

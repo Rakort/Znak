@@ -3,9 +3,22 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="prices.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="prices.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Logic\Logic.csproj" />
