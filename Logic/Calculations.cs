@@ -7,7 +7,7 @@ namespace Logic
     public class Calculations
     {
         public bool diler = false; //является ли клиент диллером
-        public bool color; // цветность
+        public bool? color=null; // цветность
         public bool sidePrint; // сторонность печати
         public int tirag; // тираж       
         public decimal priceSheet; // цена за лист    
@@ -21,25 +21,26 @@ namespace Logic
         /// <returns></returns>
         public List<decimal> GetList(Price priceClass) 
         {
-            var list = new List<decimal>();
+                var list = new List<decimal>();
 
-            if (sidePrint == true && diler == false)
-            {
-                list = priceClass.Price_4_4;
-            }
-            else if(sidePrint == false && diler == false)
-                list = priceClass.Price_4_0;
-
-
-            if (sidePrint == true && diler == true)
-            {
-                list = priceClass.Price_4_4_Diler;
-            }
-            else if (sidePrint == false && diler == true)
-                list = priceClass.Price_4_0_Diler;
+                if (sidePrint == true && diler == false)
+                {
+                    list = priceClass.Price_4_4;
+                }
+                else if (sidePrint == false && diler == false)
+                    list = priceClass.Price_4_0;
 
 
-            return list;
+                if (sidePrint == true && diler == true)
+                {
+                    list = priceClass.Price_4_4_Diler;
+                }
+                else if (sidePrint == false && diler == true)
+                    list = priceClass.Price_4_0_Diler;
+
+
+                return list;
+
         }
 
         /// <summary>
@@ -77,20 +78,19 @@ namespace Logic
         /// <returns></returns>
         public int QuantityProducts(FormatPaper fromatPaper, FormatPaper fromatProduct)
         {
-            try
-            {
-                int x1 = fromatPaper.Width / fromatProduct.Width;
-                int x2 = fromatPaper.Height / fromatProduct.Height;
+            if (fromatPaper.Width == 0 || fromatPaper.Height == 0 || fromatProduct.Width == 0 || fromatProduct.Height == 0)
+                return 0;
 
-                int y1 = fromatPaper.Width / fromatProduct.Height;
-                int y2 = fromatPaper.Height / fromatProduct.Width;
+            int x1 = fromatPaper.Width / fromatProduct.Width;
+            int x2 = fromatPaper.Height / fromatProduct.Height;
 
-                int x = x1 * x2;
-                int y = y1 * y2;
+            int y1 = fromatPaper.Width / fromatProduct.Height;
+            int y2 = fromatPaper.Height / fromatProduct.Width;
 
-                return (x < y) ? y : x;
-            }
-            catch (Exception e) { return 0; }
+            int x = x1 * x2;
+            int y = y1 * y2;
+
+            return Math.Max(x, y);
         }
 
     }
