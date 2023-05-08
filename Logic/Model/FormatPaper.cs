@@ -18,6 +18,8 @@ namespace Logic.Model
             Width = width;
             Height = height;    
         }
+
+        public static FormatPaper A4 => new FormatPaper(10, 20);
         
     }
 }

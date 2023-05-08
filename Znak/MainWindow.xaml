@@ -20,7 +20,7 @@
         <StackPanel Grid.Column="0">
             <Label x:Name="LB_ProductFormat" Content="ФОРМАТ ИЗДЕЛИЯ" HorizontalAlignment="Center" Margin="20"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
-                <RadioButton x:Name="RB_ProductFormat_A7" Content="A7" GroupName="ProductFormat" Margin="20,0" Checked="RB_ProductFormat_Checked"/>
+                <RadioButton x:Name="RB_ProductFormat_A7" Content="A7" GroupName="ProductFormat" Margin="20,0" Command="{Binding ProductFormatCommand}" CommandParameter="{Binding formatPaper.A4}"/>
                 <RadioButton x:Name="RB_ProductFormat_A6" Content="A6" GroupName="ProductFormat" Margin="20,0" Checked="RB_ProductFormat_Checked"/>
                 <RadioButton x:Name="RB_ProductFormat_A5" Content="A5" GroupName="ProductFormat" Margin="20,0" Checked="RB_ProductFormat_Checked"/>
                 <RadioButton x:Name="RB_ProductFormat_A4" Content="A4" GroupName="ProductFormat" Margin="20,0" Checked="RB_ProductFormat_Checked"/>

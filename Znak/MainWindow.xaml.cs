@@ -33,10 +33,13 @@ namespace Znak
             DataContext = this;
             
         }
+
+        public ICommand ProductFormatCommand => new SimpleCommand(x => 
+                formatPaper = (FormatPaper)x);
         /// <summary>
         /// сохранение формата бумаги отностиельно активных radioButton
         /// </summary>
-        FormatPaper formatPaper = new();
+        public FormatPaper formatPaper { get; set; } = new();
 
         /// <summary>
         /// тип бумаги выбранный пользователем в ComboBox
