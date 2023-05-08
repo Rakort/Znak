@@ -20,9 +20,6 @@ using System.Windows.Shapes;
 
 namespace Znak
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         public MainWindow()
@@ -33,7 +30,7 @@ namespace Znak
             // строчка для работы биндингов
             DataContext = this;
         }
-
+        #region variables
         /// <summary>
         /// колличество изделий в тираже
         /// </summary>
@@ -95,6 +92,7 @@ namespace Znak
         Calculations calculations = new Calculations();
 
         public event PropertyChangedEventHandler PropertyChanged; //???????????
+        #endregion variables
 
         /// <summary>
         /// метод расчета стоимости
@@ -103,7 +101,12 @@ namespace Znak
         /// <param name="e"></param>
         private void But_Price_Click(object sender, RoutedEventArgs e)
         {
+            //провкрка выбрана ли цветность и тип бумаги
             if ((RB_4_0.IsChecked == false && RB_4_4.IsChecked == false && RB_1_0.IsChecked == false && RB_1_1.IsChecked == false)
+                || PaperType is null)
+                return;
+            //проверка выбран ли формат бумаги
+            if ((RB_PaperFormatA4.IsChecked == false && RB_PaperFormatA3.IsChecked == false && RB_PaperFormatSRA3.IsChecked == false && RB_PaperFormat_325X470.IsChecked == false && RB_PaperFormat_330X485.IsChecked == false)
                 || PaperType is null)
                 return;
             //устанавливаем значение цаетности и сторонности в зависимости от активных radioButton
@@ -114,8 +117,8 @@ namespace Znak
             calculations.diler = CB_Dealers.IsChecked ?? false;
             // цена за лист
             decimal priceInList = calculations.MainPrice(PaperType, SheetsCount, a4);
-            TB_price_tirag.Text = (priceInList * SheetsCount).ToString();
-            TB_price_per_sheet.Text = priceInList.ToString();
+            TB_price_tirag.Text = Math.Round((priceInList * SheetsCount), 1).ToString() + " p";
+            TB_price_per_sheet.Text = priceInList.ToString() + " p";
             
         }
 
@@ -138,14 +141,19 @@ namespace Znak
         /// <param name="e"></param>
         private void RB_ProductFormat_Checked(object sender, RoutedEventArgs e)
         {
-            if (RB_ProductFormat_A7.IsChecked == true) { WidthNull = 74;  HeightNull = 105; }
-            if (RB_ProductFormat_A6.IsChecked == true) { WidthNull = 105; HeightNull = 148; }
-            if (RB_ProductFormat_A5.IsChecked == true) { WidthNull = 148; HeightNull = 210; }
-            if (RB_ProductFormat_A4.IsChecked == true) { WidthNull = 210; HeightNull = 297; }
-            if (RB_ProductFormat_A3.IsChecked == true) { WidthNull = 420; HeightNull = 297; }
+            //устанавливаем значение блидов в зависимости от активности checkBox
+            int bleeds =0;
+            if (CB_bleeds.IsChecked == true) bleeds += 4;
 
+            if (RB_ProductFormat_A7.IsChecked == true) { WidthNull = 74 + bleeds;  HeightNull = 105 + bleeds; }
+            if (RB_ProductFormat_A6.IsChecked == true) { WidthNull = 105 + bleeds; HeightNull = 148 + bleeds; }
+            if (RB_ProductFormat_A5.IsChecked == true) { WidthNull = 148 + bleeds; HeightNull = 210 + bleeds; }
+            if (RB_ProductFormat_A4.IsChecked == true) { WidthNull = 210 + bleeds; HeightNull = 297 + bleeds; }
+            if (RB_ProductFormat_A3.IsChecked == true) { WidthNull = 420 + bleeds; HeightNull = 297 + bleeds; }
+                    
             QuantityOnSheet();
             Tirag();
+            
         }
 
         /// <summary>
@@ -178,10 +186,8 @@ namespace Znak
         /// <summary>
         /// заполнение TextBox количество на листе при ручном изменении формата изделия
         /// </summary>
-        private void TB_height_width_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            QuantityOnSheet();
-        }
+        private void TB_height_width_TextChanged(object sender, TextChangedEventArgs e) { QuantityOnSheet();}
+        
         /// <summary>
         /// расчет тиража от количества изделий
         /// </summary>
@@ -203,6 +209,39 @@ namespace Znak
             }
             catch (Exception ) { }
             
+        }
+
+        /// <summary>
+        /// прибавление блидов к изделию относительно активности CB
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CB_bleeds_Checked(object sender, RoutedEventArgs e) 
+        {
+            //устанавливаем значение дилерской цены в зависимости от активности checkBox
+            calculations.bleeds = CB_bleeds.IsChecked ?? false;
+            Bleeds();
+        }
+
+        /// <summary>
+        /// прибавление блидов к изделию
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Bleeds()
+        {
+            
+            //устанавливаем значение блидов в зависимости от активности checkBox
+            if (calculations.bleeds == true) 
+            { 
+                WidthNull += 4; HeightNull += 4; 
+            }
+            else if(calculations.bleeds == false)
+            {
+                WidthNull -= 4; HeightNull -= 4;
+            }
+
+
         }
     }
 }

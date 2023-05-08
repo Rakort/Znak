@@ -6,7 +6,11 @@ namespace Logic
 {
     public class Calculations
     {
-        public bool diler = false; //является ли клиент диллером
+        /// <summary>
+        /// наличие блидов
+        /// </summary>
+        public bool diler; //является ли клиент диллером
+        public bool? bleeds = null; // цветность
         public bool? color=null; // цветность
         public bool sidePrint; // сторонность печати
         public int tirag; // тираж       
