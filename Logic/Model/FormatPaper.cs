@@ -18,6 +18,8 @@ namespace Logic.Model
             Width = width;
             Height = height;    
         }
+
+        public bool IsZero => Width == 0 && Height == 0;
         
     }
 }

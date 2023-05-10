@@ -37,7 +37,7 @@
             </StackPanel>
 
             <Label x:Name="LB" Content="ВЫБОР БУМАГИ" HorizontalAlignment="Center" Margin="20"/>
-            <ComboBox x:Name="CB_Materials" ItemsSource="{Binding PriceList}" SelectedItem="{Binding PaperType}" DisplayMemberPath="NamePaper"
+            <ComboBox x:Name="CB_Materials" ItemsSource="{Binding PriceList}" SelectedItem="{Binding calculations.priceClass}" DisplayMemberPath="NamePaper"
                       HorizontalAlignment="Center" Width="186"/>
 
             <StackPanel Orientation="Horizontal">
@@ -60,12 +60,12 @@
                 <TextBox x:Name="TB_height" Text="{Binding HeightNull, UpdateSourceTrigger=PropertyChanged}"  Margin="10" Width="80" TextChanged="TB_height_width_TextChanged"/>
                 <TextBox x:Name="TB_width"  Text="{Binding WidthNull, UpdateSourceTrigger=PropertyChanged}" Margin="10" Width="80" TextChanged="TB_height_width_TextChanged"/>
             </StackPanel>
-            <CheckBox x:Name="CB_bleeds" Width="133" Checked="CB_bleeds_Checked" Content="ДОБАВИТЬ БЛИДЫ" Unchecked="CB_bleeds_Checked"/>
+            <CheckBox x:Name="CB_bleeds" HorizontalAlignment="Center" IsChecked="{Binding calculations.bleeds}" Checked="CB_bleeds_Checked" Content="ДОБАВИТЬ БЛИДЫ" Unchecked="CB_bleeds_Checked"/>
 
             <Label x:Name="LB_Number_of_products_per_sheet" Content="КОЛИЧЕСТВО ИЗДЕЛИЙ НА ЛИСТЕ" HorizontalAlignment="Center" Margin="20" />
             <TextBox x:Name="Quantity_per_sheet" Text="{Binding quantityOnSheetNull, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Center" Width="80" />
 
-            <CheckBox x:Name="CB_Dealers" Content="ДЛЯ ДИЛЛЕРОВ" Margin="20"/>
+            <CheckBox x:Name="CB_Dealers" IsChecked="{Binding calculations.diler}" Content="ДЛЯ ДИЛЛЕРОВ" Margin="20"/>
 
         </StackPanel>
 

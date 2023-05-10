@@ -1,22 +1,30 @@
 ﻿using Logic.Model;
 using System;
+using System.ComponentModel;
 
 namespace Logic
 
 {
-    public class Calculations
+    public class Calculations : INotifyPropertyChanged
     {
         /// <summary>
         /// наличие блидов
         /// </summary>
-        public bool diler; //является ли клиент диллером
-        public bool? bleeds = null; // цветность
-        public bool? color=null; // цветность
+        public bool diler { get; set; } //является ли клиент диллером
+        public bool bleeds { get; set; } = false; // цветность
+        public bool color; // цветность
         public bool sidePrint; // сторонность печати
         public int tirag; // тираж       
         public decimal priceSheet; // цена за лист    
         public decimal price = 0;// цена
-        public Price priceClass;  // обьект класса прайс выбранный в ComboBox
+        public Price priceClass { get; set; }  // обьект класса прайс выбранный в ComboBox
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public bool IsValid()
+        {
+            return priceClass != null;
+        }
 
         /// <summary>
         /// получение списка цен
@@ -25,53 +33,44 @@ namespace Logic
         /// <returns></returns>
         public List<decimal> GetList(Price priceClass) 
         {
-                var list = new List<decimal>();
-
-                if (sidePrint == true && diler == false)
-                {
-                    list = priceClass.Price_4_4;
-                }
-                else if (sidePrint == false && diler == false)
-                    list = priceClass.Price_4_0;
-
-
-                if (sidePrint == true && diler == true)
-                {
-                    list = priceClass.Price_4_4_Diler;
-                }
-                else if (sidePrint == false && diler == true)
-                    list = priceClass.Price_4_0_Diler;
-
-
-                return list;
-
+            var list = (sidePrint, diler) switch
+            {
+                (true, false) => priceClass.Price_4_4,
+                (false, false) => priceClass.Price_4_0,
+                (true, true) => priceClass.Price_4_4_Diler,
+                (false, true) => priceClass.Price_4_0_Diler
+            };
+            return list;
         }
 
         /// <summary>
         /// главный метод расчета цены за 1 лист
         /// </summary>
-        /// <param name="priceClass"></param>
         /// <returns></returns>
-        public decimal MainPrice(Price priceClass, int tirag,bool a4) 
+        public decimal MainPrice(int tirag,bool a4) 
         {
-            decimal list =1;// цена за 1 лист
-            int i = 0;//номер элемента массива
-
             //проверка стоимости печати относительно тиража
-            if (tirag > 0 && tirag < 5) i = 1;
-            else if (tirag >= 5 && tirag < 20) i = 2;
-            else if (tirag >= 20 && tirag < 50) i = 3;
-            else if (tirag >= 50 && tirag < 100) i = 4;
-            else if (tirag >= 100) i = 5;
+            int i = tirag switch
+            {
+                > 0 and < 5 => 1,
+                >= 5 and < 20 => 2,
+                >= 20 and < 50 => 3,
+                >= 50 and < 100 => 4,
+                >= 100 => 5,
+                _ => 0,
+            };
 
+            // цена за 1 лист
+            decimal price = GetList(priceClass)[i];
             //проверка а4 лист или увеличеный
-            if (a4) list = GetList(priceClass)[i] / 2;
-            else list = GetList(priceClass)[i];
+            if (a4) 
+                price = price / 2;
 
             //если печать чернобелая цена в 2 раза ниже
-            if (color == false) list = list / 2;
+            if (!color) 
+                price = price / 2;
 
-            return list;
+            return price;
         }
 
         /// <summary>
@@ -82,7 +81,7 @@ namespace Logic
         /// <returns></returns>
         public int QuantityProducts(FormatPaper fromatPaper, FormatPaper fromatProduct)
         {
-            if (fromatPaper.Width == 0 || fromatPaper.Height == 0 || fromatProduct.Width == 0 || fromatProduct.Height == 0)
+            if (fromatPaper.IsZero || fromatProduct.IsZero)
                 return 0;
 
             int x1 = fromatPaper.Width / fromatProduct.Width;

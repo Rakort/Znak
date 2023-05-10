@@ -50,23 +50,18 @@ namespace Znak
         /// </summary>
         FormatPaper formatPaper = new();
 
-        /// <summary>
-        /// тип бумаги выбранный пользователем в ComboBox
-        /// </summary>
-        public Price PaperType { get; set; }
-
         //int? со значением null, для отсутствия ноля в TextBox до присвоения значения полю
         /// <summary>
         /// ширина изделия, поле биндится к TB_width
         /// </summary>
-        public int? WidthNull { get; set; }   
+        public int? WidthNull { get; set; }
         public int WidthP => WidthNull ?? 0;
 
         /// <summary>
         /// высота изделия, поле биндится к TB_height
         /// </summary>
         //int? со значением null, для отсутствия ноля в TextBox до присвоения значения полю
-        public int? HeightNull { get; set; }   
+        public int? HeightNull { get; set; }
         public int HeightP => HeightNull ?? 0;
 
         /// <summary>
@@ -82,16 +77,17 @@ namespace Znak
         /// <summary>
         /// A4 или А3 лист "false == a3"
         /// </summary>
-        public bool a4 = false; 
+        public bool a4 = false;
 
         /// <summary>
         /// прайс лист
         /// </summary>
         public List<Price> PriceList { get; set; }
 
-        Calculations calculations = new Calculations();
+        public Calculations calculations { get; set; } = new Calculations();
 
-        public event PropertyChangedEventHandler PropertyChanged; //???????????
+        // Из интерфейса INotifyPropertyChanged. Нужно для обновления зачаний в визуальных компонентах
+        public event PropertyChangedEventHandler PropertyChanged;
         #endregion variables
 
         /// <summary>
@@ -101,39 +97,30 @@ namespace Znak
         /// <param name="e"></param>
         private void But_Price_Click(object sender, RoutedEventArgs e)
         {
+            if (!calculations.IsValid())
+                return;
             //провкрка выбрана ли цветность и тип бумаги
-            if ((RB_4_0.IsChecked == false && RB_4_4.IsChecked == false && RB_1_0.IsChecked == false && RB_1_1.IsChecked == false)
-                || PaperType is null)
+            if (RB_4_0.IsChecked == false && RB_4_4.IsChecked == false && RB_1_0.IsChecked == false && RB_1_1.IsChecked == false)
                 return;
             //проверка выбран ли формат бумаги
-            if ((RB_PaperFormatA4.IsChecked == false && RB_PaperFormatA3.IsChecked == false && RB_PaperFormatSRA3.IsChecked == false && RB_PaperFormat_325X470.IsChecked == false && RB_PaperFormat_330X485.IsChecked == false)
-                || PaperType is null)
+            if (RB_PaperFormatA4.IsChecked == false && RB_PaperFormatA3.IsChecked == false && RB_PaperFormatSRA3.IsChecked == false && RB_PaperFormat_325X470.IsChecked == false && RB_PaperFormat_330X485.IsChecked == false)
                 return;
             //устанавливаем значение цаетности и сторонности в зависимости от активных radioButton
             calculations.color = (RB_4_0.IsChecked ?? false) || (RB_4_4.IsChecked ?? false);
             calculations.sidePrint = (RB_1_1.IsChecked ?? false) || (RB_4_4.IsChecked ?? false);
 
-            //устанавливаем значение дилерской цены в зависимости от активности checkBox
-            calculations.diler = CB_Dealers.IsChecked ?? false;
             // цена за лист
-            decimal priceInList = calculations.MainPrice(PaperType, SheetsCount, a4);
+            decimal priceInList = calculations.MainPrice(SheetsCount, a4);
             TB_price_tirag.Text = Math.Round((priceInList * SheetsCount), 1).ToString() + " p";
             TB_price_per_sheet.Text = priceInList.ToString() + " p";
-            
+
         }
 
         /// <summary>
         /// определение формата изделия
         /// </summary>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        /// <returns></returns>
-        public FormatPaper ProductFormat()
-        {                             
-            FormatPaper formatPaper = new FormatPaper(WidthP,HeightP);
+        public FormatPaper ProductFormat => new FormatPaper(WidthP, HeightP);
 
-            return formatPaper;
-        }
         /// <summary>
         /// заполнение полей высоты и ширины изделия отностиельно активных radioButton
         /// </summary>
@@ -141,21 +128,20 @@ namespace Znak
         /// <param name="e"></param>
         private void RB_ProductFormat_Checked(object sender, RoutedEventArgs e)
         {
-            //устанавливаем значение блидов в зависимости от активности checkBox
-            int bleeds =0;
-            if (CB_bleeds.IsChecked == true) bleeds += 4;
+            if (RB_ProductFormat_A7.IsChecked == true) { WidthNull = 74; HeightNull = 105; }
+            if (RB_ProductFormat_A6.IsChecked == true) { WidthNull = 105; HeightNull = 148; }
+            if (RB_ProductFormat_A5.IsChecked == true) { WidthNull = 148; HeightNull = 210; }
+            if (RB_ProductFormat_A4.IsChecked == true) { WidthNull = 210; HeightNull = 297; }
+            if (RB_ProductFormat_A3.IsChecked == true) { WidthNull = 420; HeightNull = 297; }
 
-            if (RB_ProductFormat_A7.IsChecked == true) { WidthNull = 74 + bleeds;  HeightNull = 105 + bleeds; }
-            if (RB_ProductFormat_A6.IsChecked == true) { WidthNull = 105 + bleeds; HeightNull = 148 + bleeds; }
-            if (RB_ProductFormat_A5.IsChecked == true) { WidthNull = 148 + bleeds; HeightNull = 210 + bleeds; }
-            if (RB_ProductFormat_A4.IsChecked == true) { WidthNull = 210 + bleeds; HeightNull = 297 + bleeds; }
-            if (RB_ProductFormat_A3.IsChecked == true) { WidthNull = 420 + bleeds; HeightNull = 297 + bleeds; }
-                    
+            //устанавливаем значение блидов в зависимости от активности checkBox
+            if (calculations.bleeds) { WidthNull += 4; HeightNull += 4; }
+
             QuantityOnSheet();
             Tirag();
-            
-        }
 
+        }
+        
         /// <summary>
         /// определение формата бумаги отностиельно активных radioButton
         /// </summary>
@@ -180,7 +166,7 @@ namespace Znak
         private void QuantityOnSheet()
         {
             // заполнение TextBox количество на листе
-            quantityOnSheetNull = calculations.QuantityProducts(formatPaper, ProductFormat());
+            quantityOnSheetNull = calculations.QuantityProducts(formatPaper, ProductFormat);
         }
 
         /// <summary>
@@ -202,12 +188,12 @@ namespace Znak
         /// <param name="e"></param>
         private void Tirag()
         {
-            try
-            {
-                SheetsCountNull = (int)Math.Ceiling((double)productNull / (double)quantityOnSheetNull);
-                if (SheetsCountNull <= 0) SheetsCountNull = 0;
+            if (productNull.HasValue && quantityOnSheetNull.HasValue && quantityOnSheetNull > 0)
+            { 
+                SheetsCountNull = productNull / quantityOnSheetNull;
+                if (SheetsCountNull <= 0)
+                    SheetsCountNull = 0; 
             }
-            catch (Exception ) { }
             
         }
 
@@ -219,24 +205,20 @@ namespace Znak
         private void CB_bleeds_Checked(object sender, RoutedEventArgs e) 
         {
             //устанавливаем значение дилерской цены в зависимости от активности checkBox
-            calculations.bleeds = CB_bleeds.IsChecked ?? false;
             Bleeds();
         }
 
         /// <summary>
         /// прибавление блидов к изделию
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Bleeds()
         {
-            
             //устанавливаем значение блидов в зависимости от активности checkBox
-            if (calculations.bleeds == true) 
+            if (calculations.bleeds) 
             { 
                 WidthNull += 4; HeightNull += 4; 
             }
-            else if(calculations.bleeds == false)
+            else
             {
                 WidthNull -= 4; HeightNull -= 4;
             }
