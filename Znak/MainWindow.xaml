@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Znak"
-        d:DataContext="{d:DesignInstance Type=local:MainWindow}"
+        d:DataContext="{d:DesignInstance Type=local:MainWindow, IsDesignTimeCreatable=True}"
         mc:Ignorable="d"
         Title="MainWindow" Height="580" Width="705">
     <Grid>
@@ -28,13 +28,7 @@
             </StackPanel>
 
             <Label x:Name="PaperFormat" Content="ФОРМАТ БУМАГИ" HorizontalAlignment="Center" Margin="20"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <RadioButton x:Name="RB_PaperFormatA4" Content="A4" GroupName="PaperFormat" Margin="15,0" Checked="RB_PaperFormat_Checked"/>
-                <RadioButton x:Name="RB_PaperFormatA3" Content="A3" GroupName="PaperFormat" Margin="15,0" Checked="RB_PaperFormat_Checked"/>
-                <RadioButton x:Name="RB_PaperFormatSRA3" Content="SRA3" GroupName="PaperFormat" Margin="15,0" Checked="RB_PaperFormat_Checked"/>
-                <RadioButton x:Name="RB_PaperFormat_325X470" Content="325x470" GroupName="PaperFormat" Margin="15,0" Checked="RB_PaperFormat_Checked"/>
-                <RadioButton x:Name="RB_PaperFormat_330X485" Content="330x485" GroupName="PaperFormat" Margin="15,0" Checked="RB_PaperFormat_Checked"/>
-            </StackPanel>
+            <local:RadioComponent ItemSource="{Binding FormatPaperItemSource}" CurrentItem="{Binding CurrentFormatPaperSource}" DisplayMemberPath="Name" Checked="RadioComponent_Checked"/>
 
             <Label x:Name="LB" Content="ВЫБОР БУМАГИ" HorizontalAlignment="Center" Margin="20"/>
             <ComboBox x:Name="CB_Materials" ItemsSource="{Binding PriceList}" SelectedItem="{Binding PaperType}" DisplayMemberPath="NamePaper"

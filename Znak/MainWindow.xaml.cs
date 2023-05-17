@@ -48,7 +48,7 @@ namespace Znak
         /// <summary>
         /// сохранение формата бумаги отностиельно активных radioButton
         /// </summary>
-        FormatPaper formatPaper = new();
+        FormatPaper formatPaper => CurrentFormatPaperSource?.FormatPaper ?? new();
 
         /// <summary>
         /// тип бумаги выбранный пользователем в ComboBox
@@ -106,8 +106,7 @@ namespace Znak
                 || PaperType is null)
                 return;
             //проверка выбран ли формат бумаги
-            if ((RB_PaperFormatA4.IsChecked == false && RB_PaperFormatA3.IsChecked == false && RB_PaperFormatSRA3.IsChecked == false && RB_PaperFormat_325X470.IsChecked == false && RB_PaperFormat_330X485.IsChecked == false)
-                || PaperType is null)
+            if (formatPaper.IsZero || PaperType is null)
                 return;
             //устанавливаем значение цаетности и сторонности в зависимости от активных radioButton
             calculations.color = (RB_4_0.IsChecked ?? false) || (RB_4_4.IsChecked ?? false);
@@ -156,24 +155,18 @@ namespace Znak
             
         }
 
-        /// <summary>
-        /// определение формата бумаги отностиельно активных radioButton
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void RB_PaperFormat_Checked(object sender, RoutedEventArgs e)
-        {          
-            if (RB_PaperFormatA4.IsChecked == true) formatPaper = new FormatPaper(200, 287);
-            if (RB_PaperFormatA3.IsChecked == true) formatPaper = new FormatPaper(410, 287);
-            if (RB_PaperFormatSRA3.IsChecked == true) formatPaper = new FormatPaper(440, 310);
-            if (RB_PaperFormat_325X470.IsChecked == true) formatPaper = new FormatPaper(315, 460);
-            if (RB_PaperFormat_330X485.IsChecked == true) formatPaper = new FormatPaper(320, 475);
-            //оределяет выбран лист А4 или нет
-            a4 = RB_PaperFormatA4.IsChecked ?? false;
+        public record FormatPaperSource(FormatPaper FormatPaper, string Name);
+        public CollectionView FormatPaperItemSource => new CollectionView( new List<FormatPaperSource>()
+        {
+            new FormatPaperSource(new FormatPaper(200, 287), "A4"),
+            new FormatPaperSource(new FormatPaper(410, 287), "A3"),
+            new FormatPaperSource(new FormatPaper(440, 310), "SRA3"),
+            new FormatPaperSource(new FormatPaper(315, 460), "325X470"),
+            new FormatPaperSource(new FormatPaper(320, 475), "330X485"),
+    });
 
-            QuantityOnSheet();
-            Tirag();
-        }
+        public FormatPaperSource CurrentFormatPaperSource { get; set; }
+
         /// <summary>
         /// заполнение TextBox количество на листе
         /// </summary>
@@ -221,6 +214,19 @@ namespace Znak
             //устанавливаем значение дилерской цены в зависимости от активности checkBox
             calculations.bleeds = CB_bleeds.IsChecked ?? false;
             Bleeds();
+        }
+
+        /// <summary>
+        /// Выбор формата бумаги через radioButton
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RadioComponent_Checked(object sender, RoutedEventArgs e)
+        {
+            a4 = CurrentFormatPaperSource?.Name == "A4";
+
+            QuantityOnSheet();
+            Tirag();
         }
 
         /// <summary>
