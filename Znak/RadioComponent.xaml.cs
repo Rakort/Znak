@@ -31,14 +31,14 @@ namespace Znak
         public static readonly DependencyProperty DisplayMemberPathProperty =
             DependencyProperty.Register("DisplayMemberPath", typeof(string), typeof(RadioComponent), new PropertyMetadata(""));
         
-        public CollectionView ItemSource
+        public ListCollectionView ItemSource
         {
-            get { return (CollectionView)GetValue(ItemSourceProperty); }
+            get { return (ListCollectionView)GetValue(ItemSourceProperty); }
             set { SetValue(ItemSourceProperty, value); }
         }
 
         public static readonly DependencyProperty ItemSourceProperty =
-            DependencyProperty.Register("ItemSource", typeof(CollectionView), typeof(RadioComponent), 
+            DependencyProperty.Register("ItemSource", typeof(ListCollectionView), typeof(RadioComponent), 
                 // Действие при изменении свойства
                 new UIPropertyMetadata(null, (o, args) => {
                     if (o is RadioComponent current)
@@ -54,10 +54,41 @@ namespace Znak
         // Using a DependencyProperty as the backing store for CurrentItem.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CurrentItemProperty =
             DependencyProperty.Register("CurrentItem", typeof(object), typeof(RadioComponent), 
-                new FrameworkPropertyMetadata(null)
+                new FrameworkPropertyMetadata(null, (o, args) => {
+                    if (o is RadioComponent current)
+                    {
+                        if (args.NewValue == args.OldValue)
+                            return;
+
+                        if (args.NewValue == null)
+                            current._radioButtons.ForEach(x => x.IsChecked = false);
+                        else
+                        {
+                            current._radioButtons.ForEach(x => x.IsChecked = false);
+                            var rb = current._radioButtons.FirstOrDefault(x => x.Tag.Equals(args.NewValue));
+                            if(rb != null)
+                                rb.IsChecked = true;
+                        }
+                    }
+                })
                 {
                     BindsTwoWayByDefault = true,
                 });
+
+
+
+        public int MaxColumn
+        {
+            get { return (int)GetValue(MaxColumnProperty); }
+            set { SetValue(MaxColumnProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MaxColumn.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MaxColumnProperty =
+            DependencyProperty.Register("MaxColumn", typeof(int), typeof(RadioComponent), new PropertyMetadata(0));
+
+
+        private List<RadioButton> _radioButtons = new List<RadioButton>();
 
         #endregion
 
@@ -78,15 +109,26 @@ namespace Znak
         {
             // Очистка грида
             MainGrid.Children.Clear();
+            _radioButtons.Clear();
 
             if (ItemSource == null)
                 return;
 
+            var maxColumn = MaxColumn <= 0 ? ItemSource.Count : Math.Min(ItemSource.Count, MaxColumn);
+
+            if (ItemSource.Count > maxColumn)
+            {
+                var maxRow = (int)Math.Ceiling((decimal)ItemSource.Count / MaxColumn);
+                while (maxRow > MainGrid.RowDefinitions.Count())
+                    MainGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
+            }
+
             // Создаем колонки в гриде пока их меньше чем элементов в списке
-            while(ItemSource.Count > MainGrid.ColumnDefinitions.Count())
+            while (maxColumn > MainGrid.ColumnDefinitions.Count())
                 MainGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
 
-            int i = 0;
+            int column = 0;
+            int row = 0;
             foreach (var item in ItemSource)
             {
                 // Создаем RadioButton
@@ -101,9 +143,17 @@ namespace Znak
                 rb.Checked += Rb_Checked;
 
                 // Устанавливаем номер колонки
-                Grid.SetColumn(rb, i);
+                Grid.SetColumn(rb, column);
+                Grid.SetRow(rb, row);
                 MainGrid.Children.Add(rb);
-                i++;
+                _radioButtons.Add(rb);
+                column++;
+                if (column >= maxColumn)
+                {
+                    row++;
+                    column = 0;
+                }
+                
             }
         }
 
@@ -120,6 +170,7 @@ namespace Znak
                 if (radioButton.IsChecked == true)
                 {
                     CurrentItem = radioButton.Tag;
+                    ItemSource.MoveCurrentTo(CurrentItem);
                     // Активируем событие
                     Checked?.Invoke(sender, e);
                 }

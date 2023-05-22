@@ -1,6 +1,7 @@
 ﻿using Logic;
 using Logic.Model;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -29,6 +30,7 @@ namespace Znak
             PriceList = PriceManager.GetPrices();
             // строчка для работы биндингов
             DataContext = this;
+
         }
         #region variables
         /// <summary>
@@ -118,7 +120,8 @@ namespace Znak
             decimal priceInList = calculations.MainPrice(PaperType, SheetsCount, a4);
             TB_price_tirag.Text = Math.Round((priceInList * SheetsCount), 1).ToString() + " p";
             TB_price_per_sheet.Text = priceInList.ToString() + " p";
-            
+
+            Draw();
         }
 
         /// <summary>
@@ -156,7 +159,7 @@ namespace Znak
         }
 
         public record FormatPaperSource(FormatPaper FormatPaper, string Name);
-        public CollectionView FormatPaperItemSource => new CollectionView( new List<FormatPaperSource>()
+        public ListCollectionView FormatPaperItemSource => new ListCollectionView( new List<FormatPaperSource>()
         {
             new FormatPaperSource(new FormatPaper(200, 287), "A4"),
             new FormatPaperSource(new FormatPaper(410, 287), "A3"),
@@ -249,5 +252,68 @@ namespace Znak
 
 
         }
+
+        private void Draw()
+        {
+            var formatPaper = CurrentFormatPaperSource.FormatPaper;
+            var formatProduct = ProductFormat();
+            FlipFormatProduct();
+
+            Canvas.Children.Clear();
+
+            Canvas.Children.Add( new Rectangle()
+            {
+                HorizontalAlignment = HorizontalAlignment.Left,
+                VerticalAlignment = VerticalAlignment.Top,
+                Margin = new Thickness(0, 0, 0, 0),
+                Visibility = System.Windows.Visibility.Visible,
+                StrokeThickness = 4,
+                Stroke = System.Windows.Media.Brushes.Black,
+                Height = formatPaper.Height,
+                Width = formatPaper.Width,
+            });
+
+            int x = 0, y = 0;
+            while(y + formatProduct.Height < formatPaper.Height)
+            {
+                while(x + formatProduct.Width < formatPaper.Width)
+                {
+                    Canvas.Children.Add(CreateRectangle(x,y,formatProduct.Width,formatProduct.Height));
+                    x += formatProduct.Width;
+                }
+                x = 0;
+                y += formatProduct.Height;
+            }
+
+            void FlipFormatProduct()
+            {
+                int x1 = formatPaper.Width / formatProduct.Width;
+                int x2 = formatPaper.Height / formatProduct.Height;
+
+                int y1 = formatPaper.Width / formatProduct.Height;
+                int y2 = formatPaper.Height / formatProduct.Width;
+
+                int x = x1 * x2;
+                int y = y1 * y2;
+                // Поворачиваем продукт
+                if (y > x)
+                    formatProduct = new FormatPaper(formatProduct.Height, formatProduct.Width);
+            }
+        }
+
+        
+
+        private Rectangle CreateRectangle(double X1, double Y1, double X2, double Y2) =>
+            new Rectangle()
+            {
+                HorizontalAlignment = HorizontalAlignment.Left,
+                VerticalAlignment = VerticalAlignment.Top,
+                Margin = new Thickness(X1, Y1, 0, 0),
+                Visibility = System.Windows.Visibility.Visible,
+                StrokeThickness = 4,
+                Stroke = System.Windows.Media.Brushes.Black,
+                Height = Y2,
+                Width = X2,
+            };
     }
 }

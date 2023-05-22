@@ -8,6 +8,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="580" Width="705">
     <Grid>
+        <local:CalcView />
+        <Grid Visibility="Collapsed">
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="1*"/>
@@ -60,8 +62,10 @@
             <TextBox x:Name="Quantity_per_sheet" Text="{Binding quantityOnSheetNull, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Center" Width="80" />
 
             <CheckBox x:Name="CB_Dealers" Content="ДЛЯ ДИЛЛЕРОВ" Margin="20"/>
-
-        </StackPanel>
+                <Viewbox Stretch="Uniform" Width="150" Height="150">
+                    <Grid  x:Name="Canvas" />
+                </Viewbox>
+            </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -75,5 +79,6 @@
             </StackPanel>
         </StackPanel>
 
+    </Grid>
     </Grid>
 </Window>
