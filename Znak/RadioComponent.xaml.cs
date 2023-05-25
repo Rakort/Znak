@@ -57,9 +57,6 @@ namespace Znak
                 new FrameworkPropertyMetadata(null, (o, args) => {
                     if (o is RadioComponent current)
                     {
-                        if (args.NewValue == args.OldValue)
-                            return;
-
                         if (args.NewValue == null)
                             current._radioButtons.ForEach(x => x.IsChecked = false);
                         else

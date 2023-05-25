@@ -31,6 +31,7 @@ namespace Znak
             // строчка для работы биндингов
             DataContext = this;
 
+            new MainView().Show();
         }
         #region variables
         /// <summary>
