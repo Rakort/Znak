@@ -6,14 +6,15 @@
         xmlns:local="clr-namespace:Znak"
         d:DataContext="{d:DesignInstance Type=local:MainView, IsDesignTimeCreatable=True}"
         mc:Ignorable="d"
-        Title="MainView" Height="600" Width="900">
-    <Grid>
+        Title="MainView" Height="600" Width="900" >
+    <Grid Background="{DynamicResource WindowBackgroundBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <local:CalcView x:Name="CalcView"/>
         <StackPanel Grid.Column="1">
+            <ComboBox Name="styleBox"/>
             <Button Content="Save" Name="BtnSave" Click="BtnSave_Click"/>
             <Button Content="Load" Name="BtnLoad" Click="BtnLoad_Click" IsEnabled="{Binding IsSelectSave}"/>
             <ListBox ItemsSource="{Binding SavedCalc}" SelectedItem="{Binding CurrentCalc}"  Name="LbHistory" >
