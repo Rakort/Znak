@@ -79,6 +79,8 @@
                 <TextBox x:Name="TB_price_per_sheet" Margin="55,0"  Width="78" />
                 <TextBox x:Name="TB_price_tirag" Margin="55,0"  Width="78" />
             </StackPanel>
+            <Button x:Name="But_Ploter" Content="ПЛОТРНАЯ ПЕЧАТЬ" Width="129" Click="But_Ploter_Click" />
+            <Button x:Name="But_Laser" Content="ЛАЗЕРНАЯ ПЕЧАТЬ" Width="129"/>
         </StackPanel>
 
     </Grid>

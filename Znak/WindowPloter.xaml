@@ -1,0 +1,37 @@
+﻿<Window x:Class="Znak.WindowPloter"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Znak"
+        mc:Ignorable="d"
+        Title="WindowPloter"  Height="580" Width="705">
+    <Grid>
+        <ComboBox x:Name="CB_MaterialsPloter" ItemsSource="{Binding PricePloter}" SelectedItem="{Binding PloterPeperType}"  DisplayMemberPath="NamePloter" HorizontalAlignment="Left" Margin="69,117,0,0" VerticalAlignment="Top" Width="163"/>
+        <ComboBox HorizontalAlignment="Left" Margin="471,120,0,0" VerticalAlignment="Top" Width="172"/>
+        
+        <Label Content="СТАНДАРТНЫЕ ФОРМАТЫ" HorizontalAlignment="Center" Margin="0,57,0,0" VerticalAlignment="Top" Width="167"/>
+        <RadioButton x:Name="RB_FormatPloter_A2" Content="A2" HorizontalAlignment="Left" Margin="264,119,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="RB_FormatPloter_A1" Content="A1" HorizontalAlignment="Left" Margin="329,120,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="RB_FormatPloter_A0" Content="A0" HorizontalAlignment="Left" Margin="403,120,0,0" VerticalAlignment="Top"/>
+        <Label Content="ФОРМАТ ИЗДЕЛИЯ В ММ" HorizontalAlignment="Left" Margin="270,164,0,0" VerticalAlignment="Top" Width="152"/>
+        <TextBox HorizontalAlignment="Left" Margin="226,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
+        <TextBox HorizontalAlignment="Left" Margin="394,202,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="78"/>
+        <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="76" Margin="308,264,0,0"/>
+        <TextBox HorizontalAlignment="Left" Margin="152,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="81"/>
+        <TextBox HorizontalAlignment="Left" Margin="581,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62"/>
+        <TextBox HorizontalAlignment="Left" Margin="581,292,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62"/>
+        <TextBox HorizontalAlignment="Left" Margin="581,333,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62"/>
+        <TextBox HorizontalAlignment="Left" Margin="152,302,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="81"/>
+        <TextBox HorizontalAlignment="Left" Margin="152,342,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
+        <CheckBox Content="ДИЛЛЕРСКАЯ ЦЕНА" HorizontalAlignment="Left" Margin="290,375,0,0" VerticalAlignment="Top"/>
+        <Label Content="КОЛИЧЕСВО ИЗДЕЛИЙ" HorizontalAlignment="Center" Margin="0,229,0,0" VerticalAlignment="Top" Width="148"/>
+        <Label Content="ЦЕНА ПЕЧАТИ" HorizontalAlignment="Left" Margin="443,242,0,0" VerticalAlignment="Top" Width="114"/>
+        <Label Content="ЦЕНА СВ. ПОЛЯ" HorizontalAlignment="Left" Margin="443,289,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="ЦЕНА ОБЩАЯ" HorizontalAlignment="Left" Margin="443,338,0,0" VerticalAlignment="Top" Width="114"/>
+        <Label Content="ПЛОЩАДЬ ПЕЧАТИ" HorizontalAlignment="Left" Margin="12,242,0,0" VerticalAlignment="Top" Width="124"/>
+        <Label Content="ПЛОЩАДЬ СВ. ПОЛЯ" HorizontalAlignment="Left" Margin="10,297,0,0" VerticalAlignment="Top" Width="128"/>
+        <Label Content="ЦЕНА ЗА МЕТР" HorizontalAlignment="Left" Margin="14,346,0,0" VerticalAlignment="Top" Width="124"/>
+
+    </Grid>
+</Window>

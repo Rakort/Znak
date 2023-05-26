@@ -8,6 +8,7 @@ using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -101,7 +102,7 @@ namespace Znak
         /// <param name="e"></param>
         private void But_Price_Click(object sender, RoutedEventArgs e)
         {
-            //провкрка выбрана ли цветность и тип бумаги
+            //проверка выбрана ли цветность и тип бумаги
             if ((RB_4_0.IsChecked == false && RB_4_4.IsChecked == false && RB_1_0.IsChecked == false && RB_1_1.IsChecked == false)
                 || PaperType is null)
                 return;
@@ -109,7 +110,7 @@ namespace Znak
             if ((RB_PaperFormatA4.IsChecked == false && RB_PaperFormatA3.IsChecked == false && RB_PaperFormatSRA3.IsChecked == false && RB_PaperFormat_325X470.IsChecked == false && RB_PaperFormat_330X485.IsChecked == false)
                 || PaperType is null)
                 return;
-            //устанавливаем значение цаетности и сторонности в зависимости от активных radioButton
+            //устанавливаем значение цветности и сторонности в зависимости от активных radioButton
             calculations.color = (RB_4_0.IsChecked ?? false) || (RB_4_4.IsChecked ?? false);
             calculations.sidePrint = (RB_1_1.IsChecked ?? false) || (RB_4_4.IsChecked ?? false);
 
@@ -240,8 +241,17 @@ namespace Znak
             {
                 WidthNull -= 4; HeightNull -= 4;
             }
+        }
 
-
+      /// <summary>
+      /// открытие окна плотерной печати
+      /// </summary>
+      /// <param name="sender"></param>
+      /// <param name="e"></param>      
+        private void But_Ploter_Click(object sender, RoutedEventArgs e)
+        {
+            WindowPloter ploter = new();
+            ploter.ShowDialog();
         }
     }
 }

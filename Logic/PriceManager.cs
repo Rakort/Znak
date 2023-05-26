@@ -35,7 +35,7 @@ namespace Logic
 
             return _prices;
         }
-        // пример создания параметров цены бумаги
+        // пример создания параметров цены бумаги лазерной печати
         private static List<Price> DefaultPrices => new List<Price>
             {
                 new Price
@@ -46,7 +46,19 @@ namespace Logic
 
                     Price_4_0_Diler = new List<decimal> { 0, 14.9m, 14.9m, 12.4m, 11.2m, 9.9m },
                     Price_4_4_Diler = new List<decimal> { 0, 27.4m, 27.4m, 22.8m, 18.2m, 16.9m },
-                }             
+                }
+            };
+
+        // пример создания параметров цены плотера
+        public static List<PricePloter> DefaultPricesPloter => new List<PricePloter>
+            {
+                new PricePloter
+                {
+                    NamePloter = "Банер",
+                    Price = 400,
+                    PriceDiller = 200,
+                }
+                
             };
     }
 }
