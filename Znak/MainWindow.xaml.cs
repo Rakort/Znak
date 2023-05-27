@@ -30,6 +30,8 @@ namespace Znak
             PriceList = PriceManager.GetPrices();
             // строчка для работы биндингов
             DataContext = this;
+
+            new MainView().Show();
         }
         #region variables
         /// <summary>

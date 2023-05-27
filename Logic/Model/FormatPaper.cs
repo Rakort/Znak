@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Logic.Model
 {
-    public class FormatPaper
+    public record FormatPaper
     {
         public int Width { get; set; }
         public int Height { get; set; }
@@ -19,5 +19,8 @@ namespace Logic.Model
             Height = height;    
         }
         
+        public bool IsZero => Width == 0 && Height == 0;
+
+        public static FormatPaper A4 => new FormatPaper(200, 287);
     }
 }
