@@ -31,22 +31,18 @@ namespace Znak
             // строчка для работы биндингов
             DataContext = this;
 
-            new MainView().Show();
+           // new MainView().Show();
         }
         #region variables
         /// <summary>
         /// колличество изделий в тираже
         /// </summary>
-        // //int? со значением null, для отсутствия ноля в TextBox до присвоения значения полю
-        public int? productNull { get; set; }
-        public int product => productNull ?? 0;
-
+        public int product { get; set; }
+        
         /// <summary>
         /// колличество изделий на листе
         /// </summary>
-        // //int? со значением null, для отсутствия ноля в TextBox до присвоения значения полю
-        public int? quantityOnSheetNull { get; set; }
-        public int quantityOnSheet => quantityOnSheetNull ?? 0;
+        public int quantityOnSheet { get; set; }
 
         /// <summary>
         /// сохранение формата бумаги отностиельно активных radioButton
@@ -58,29 +54,20 @@ namespace Znak
         /// </summary>
         public Price PaperType { get; set; }
 
-        //int? со значением null, для отсутствия ноля в TextBox до присвоения значения полю
         /// <summary>
         /// ширина изделия, поле биндится к TB_width
         /// </summary>
-        public int? WidthNull { get; set; }   
-        public int WidthP => WidthNull ?? 0;
+        public int WidthProducts { get; set; }   
 
         /// <summary>
         /// высота изделия, поле биндится к TB_height
         /// </summary>
-        //int? со значением null, для отсутствия ноля в TextBox до присвоения значения полю
-        public int? HeightNull { get; set; }   
-        public int HeightP => HeightNull ?? 0;
+        public int HeightProducts { get; set; }   
 
         /// <summary>
         /// количество листов в тираже
         /// </summary>
-        // int? со значением null, для отсутствия ноля в TextBox до присвоения значения полю
-        public int? SheetsCountNull { get; set; }
-        /// <summary>
-        /// количество листов в тираже
-        /// </summary>
-        public int SheetsCount => SheetsCountNull ?? 0;
+        public int SheetsCount { get; set; }
 
         /// <summary>
         /// A4 или А3 лист "false == a3"
@@ -133,7 +120,7 @@ namespace Znak
         /// <returns></returns>
         public FormatPaper ProductFormat()
         {                             
-            FormatPaper formatPaper = new FormatPaper(WidthP,HeightP);
+            FormatPaper formatPaper = new FormatPaper(WidthProducts,HeightProducts);
 
             return formatPaper;
         }
@@ -146,17 +133,17 @@ namespace Znak
         {
             //устанавливаем значение блидов в зависимости от активности checkBox
             int bleeds =0;
-            if (CB_bleeds.IsChecked == true) bleeds += 4;
+            // if (CB_bleeds.IsChecked == true) bleeds += 4;
+            CB_bleeds.IsChecked = false; // выключаем блиды
 
-            if (RB_ProductFormat_A7.IsChecked == true) { WidthNull = 74 + bleeds;  HeightNull = 105 + bleeds; }
-            if (RB_ProductFormat_A6.IsChecked == true) { WidthNull = 105 + bleeds; HeightNull = 148 + bleeds; }
-            if (RB_ProductFormat_A5.IsChecked == true) { WidthNull = 148 + bleeds; HeightNull = 210 + bleeds; }
-            if (RB_ProductFormat_A4.IsChecked == true) { WidthNull = 210 + bleeds; HeightNull = 297 + bleeds; }
-            if (RB_ProductFormat_A3.IsChecked == true) { WidthNull = 420 + bleeds; HeightNull = 297 + bleeds; }
-                    
+            if (RB_ProductFormat_A7.IsChecked == true) { WidthProducts = 74 + bleeds;  HeightProducts = 105 + bleeds; }
+            if (RB_ProductFormat_A6.IsChecked == true) { WidthProducts = 105 + bleeds; HeightProducts = 148 + bleeds; }
+            if (RB_ProductFormat_A5.IsChecked == true) { WidthProducts = 148 + bleeds; HeightProducts = 210 + bleeds; }
+            if (RB_ProductFormat_A4.IsChecked == true) { WidthProducts = 210 + bleeds; HeightProducts = 297 + bleeds; }
+            if (RB_ProductFormat_A3.IsChecked == true) { WidthProducts = 420 + bleeds; HeightProducts = 297 + bleeds; }
+                
             QuantityOnSheet();
-            Tirag();
-            
+            Tirag();        
         }
 
         /// <summary>
@@ -171,6 +158,7 @@ namespace Znak
             if (RB_PaperFormatSRA3.IsChecked == true) formatPaper = new FormatPaper(440, 310);
             if (RB_PaperFormat_325X470.IsChecked == true) formatPaper = new FormatPaper(315, 460);
             if (RB_PaperFormat_330X485.IsChecked == true) formatPaper = new FormatPaper(320, 475);
+
             //оределяет выбран лист А4 или нет
             a4 = RB_PaperFormatA4.IsChecked ?? false;
 
@@ -183,13 +171,23 @@ namespace Znak
         private void QuantityOnSheet()
         {
             // заполнение TextBox количество на листе
-            quantityOnSheetNull = calculations.QuantityProducts(formatPaper, ProductFormat());
+            quantityOnSheet = calculations.QuantityProducts(formatPaper, ProductFormat());
         }
 
         /// <summary>
         /// заполнение TextBox количество на листе при ручном изменении формата изделия
         /// </summary>
-        private void TB_height_width_TextChanged(object sender, TextChangedEventArgs e) { QuantityOnSheet();}
+        private void TB_height_width_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //WidthProducts = 0;
+            //HeightProducts = 0;
+            //if (CB_bleeds.IsChecked == true)
+            //{
+               //WidthProducts += 4;
+               //HeightProducts += 4;
+            //}
+            QuantityOnSheet();  /*CB_bleeds.IsChecked = false*/;         
+        }
         
         /// <summary>
         /// расчет тиража от количества изделий
@@ -207,8 +205,8 @@ namespace Znak
         {
             try
             {
-                SheetsCountNull = (int)Math.Ceiling((double)productNull / (double)quantityOnSheetNull);
-                if (SheetsCountNull <= 0) SheetsCountNull = 0;
+                SheetsCount = (int)Math.Ceiling((double)product / (double)quantityOnSheet);
+                if (SheetsCount <= 0) SheetsCount = 0;
             }
             catch (Exception ) { }
             
@@ -223,25 +221,15 @@ namespace Znak
         {
             //устанавливаем значение дилерской цены в зависимости от активности checkBox
             calculations.bleeds = CB_bleeds.IsChecked ?? false;
-            Bleeds();
-        }
 
-        /// <summary>
-        /// прибавление блидов к изделию
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Bleeds()
-        {
-            
             //устанавливаем значение блидов в зависимости от активности checkBox
-            if (calculations.bleeds == true) 
-            { 
-                WidthNull += 4; HeightNull += 4; 
-            }
-            else if(calculations.bleeds == false)
+            if (calculations.bleeds == true)
             {
-                WidthNull -= 4; HeightNull -= 4;
+                WidthProducts += 4; HeightProducts += 4;
+            }
+            else if (calculations.bleeds == false)
+            {
+                WidthProducts -= 4; HeightProducts -= 4;
             }
         }
 
@@ -254,6 +242,15 @@ namespace Znak
         {
             WindowPloter ploter = new();
             ploter.ShowDialog();
+        }
+        /// <summary>
+        /// событие постановки курсора в TB_height
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TB_height_GotFocus(object sender, RoutedEventArgs e)
+        {
+            CB_bleeds.IsChecked = false;
         }
     }
 }

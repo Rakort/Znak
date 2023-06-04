@@ -56,9 +56,27 @@ namespace Logic
                 {
                     NamePloter = "Банер",
                     Price = 400,
+                    FreeFieldPrice = 100,
                     PriceDiller = 200,
                 }
                 
+            };
+
+        // пример создания параметров ширины рулонов плотера
+        public static List<WidthPloterRoll> DefaultWidthPloterRoll => new List<WidthPloterRoll>
+            {
+                new WidthPloterRoll
+                {
+                    WidthRoll = 1270,
+                    Measure = "1.27 M. ",
+                },
+                new WidthPloterRoll
+                {
+                    WidthRoll = 1500,
+                    Measure = "1.5 M. ",
+                },
+
+
             };
     }
 }

@@ -8,23 +8,30 @@
         Title="WindowPloter"  Height="580" Width="705">
     <Grid>
         <ComboBox x:Name="CB_MaterialsPloter" ItemsSource="{Binding PricePloter}" SelectedItem="{Binding PloterPeperType}"  DisplayMemberPath="NamePloter" HorizontalAlignment="Left" Margin="69,117,0,0" VerticalAlignment="Top" Width="163"/>
-        <ComboBox HorizontalAlignment="Left" Margin="471,120,0,0" VerticalAlignment="Top" Width="172"/>
-        
+        <ComboBox x:Name="CB_WidthPloterRoll" ItemsSource="{Binding WidthPloterRoll}" SelectedItem="{Binding PloterWidthType}"  DisplayMemberPath="Measure" HorizontalAlignment="Left" Margin="471,120,0,0" VerticalAlignment="Top" Width="172"/>
+
         <Label Content="СТАНДАРТНЫЕ ФОРМАТЫ" HorizontalAlignment="Center" Margin="0,57,0,0" VerticalAlignment="Top" Width="167"/>
-        <RadioButton x:Name="RB_FormatPloter_A2" Content="A2" HorizontalAlignment="Left" Margin="264,119,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="RB_FormatPloter_A1" Content="A1" HorizontalAlignment="Left" Margin="329,120,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="RB_FormatPloter_A0" Content="A0" HorizontalAlignment="Left" Margin="403,120,0,0" VerticalAlignment="Top"/>
+
+        <RadioButton x:Name="RB_FormatPloter_A2" Content="A2" HorizontalAlignment="Left" Margin="264,119,0,0" VerticalAlignment="Top" Checked="RB_ProductFormatPlot_Checked"/>
+        <RadioButton x:Name="RB_FormatPloter_A1" Content="A1" HorizontalAlignment="Left" Margin="329,120,0,0" VerticalAlignment="Top" Checked="RB_ProductFormatPlot_Checked"/>
+        <RadioButton x:Name="RB_FormatPloter_A0" Content="A0" HorizontalAlignment="Left" Margin="403,120,0,0" VerticalAlignment="Top" Checked="RB_ProductFormatPlot_Checked"/>
+
         <Label Content="ФОРМАТ ИЗДЕЛИЯ В ММ" HorizontalAlignment="Left" Margin="270,164,0,0" VerticalAlignment="Top" Width="152"/>
-        <TextBox HorizontalAlignment="Left" Margin="226,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
-        <TextBox HorizontalAlignment="Left" Margin="394,202,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="78"/>
-        <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="76" Margin="308,264,0,0"/>
-        <TextBox HorizontalAlignment="Left" Margin="152,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="81"/>
-        <TextBox HorizontalAlignment="Left" Margin="581,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62"/>
-        <TextBox HorizontalAlignment="Left" Margin="581,292,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62"/>
-        <TextBox HorizontalAlignment="Left" Margin="581,333,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62"/>
-        <TextBox HorizontalAlignment="Left" Margin="152,302,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="81"/>
-        <TextBox HorizontalAlignment="Left" Margin="152,342,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
-        <CheckBox Content="ДИЛЛЕРСКАЯ ЦЕНА" HorizontalAlignment="Left" Margin="290,375,0,0" VerticalAlignment="Top"/>
+
+        <TextBox x:Name="TB_widthP" Text="{Binding widthP, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="226,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
+        <TextBox x:Name="TB_heightP" Text="{Binding heightP, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="394,202,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="78"/>
+
+        <TextBox x:Name="TB_quantityP" Text="{Binding quantityP, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="76" Margin="308,264,0,0"/>
+
+        <TextBox x:Name="TB_PrintArea" Text="{Binding printArea, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Margin="152,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="81"/>
+        <TextBox x:Name="TB_printingPrice" Text="{Binding printingPrice, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Margin="581,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62"/>
+        <TextBox x:Name="TB_freeFieldPrice" Text="{Binding freeFieldPrice, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Margin="581,292,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62"/>
+        <TextBox x:Name="TB_PricePlot" Text="{Binding PricePlot, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Margin="581,333,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62"/>
+        <TextBox x:Name="TB_freeFieldArea" Text="{Binding freeFieldArea, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Margin="152,302,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="81"/>
+        <TextBox x:Name="TB_priceMeter" Text="{Binding priceMeter, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Margin="152,342,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
+
+        <CheckBox x:Name="CB_dillerPlot" Content="ДИЛЛЕРСКАЯ ЦЕНА" HorizontalAlignment="Left" Margin="290,375,0,0" VerticalAlignment="Top"/>
+
         <Label Content="КОЛИЧЕСВО ИЗДЕЛИЙ" HorizontalAlignment="Center" Margin="0,229,0,0" VerticalAlignment="Top" Width="148"/>
         <Label Content="ЦЕНА ПЕЧАТИ" HorizontalAlignment="Left" Margin="443,242,0,0" VerticalAlignment="Top" Width="114"/>
         <Label Content="ЦЕНА СВ. ПОЛЯ" HorizontalAlignment="Left" Margin="443,289,0,0" VerticalAlignment="Top" Width="120"/>
@@ -32,6 +39,7 @@
         <Label Content="ПЛОЩАДЬ ПЕЧАТИ" HorizontalAlignment="Left" Margin="12,242,0,0" VerticalAlignment="Top" Width="124"/>
         <Label Content="ПЛОЩАДЬ СВ. ПОЛЯ" HorizontalAlignment="Left" Margin="10,297,0,0" VerticalAlignment="Top" Width="128"/>
         <Label Content="ЦЕНА ЗА МЕТР" HorizontalAlignment="Left" Margin="14,346,0,0" VerticalAlignment="Top" Width="124"/>
+        <Button x:Name="BT_Calculation" Content="РАСЧЕТ" HorizontalAlignment="Center" Margin="0,424,0,0" VerticalAlignment="Top" Width="76" Click="BT_Calculation_Click"/>
 
     </Grid>
 </Window>

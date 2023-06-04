@@ -42,13 +42,13 @@
 
             <StackPanel Orientation="Horizontal">
                 <Label x:Name="LB_ProductFormat_Copy" Content="ЛИСТЫ" Margin="10" Width="80"/>
-                <TextBox x:Name="TB_Sheets" Text="{Binding SheetsCountNull, UpdateSourceTrigger=PropertyChanged}" Margin="10" Width="80"/>
+                <TextBox x:Name="TB_Sheets" Text="{Binding SheetsCount, UpdateSourceTrigger=PropertyChanged}" Margin="10" Width="80"/>
                 <RadioButton x:Name="RB_4_0" Content="4+0" GroupName="Color" Margin="10" VerticalAlignment="Center"/>
                 <RadioButton x:Name="RB_4_4" Content="4+4" GroupName="Color" Margin="10" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label x:Name="LB_ProductFormat_Copy1" Content="ИЗДЕЛИЯ" Margin="10" Width="80"/>
-                <TextBox x:Name="TB_Products" Text="{Binding productNull, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="10" Width="80" TextChanged="TB_Products_TextChanged" />
+                <TextBox x:Name="TB_Products" Text="{Binding product, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="10" Width="80" TextChanged="TB_Products_TextChanged" />
                 <RadioButton x:Name="RB_1_0" Content="1+0" GroupName="Color" Margin="10" VerticalAlignment="Center"/>
                 <RadioButton x:Name="RB_1_1" Content="1+1" GroupName="Color" Margin="10" VerticalAlignment="Center"/>
             </StackPanel>
@@ -57,13 +57,13 @@
         <StackPanel Grid.Column="1">
             <Label x:Name="LB_SpecialFormat" Content="СВОЙ ФОРМАТ" HorizontalAlignment="Center" Margin="20"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBox x:Name="TB_height" Text="{Binding HeightNull, UpdateSourceTrigger=PropertyChanged}"  Margin="10" Width="80" TextChanged="TB_height_width_TextChanged"/>
-                <TextBox x:Name="TB_width"  Text="{Binding WidthNull, UpdateSourceTrigger=PropertyChanged}" Margin="10" Width="80" TextChanged="TB_height_width_TextChanged"/>
+                <TextBox x:Name="TB_height" Text="{Binding HeightProducts, UpdateSourceTrigger=PropertyChanged}"  Margin="10" Width="80" TextChanged="TB_height_width_TextChanged" GotFocus="TB_height_GotFocus"/>
+                <TextBox x:Name="TB_width"  Text="{Binding WidthProducts, UpdateSourceTrigger=PropertyChanged}" Margin="10" Width="80" TextChanged="TB_height_width_TextChanged" GotFocus="TB_height_GotFocus"/>
             </StackPanel>
             <CheckBox x:Name="CB_bleeds" Width="133" Checked="CB_bleeds_Checked" Content="ДОБАВИТЬ БЛИДЫ" Unchecked="CB_bleeds_Checked"/>
 
-            <Label x:Name="LB_Number_of_products_per_sheet" Content="КОЛИЧЕСТВО ИЗДЕЛИЙ НА ЛИСТЕ" HorizontalAlignment="Center" Margin="20" />
-            <TextBox x:Name="Quantity_per_sheet" Text="{Binding quantityOnSheetNull, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Center" Width="80" />
+            <Label x:Name="LB_Number_of_products_per_sheet" Content="КОЛИЧЕСТВО ИЗДЕЛИЙ НА ЛИСТЕ" HorizontalAlignment="Center" />
+            <TextBox x:Name="Quantity_per_sheet" Text="{Binding quantityOnSheet, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Center" Width="80" />
 
             <CheckBox x:Name="CB_Dealers" Content="ДЛЯ ДИЛЛЕРОВ" Margin="20"/>
 
@@ -79,9 +79,14 @@
                 <TextBox x:Name="TB_price_per_sheet" Margin="55,0"  Width="78" />
                 <TextBox x:Name="TB_price_tirag" Margin="55,0"  Width="78" />
             </StackPanel>
-            <Button x:Name="But_Ploter" Content="ПЛОТРНАЯ ПЕЧАТЬ" Width="129" Click="But_Ploter_Click" />
-            <Button x:Name="But_Laser" Content="ЛАЗЕРНАЯ ПЕЧАТЬ" Width="129"/>
+
         </StackPanel>
+
+        <Grid Grid.ColumnSpan="2" Margin="0,92,0,0" Grid.Row="1">
+            <Button x:Name="But_Ploter" Content="ПЛОТРНАЯ ПЕЧАТЬ" Width="129"  Click="But_Ploter_Click" Margin="514,0,62,23" Height="59" VerticalAlignment="Bottom" />
+            <Button x:Name="But_Laser" Content="ЛАЗЕРНАЯ ПЕЧАТЬ" Width="129" Margin="31,0,545,20" Height="56" VerticalAlignment="Bottom" />
+        </Grid>
+
 
     </Grid>
 </Window>
