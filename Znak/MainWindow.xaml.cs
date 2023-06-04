@@ -130,17 +130,14 @@ namespace Znak
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void RB_ProductFormat_Checked(object sender, RoutedEventArgs e)
-        {
-            //устанавливаем значение блидов в зависимости от активности checkBox
-            int bleeds =0;
-            // if (CB_bleeds.IsChecked == true) bleeds += 4;
-            CB_bleeds.IsChecked = false; // выключаем блиды
+        {    
+            CB_bleeds.IsChecked = false; // выключаем блиды после каждого изменения формата изделия
 
-            if (RB_ProductFormat_A7.IsChecked == true) { WidthProducts = 74 + bleeds;  HeightProducts = 105 + bleeds; }
-            if (RB_ProductFormat_A6.IsChecked == true) { WidthProducts = 105 + bleeds; HeightProducts = 148 + bleeds; }
-            if (RB_ProductFormat_A5.IsChecked == true) { WidthProducts = 148 + bleeds; HeightProducts = 210 + bleeds; }
-            if (RB_ProductFormat_A4.IsChecked == true) { WidthProducts = 210 + bleeds; HeightProducts = 297 + bleeds; }
-            if (RB_ProductFormat_A3.IsChecked == true) { WidthProducts = 420 + bleeds; HeightProducts = 297 + bleeds; }
+            if (RB_ProductFormat_A7.IsChecked == true) { WidthProducts = 74;  HeightProducts = 105; }
+            if (RB_ProductFormat_A6.IsChecked == true) { WidthProducts = 105; HeightProducts = 148; }
+            if (RB_ProductFormat_A5.IsChecked == true) { WidthProducts = 148; HeightProducts = 210; }
+            if (RB_ProductFormat_A4.IsChecked == true) { WidthProducts = 210; HeightProducts = 297; }
+            if (RB_ProductFormat_A3.IsChecked == true) { WidthProducts = 420; HeightProducts = 297; }
                 
             QuantityOnSheet();
             Tirag();        
@@ -179,14 +176,7 @@ namespace Znak
         /// </summary>
         private void TB_height_width_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //WidthProducts = 0;
-            //HeightProducts = 0;
-            //if (CB_bleeds.IsChecked == true)
-            //{
-               //WidthProducts += 4;
-               //HeightProducts += 4;
-            //}
-            QuantityOnSheet();  /*CB_bleeds.IsChecked = false*/;         
+           QuantityOnSheet();          
         }
         
         /// <summary>
