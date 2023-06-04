@@ -6,87 +6,93 @@
         xmlns:local="clr-namespace:Znak"
         d:DataContext="{d:DesignInstance Type=local:MainWindow}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="580" Width="705">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="1*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
+        Title="MainWindow" Height="580" Width="720">
+    <TabControl>
+        <TabItem Header="Лазерная печать" d:IsLocked="True">
+            <Grid Background="#FFE5E5E5" Height="538" Margin="-2,0,-2,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0">
-            <Label x:Name="LB_ProductFormat" Content="ФОРМАТ ИЗДЕЛИЯ" HorizontalAlignment="Center" Margin="20"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
-                <RadioButton x:Name="RB_ProductFormat_A7" Content="A7" GroupName="ProductFormat" Margin="20,0" Checked="RB_ProductFormat_Checked"/>
-                <RadioButton x:Name="RB_ProductFormat_A6" Content="A6" GroupName="ProductFormat" Margin="20,0" Checked="RB_ProductFormat_Checked"/>
-                <RadioButton x:Name="RB_ProductFormat_A5" Content="A5" GroupName="ProductFormat" Margin="20,0" Checked="RB_ProductFormat_Checked"/>
-                <RadioButton x:Name="RB_ProductFormat_A4" Content="A4" GroupName="ProductFormat" Margin="20,0" Checked="RB_ProductFormat_Checked"/>
-                <RadioButton x:Name="RB_ProductFormat_A3" Content="A3" GroupName="ProductFormat" Margin="20,0" Checked="RB_ProductFormat_Checked"/>
-            </StackPanel>
+                <Label x:Name="LB_price_per_circulation" Content="ЦЕНА ЗА ТИРАЖ" Margin="486,416,113,94" />
+                <Button x:Name="But_Price" Content="РАСЧЕТ" Margin="348,449,301,61" Click="But_Price_Click" />
+                <Label x:Name="LB_price_per_sheet" Content="ЦЕНА ЗА ЛИСТ" Margin="154,419,453,91" RenderTransformOrigin="0.486,0.672"/>
+                <TextBox x:Name="TB_price_per_sheet"  Margin="166,460,456,61" />
+                <TextBox x:Name="TB_price_tirag"  Margin="498,460,125,61" />
+                <TextBox x:Name="TB_height" Text="{Binding HeightProducts, UpdateSourceTrigger=PropertyChanged}" TextChanged="TB_height_width_TextChanged" GotFocus="TB_height_GotFocus" Margin="446,49,174,472"/>
+                <TextBox x:Name="TB_width"  Text="{Binding WidthProducts, UpdateSourceTrigger=PropertyChanged}" TextChanged="TB_height_width_TextChanged" GotFocus="TB_height_GotFocus" Margin="578,49,43,472"/>
+                <Label x:Name="LB_SpecialFormat" Content="СВОЙ ФОРМАТ" Margin="510,10,113,503"/>
+                <CheckBox x:Name="CB_bleeds" Checked="CB_bleeds_Checked" Content="ДОБАВИТЬ БЛИДЫ" Unchecked="CB_bleeds_Checked" Margin="494,91,73,433"/>
+                <Label x:Name="LB_Number_of_products_per_sheet" Content="КОЛИЧЕСТВО ИЗДЕЛИЙ НА ЛИСТЕ" Margin="468,129,28,384" />
+                <TextBox x:Name="Quantity_per_sheet" Text="{Binding quantityOnSheet, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Margin="530,171,91,350" />
+                <CheckBox x:Name="CB_Dealers" Content="ДЛЯ ДИЛЛЕРОВ" Margin="312,404,273,120"/>
+                <Label x:Name="LB_ProductFormat" Content="ФОРМАТ ИЗДЕЛИЯ" Margin="226,18,358,495"/>
+                <RadioButton x:Name="RB_ProductFormat_A7" Content="A7" GroupName="ProductFormat" Checked="RB_ProductFormat_Checked" Margin="73,58,597,466"/>
+                <RadioButton x:Name="RB_ProductFormat_A6" Content="A6" GroupName="ProductFormat" Checked="RB_ProductFormat_Checked" Margin="148,58,520,466"/>
+                <RadioButton x:Name="RB_ProductFormat_A5" Content="A5" GroupName="ProductFormat" Checked="RB_ProductFormat_Checked" Margin="220,58,446,466"/>
+                <RadioButton x:Name="RB_ProductFormat_A4" Content="A4" GroupName="ProductFormat" Checked="RB_ProductFormat_Checked" Margin="294,58,373,466"/>
+                <RadioButton x:Name="RB_ProductFormat_A3" Content="A3" GroupName="ProductFormat" Checked="RB_ProductFormat_Checked" Margin="368,58,300,466"/>
+                <Label x:Name="PaperFormat" Content="ФОРМАТ БУМАГИ" Margin="226,111,364,402"/>
+                <RadioButton x:Name="RB_PaperFormatA4" Content="A4" GroupName="PaperFormat" Checked="RB_PaperFormat_Checked" Margin="70,159,601,365"/>
+                <RadioButton x:Name="RB_PaperFormatA3" Content="A3" GroupName="PaperFormat" Checked="RB_PaperFormat_Checked" Margin="133,159,533,365"/>
+                <RadioButton x:Name="RB_PaperFormatSRA3" Content="SRA3" GroupName="PaperFormat" Checked="RB_PaperFormat_Checked" Margin="198,159,456,365"/>
+                <RadioButton x:Name="RB_PaperFormat_325X470" Content="325x470" GroupName="PaperFormat" Checked="RB_PaperFormat_Checked" Margin="274,159,362,365"/>
+                <RadioButton x:Name="RB_PaperFormat_330X485" Content="330x485" GroupName="PaperFormat" Checked="RB_PaperFormat_Checked" Margin="368,159,269,365"/>
+                <Label x:Name="LB" Content="ВЫБОР БУМАГИ" Margin="100,195,499,318"/>
+                <ComboBox x:Name="CB_Materials" ItemsSource="{Binding PriceList}" SelectedItem="{Binding PaperType}" DisplayMemberPath="NamePaper"
+    Margin="60,226,453,291"/>
+                <Label x:Name="LB_ProductFormat_Copy" Content="ЛИСТЫ" Margin="60,269,559,244"/>
+                <TextBox x:Name="TB_Sheets" Text="{Binding SheetsCount, UpdateSourceTrigger=PropertyChanged}" Margin="127,273,492,248" RenderTransformOrigin="0.505,0.416"/>
+                <Label x:Name="LB_ProductFormat_Copy1" Content="ИЗДЕЛИЯ" Margin="33,320,591,193"/>
+                <TextBox x:Name="TB_Products" Text="{Binding product, UpdateSourceTrigger=PropertyChanged}" TextChanged="TB_Products_TextChanged" Margin="133,320,486,193" />
+                <RadioButton x:Name="RB_4_0" Content="4+0" GroupName="Color" Margin="288,267,373,257"/>
+                <RadioButton x:Name="RB_4_4" Content="4+4" GroupName="Color" Margin="348,267,313,257"/>
+                <RadioButton x:Name="RB_1_0" Content="1+0" GroupName="Color" Margin="292,321,369,203"/>
+                <RadioButton x:Name="RB_1_1" Content="1+1" GroupName="Color" Margin="352,321,309,203"/>
+                <Button x:Name="But_Ploter" Content="ПЛОТРНАЯ ПЕЧАТЬ"  Click="But_Ploter_Click" Margin="546,0,54,123" Height="30" VerticalAlignment="Bottom" />
+                <Button x:Name="But_Laser" Content="ЛАЗЕРНАЯ ПЕЧАТЬ" Margin="562,0,54,193" Height="26" VerticalAlignment="Bottom" />
+            </Grid>
+        </TabItem>
+        
+        <TabItem Header="Плотерная печать">
+            <Grid Background="#FFE5E5E5" Height="538" Margin="-2,0,-2,0">
 
-            <Label x:Name="PaperFormat" Content="ФОРМАТ БУМАГИ" HorizontalAlignment="Center" Margin="20"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <RadioButton x:Name="RB_PaperFormatA4" Content="A4" GroupName="PaperFormat" Margin="15,0" Checked="RB_PaperFormat_Checked"/>
-                <RadioButton x:Name="RB_PaperFormatA3" Content="A3" GroupName="PaperFormat" Margin="15,0" Checked="RB_PaperFormat_Checked"/>
-                <RadioButton x:Name="RB_PaperFormatSRA3" Content="SRA3" GroupName="PaperFormat" Margin="15,0" Checked="RB_PaperFormat_Checked"/>
-                <RadioButton x:Name="RB_PaperFormat_325X470" Content="325x470" GroupName="PaperFormat" Margin="15,0" Checked="RB_PaperFormat_Checked"/>
-                <RadioButton x:Name="RB_PaperFormat_330X485" Content="330x485" GroupName="PaperFormat" Margin="15,0" Checked="RB_PaperFormat_Checked"/>
-            </StackPanel>
+                <ComboBox x:Name="CB_MaterialsPloter" ItemsSource="{Binding PricePloter}" SelectedItem="{Binding PloterPeperType}"  DisplayMemberPath="NamePloter" HorizontalAlignment="Left" Margin="69,117,0,0" VerticalAlignment="Top" Width="163"/>
+                <ComboBox x:Name="CB_WidthPloterRoll" ItemsSource="{Binding WidthPloterRoll}" SelectedItem="{Binding PloterWidthType}"  DisplayMemberPath="Measure" HorizontalAlignment="Left" Margin="471,120,0,0" VerticalAlignment="Top" Width="172"/>
 
-            <Label x:Name="LB" Content="ВЫБОР БУМАГИ" HorizontalAlignment="Center" Margin="20"/>
-            <ComboBox x:Name="CB_Materials" ItemsSource="{Binding PriceList}" SelectedItem="{Binding PaperType}" DisplayMemberPath="NamePaper"
-                      HorizontalAlignment="Center" Width="186"/>
+                <Label Content="СТАНДАРТНЫЕ ФОРМАТЫ" HorizontalAlignment="Center" Margin="0,57,0,0" VerticalAlignment="Top" Width="167"/>
 
-            <StackPanel Orientation="Horizontal">
-                <Label x:Name="LB_ProductFormat_Copy" Content="ЛИСТЫ" Margin="10" Width="80"/>
-                <TextBox x:Name="TB_Sheets" Text="{Binding SheetsCount, UpdateSourceTrigger=PropertyChanged}" Margin="10" Width="80"/>
-                <RadioButton x:Name="RB_4_0" Content="4+0" GroupName="Color" Margin="10" VerticalAlignment="Center"/>
-                <RadioButton x:Name="RB_4_4" Content="4+4" GroupName="Color" Margin="10" VerticalAlignment="Center"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label x:Name="LB_ProductFormat_Copy1" Content="ИЗДЕЛИЯ" Margin="10" Width="80"/>
-                <TextBox x:Name="TB_Products" Text="{Binding product, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="10" Width="80" TextChanged="TB_Products_TextChanged" />
-                <RadioButton x:Name="RB_1_0" Content="1+0" GroupName="Color" Margin="10" VerticalAlignment="Center"/>
-                <RadioButton x:Name="RB_1_1" Content="1+1" GroupName="Color" Margin="10" VerticalAlignment="Center"/>
-            </StackPanel>
-        </StackPanel>
+                <RadioButton x:Name="RB_FormatPloter_A2" Content="A2" HorizontalAlignment="Left" Margin="264,119,0,0" VerticalAlignment="Top" Checked="RB_ProductFormatPlot_Checked"/>
+                <RadioButton x:Name="RB_FormatPloter_A1" Content="A1" HorizontalAlignment="Left" Margin="329,120,0,0" VerticalAlignment="Top" Checked="RB_ProductFormatPlot_Checked"/>
+                <RadioButton x:Name="RB_FormatPloter_A0" Content="A0" HorizontalAlignment="Left" Margin="403,120,0,0" VerticalAlignment="Top" Checked="RB_ProductFormatPlot_Checked"/>
 
-        <StackPanel Grid.Column="1">
-            <Label x:Name="LB_SpecialFormat" Content="СВОЙ ФОРМАТ" HorizontalAlignment="Center" Margin="20"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBox x:Name="TB_height" Text="{Binding HeightProducts, UpdateSourceTrigger=PropertyChanged}"  Margin="10" Width="80" TextChanged="TB_height_width_TextChanged" GotFocus="TB_height_GotFocus"/>
-                <TextBox x:Name="TB_width"  Text="{Binding WidthProducts, UpdateSourceTrigger=PropertyChanged}" Margin="10" Width="80" TextChanged="TB_height_width_TextChanged" GotFocus="TB_height_GotFocus"/>
-            </StackPanel>
-            <CheckBox x:Name="CB_bleeds" Width="133" Checked="CB_bleeds_Checked" Content="ДОБАВИТЬ БЛИДЫ" Unchecked="CB_bleeds_Checked"/>
+                <Label Content="ФОРМАТ ИЗДЕЛИЯ В ММ" HorizontalAlignment="Left" Margin="270,164,0,0" VerticalAlignment="Top" Width="152"/>
 
-            <Label x:Name="LB_Number_of_products_per_sheet" Content="КОЛИЧЕСТВО ИЗДЕЛИЙ НА ЛИСТЕ" HorizontalAlignment="Center" />
-            <TextBox x:Name="Quantity_per_sheet" Text="{Binding quantityOnSheet, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Center" Width="80" />
+                <TextBox x:Name="TB_widthP" Text="{Binding widthP, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="226,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71"/>
+                <TextBox x:Name="TB_heightP" Text="{Binding heightP, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="394,202,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="78"/>
 
-            <CheckBox x:Name="CB_Dealers" Content="ДЛЯ ДИЛЛЕРОВ" Margin="20"/>
+                <TextBox x:Name="TB_quantityP" Text="{Binding quantityP, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="76" Margin="308,264,0,0"/>
 
-        </StackPanel>
+                <TextBox x:Name="TB_PrintArea" Text="{Binding printArea, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Margin="152,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="81"/>
+                <TextBox x:Name="TB_printingPrice" Text="{Binding printingPrice, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Margin="581,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62"/>
+                <TextBox x:Name="TB_freeFieldPrice" Text="{Binding freeFieldPrice, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Margin="581,292,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62"/>
+                <TextBox x:Name="TB_PricePlot" Text="{Binding PricePlot, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Margin="581,333,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62"/>
+                <TextBox x:Name="TB_freeFieldArea" Text="{Binding freeFieldArea, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Margin="152,302,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="81"/>
+                <TextBox x:Name="TB_priceMeter" Text="{Binding priceMeter, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Margin="152,342,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
 
-        <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Label x:Name="LB_price_per_sheet" Content="ЦЕНА ЗА ЛИСТ" Margin="10"/>
-                <Button x:Name="But_Price" Content="РАСЧЕТ" Margin="10" Width="52" Click="But_Price_Click" />
-                <Label x:Name="LB_price_per_circulation" Content="ЦЕНА ЗА ТИРАЖ" Margin="10" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBox x:Name="TB_price_per_sheet" Margin="55,0"  Width="78" />
-                <TextBox x:Name="TB_price_tirag" Margin="55,0"  Width="78" />
-            </StackPanel>
+                <CheckBox x:Name="CB_dillerPlot" Content="ДИЛЛЕРСКАЯ ЦЕНА" HorizontalAlignment="Left" Margin="290,375,0,0" VerticalAlignment="Top"/>
 
-        </StackPanel>
-
-        <Grid Grid.ColumnSpan="2" Margin="0,92,0,0" Grid.Row="1">
-            <Button x:Name="But_Ploter" Content="ПЛОТРНАЯ ПЕЧАТЬ" Width="129"  Click="But_Ploter_Click" Margin="514,0,62,23" Height="59" VerticalAlignment="Bottom" />
-            <Button x:Name="But_Laser" Content="ЛАЗЕРНАЯ ПЕЧАТЬ" Width="129" Margin="31,0,545,20" Height="56" VerticalAlignment="Bottom" />
-        </Grid>
+                <Label Content="КОЛИЧЕСВО ИЗДЕЛИЙ" HorizontalAlignment="Center" Margin="0,229,0,0" VerticalAlignment="Top" Width="148"/>
+                <Label Content="ЦЕНА ПЕЧАТИ" HorizontalAlignment="Left" Margin="443,242,0,0" VerticalAlignment="Top" Width="114"/>
+                <Label Content="ЦЕНА СВ. ПОЛЯ" HorizontalAlignment="Left" Margin="443,289,0,0" VerticalAlignment="Top" Width="120"/>
+                <Label Content="ЦЕНА ОБЩАЯ" HorizontalAlignment="Left" Margin="443,338,0,0" VerticalAlignment="Top" Width="114"/>
+                <Label Content="ПЛОЩАДЬ ПЕЧАТИ" HorizontalAlignment="Left" Margin="12,242,0,0" VerticalAlignment="Top" Width="124"/>
+                <Label Content="ПЛОЩАДЬ СВ. ПОЛЯ" HorizontalAlignment="Left" Margin="10,297,0,0" VerticalAlignment="Top" Width="128"/>
+                <Label Content="ЦЕНА ЗА МЕТР" HorizontalAlignment="Left" Margin="14,346,0,0" VerticalAlignment="Top" Width="124"/>
+                <Button x:Name="BT_Calculation" Content="РАСЧЕТ" HorizontalAlignment="Center" Margin="0,424,0,0" VerticalAlignment="Top" Width="76" Click="BT_Calculation_Click"/>
 
 
-    </Grid>
+            </Grid>
+        </TabItem>
+    </TabControl>
 </Window>
