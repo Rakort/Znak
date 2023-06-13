@@ -21,38 +21,40 @@ namespace Znak
     /// <summary>
     /// Логика взаимодействия для WindowPloter.xaml
     /// </summary>
-    public partial class WindowPloter : Window, INotifyPropertyChanged
+    public partial class WindowPloter : UserControl, INotifyPropertyChanged
     {
+
+        
         public WindowPloter()
         {
             InitializeComponent();
 
             //загрузка цен
-            PricePloter = PriceManager.DefaultPricesPloter;
+            PricePloter = PriceManager.GetPricesPlot(PriceManager.pricesPlotPath);
 
             //загрузка параметров ширины рулонов
-            WidthPloterRoll = PriceManager.DefaultWidthPloterRoll;
+            WidthPloterRoll = PriceManager.GetWidthPlot(PriceManager.WidthPlotPath);
             DataContext = this;
         }
 
         #region Variables
-        public double widthP { get; set; }
-        public double heightP { get; set; }
+        public decimal widthP { get; set; }
+        public decimal heightP { get; set; }
 
         /// <summary>
         /// количество изделий
         /// </summary>
-        public double quantityP { get; set; }
+        public decimal quantityP { get; set; }
 
         /// <summary>
         /// площадь печати
         /// </summary>
-        public double printArea { get; set; }
+        public decimal printArea { get; set; }
 
         /// <summary>
         /// площадь свободного поля
         /// </summary>
-        public double freeFieldArea { get; set; }
+        public decimal freeFieldArea { get; set; }
 
         /// <summary>
         /// цена за метр
@@ -165,27 +167,27 @@ namespace Znak
         /// <summary>
         /// количество изделий умещающихся на ширене рулона вариант #2
         /// </summary>
-        int quantityInRoll2; 
+        int quantityInRoll2;
 
         /// <summary>
         /// сторона изделия #1
         /// </summary>
-        double productSide; 
+        decimal productSide;
 
         /// <summary>
         /// сторона изделия #2
         /// </summary>
-        double productSide2; 
+        decimal productSide2; 
 
         /// <summary>
         /// расчет отрезка материала для вычесления площади сп и инициализация многих переменных
         /// </summary>
         public void Calc()
         {
-            //количество изделий на ширене рулона разложенных шириной
+            //количество изделий на ширине рулона разложенных шириной
             int quantityInWidth = (int)(PloterWidthType.WidthRoll / widthP);
 
-            //количество изделий на ширене рулона разложенных высотой
+            //количество изделий на ширине рулона разложенных высотой
             int quantityInHeight = (int)(PloterWidthType.WidthRoll / heightP);
 
 
@@ -221,8 +223,8 @@ namespace Znak
         {
             Calc();
 
-            double materialQuantity = 0; //количество полосок ширины материала нужное для размещения всего количества изделий вар1
-            double materialQuantity2 = 0; //количество полосок ширины материала нужное для размещения всего количества изделий вар2
+            decimal materialQuantity = 0; //количество полосок ширины материала нужное для размещения всего количества изделий вар1
+            decimal materialQuantity2 = 0; //количество полосок ширины материала нужное для размещения всего количества изделий вар2
 
             int x = 0;
             
@@ -242,20 +244,20 @@ namespace Znak
                     }
                 }
                 else materialQuantity2 += 1;
-                //площадь отрезка материала для печати данного количества изделий с вариантом раскладки 1
-                double piece = ((PloterWidthType.WidthRoll / 1000) * ((productSide / 1000) * materialQuantity2));
+            //площадь отрезка материала для печати данного количества изделий с вариантом раскладки 1
+            decimal piece = ((PloterWidthType.WidthRoll / 1000) * ((productSide / 1000) * materialQuantity2));
 
-                //площадь отрезка материала для печати данного количества изделий с вариантом раскладки 2
-                double piece2 = ((PloterWidthType.WidthRoll / 1000) * ((productSide2 / 1000) * materialQuantity));
+            //площадь отрезка материала для печати данного количества изделий с вариантом раскладки 2
+            decimal piece2 = ((PloterWidthType.WidthRoll / 1000) * ((productSide2 / 1000) * materialQuantity));
 
             //площади свободного поля
-            double square = piece - printArea;
-            double square2 = piece2 - printArea;
+            decimal square = piece - printArea;
+            decimal square2 = piece2 - printArea;
 
             //выводим меньшую площадь
-            if (square > 0 && square < square2)         freeFieldArea = Math.Round(square,2);
+            if (square > 0 && square < square2 || square2 <= 0)       freeFieldArea = Math.Round(square,2);
 
-            else if (square2 > 0 && square > square2)   freeFieldArea = Math.Round(square2, 2);
+            else if (square2 > 0 && square > square2 || square <= 0)   freeFieldArea = Math.Round(square2, 2);
 
             else if (square2 > 0 && square2 == square)  freeFieldArea = Math.Round(square, 2);
 
@@ -269,10 +271,10 @@ namespace Znak
         public void CalcPricePlot() 
         {
             //расчет цены печати
-            printingPrice = (decimal)printArea * priceMeter;
+            printingPrice = printArea * priceMeter;
             
             //расчет цены свп
-            freeFieldPrice = (decimal)freeFieldArea * PloterPeperType.FreeFieldPrice;
+            freeFieldPrice = freeFieldArea * PloterPeperType.FreeFieldPrice;
 
             //общая цена заказа
             PricePlot = printingPrice + freeFieldPrice;

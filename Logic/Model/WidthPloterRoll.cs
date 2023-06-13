@@ -11,7 +11,7 @@ namespace Logic.Model
         /// <summary>
         /// ширина рулона
         /// </summary>
-        public double WidthRoll { get; set; }
+        public decimal WidthRoll { get; set; }
 
         /// <summary>
         /// еденица измерения ширины

@@ -1,12 +1,13 @@
-﻿<Window x:Class="Znak.WindowPloter"
+﻿<UserControl x:Class="Znak.WindowPloter"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Znak"
         mc:Ignorable="d"
-        Title="WindowPloter"  Height="580" Width="705">
-    <Grid>
+         Height="580" Width="705">
+    <Grid x:Name="Ploter_Grid" Height="580" VerticalAlignment="Center"
+          >
         <ComboBox x:Name="CB_MaterialsPloter" ItemsSource="{Binding PricePloter}" SelectedItem="{Binding PloterPeperType}"  DisplayMemberPath="NamePloter" HorizontalAlignment="Left" Margin="69,117,0,0" VerticalAlignment="Top" Width="163"/>
         <ComboBox x:Name="CB_WidthPloterRoll" ItemsSource="{Binding WidthPloterRoll}" SelectedItem="{Binding PloterWidthType}"  DisplayMemberPath="Measure" HorizontalAlignment="Left" Margin="471,120,0,0" VerticalAlignment="Top" Width="172"/>
 
@@ -42,4 +43,4 @@
         <Button x:Name="BT_Calculation" Content="РАСЧЕТ" HorizontalAlignment="Center" Margin="0,424,0,0" VerticalAlignment="Top" Width="76" Click="BT_Calculation_Click"/>
 
     </Grid>
-</Window>
+</UserControl>

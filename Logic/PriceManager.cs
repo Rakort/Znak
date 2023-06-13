@@ -12,29 +12,93 @@ namespace Logic
         /// <summary>
         /// путь расположния Json
         /// </summary>
-        private const string pricesPath = "prices.json";
+        public const string pricesPath = "prices.json";
+
+        public const string pricesPlotPath = "pricesPlot.json";
+
+        public const string WidthPlotPath = "WidthPlot.json";
+
         /// <summary>
         /// список цен
         /// </summary>
         private static List<Price> _prices;
+
+        /// <summary>
+        /// список цен плотерной печати
+        /// </summary>
+        private static List<PricePloter> _pricePloter;
+
+        /// <summary>
+        /// список размеров рулонов плотера
+        /// </summary>
+        private static List<WidthPloterRoll> _widthPloterRoll;
+
         /// <summary>
         /// записывает цены в прайс
         /// </summary>
         /// <returns></returns>
-        public static List<Price> GetPrices()
+        public static List<Price> GetPrices(string path)
         {
             // Если цен нет
             if (_prices == null)
             {
                 // Читаем из файла
-                _prices = Saver.Load<List<Price>>(pricesPath);
+                _prices = Saver.Load<List<Price>>(path);
                 // Если ничего не получили, берем стандартные
                 if (_prices == null || !_prices.Any())
                     _prices = DefaultPrices;
             }
-
+            // так я первый раз создаю json с ценами
+            //Saver.Save(pricesPlotPath, DefaultPricesPloter);
+            //Saver.Save(WidthPlotPath, DefaultWidthPloterRoll);
             return _prices;
         }
+
+        /// <summary>
+        /// записывает цены в прайс плотерной печати
+        /// </summary>
+        /// <returns></returns>
+        public static List<PricePloter> GetPricesPlot(string path)
+        {
+            // Если цен нет
+            if (_pricePloter == null)
+            {
+                // Читаем из файла
+                _pricePloter = Saver.Load<List<PricePloter>>(path);
+               
+            }           
+            return _pricePloter;
+        }
+
+        /// <summary>
+        /// записывает размеры рулонов
+        /// </summary>
+        /// <returns></returns>
+        public static List<WidthPloterRoll> GetWidthPlot(string path)
+        {
+            // Если цен нет
+            if (_widthPloterRoll == null)
+            {
+                // Читаем из файла
+                _widthPloterRoll = Saver.Load<List<WidthPloterRoll>>(path);
+
+            }
+
+            return _widthPloterRoll;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
         // пример создания параметров цены бумаги лазерной печати
         private static List<Price> DefaultPrices => new List<Price>
             {
@@ -58,8 +122,7 @@ namespace Logic
                     Price = 400,
                     FreeFieldPrice = 100,
                     PriceDiller = 200,
-                }
-                
+                }             
             };
 
         // пример создания параметров ширины рулонов плотера
@@ -75,8 +138,6 @@ namespace Logic
                     WidthRoll = 1500,
                     Measure = "1.5 M. ",
                 },
-
-
             };
     }
 }

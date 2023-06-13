@@ -27,16 +27,15 @@ namespace Znak
         {
             InitializeComponent();
             // загружает прайс лист
-            PriceList = PriceManager.GetPrices();
+            PriceList = PriceManager.GetPrices(PriceManager.pricesPath);
             // строчка для работы биндингов
-            DataContext = this;
-
-           // new MainView().Show();
+            DataContext = this;          
         }
+
         #region variables
-        /// <summary>
-        /// колличество изделий в тираже
-        /// </summary>
+            /// <summary>
+            /// колличество изделий в тираже
+            /// </summary>
         public int product { get; set; }
         
         /// <summary>
@@ -133,6 +132,7 @@ namespace Znak
         {    
             CB_bleeds.IsChecked = false; // выключаем блиды после каждого изменения формата изделия
 
+            if (RB_ProductFormat_Vizitka.IsChecked == true) { WidthProducts = 50; HeightProducts = 90; }
             if (RB_ProductFormat_A7.IsChecked == true) { WidthProducts = 74;  HeightProducts = 105; }
             if (RB_ProductFormat_A6.IsChecked == true) { WidthProducts = 105; HeightProducts = 148; }
             if (RB_ProductFormat_A5.IsChecked == true) { WidthProducts = 148; HeightProducts = 210; }
@@ -223,18 +223,8 @@ namespace Znak
             }
         }
 
-      /// <summary>
-      /// открытие окна плотерной печати
-      /// </summary>
-      /// <param name="sender"></param>
-      /// <param name="e"></param>      
-        private void But_Ploter_Click(object sender, RoutedEventArgs e)
-        {
-            WindowPloter ploter = new();
-            ploter.ShowDialog();
-        }
         /// <summary>
-        /// событие постановки курсора в TB_height
+        /// событие постановки курсора в TB_height сбрасывает диллерскую галочку при каждом изменении параметров изделия
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -242,5 +232,12 @@ namespace Znak
         {
             CB_bleeds.IsChecked = false;
         }
+
+        private void WindowPloter_Loaded(object sender, RoutedEventArgs e) //НАЙТИ ГДЕ ОН ЕСТЬ И УДАЛИТЬ НАХУЙ!!!!!!!
+        {
+
+        }
+
+       
     }
 }
