@@ -46,6 +46,7 @@ namespace Znak
         /// <summary>
         /// сохранение формата бумаги отностиельно активных radioButton
         /// </summary>
+		
         FormatPaper formatPaper = new();
 
         /// <summary>
@@ -71,6 +72,7 @@ namespace Znak
         /// <summary>
         /// A4 или А3 лист "false == a3"
         /// </summary>
+
         public bool a4 = false; 
 
         /// <summary>
@@ -156,6 +158,8 @@ namespace Znak
             if (RB_PaperFormat_325X470.IsChecked == true) formatPaper = new FormatPaper(315, 460);
             if (RB_PaperFormat_330X485.IsChecked == true) formatPaper = new FormatPaper(320, 475);
 
+            LB_Star_FormatPeper.Visibility = Visibility.Collapsed; // отключение видимости звездочки после выбора формата бумаги
+
             //оределяет выбран лист А4 или нет
             a4 = RB_PaperFormatA4.IsChecked ?? false;
 
@@ -184,7 +188,10 @@ namespace Znak
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void TB_Products_TextChanged(object sender, TextChangedEventArgs e) {Tirag();}
+        private void TB_Products_TextChanged(object sender, TextChangedEventArgs e) 
+        {
+          Tirag();
+        }
 
         /// <summary>
         /// расчет тиража от количества изделий
@@ -197,6 +204,7 @@ namespace Znak
             {
                 SheetsCount = (int)Math.Ceiling((double)product / (double)quantityOnSheet);
                 if (SheetsCount <= 0) SheetsCount = 0;
+                else LB_Star_Sheets.Visibility = Visibility.Collapsed; // отключение видимости звездочки после выбора типа бумаги
             }
             catch (Exception ) { }
             
@@ -238,6 +246,34 @@ namespace Znak
 
         }
 
-       
-    }
+		/// <summary>
+		/// отключение видимости звездочки после типа бумаги
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void CB_Materials_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			LB_Star_Peper.Visibility = Visibility.Collapsed; // отключение видимости звездочки после выбора типа бумаги
+
+		}
+		/// <summary>
+		/// отключение видимости звездочки после постановки курсора в поле количества листов
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void TB_Sheets_GotFocus(object sender, RoutedEventArgs e)
+		{
+			LB_Star_Sheets.Visibility = Visibility.Collapsed;  // отключение видимости звездочки после постановки курсора в поле количества листов
+		}
+
+		/// <summary>
+		/// отключение видимости звездочки после выбора цвета печати
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void RB_Color_Checked(object sender, RoutedEventArgs e)
+		{
+			LB_Star_Color.Visibility = Visibility.Collapsed; // отключение видимости звездочки после выбора цвета печати
+		}
+	}
 }
