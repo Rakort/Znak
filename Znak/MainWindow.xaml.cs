@@ -33,7 +33,7 @@ namespace Znak
         }
 
         #region variables
-            /// <summary>
+        /// <summary>
             /// колличество изделий в тираже
             /// </summary>
         public int product { get; set; }
@@ -229,6 +229,7 @@ namespace Znak
             {
                 WidthProducts -= 4; HeightProducts -= 4;
             }
+            Tirag();
         }
 
         /// <summary>
@@ -275,5 +276,45 @@ namespace Znak
 		{
 			LB_Star_Color.Visibility = Visibility.Collapsed; // отключение видимости звездочки после выбора цвета печати
 		}
+		/// <summary>
+		/// Сброс всех данных
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void But_Reset_Click(object sender, RoutedEventArgs e)
+		{
+           //цикл по всем элементам грида
+			foreach (var control in GR_Laser.Children)
+            {
+			   //выключаем все RadioButton
+			   if (control is RadioButton)
+			     {
+				    RadioButton radioButton = (RadioButton)control;
+				    radioButton.IsChecked = false;
+			     }      
+              //возвращаем видимость звездочкам обязательных для заполнения полей
+               if (control is Label)
+			     {
+				    Label label = (Label)control;
+				    label.Visibility = Visibility;
+			     }   
+            }
+
+          // убираем галочки из чекбоксов
+          CB_bleeds.IsChecked = false;
+          CB_Dealers.IsChecked = false;
+			
+       //обнуляем поля с данными и текстбоксы
+       product = 0;
+	   quantityOnSheet = 0;
+       WidthProducts  = 0;   
+       HeightProducts  = 0;     
+       SheetsCount  = 0;
+	   TB_price_per_sheet.Clear();
+       TB_price_tirag.Clear();
+
+       // очищение комбобокс с типом бумаги
+       CB_Materials.SelectedIndex = -1;
+	   		}
 	}
 }

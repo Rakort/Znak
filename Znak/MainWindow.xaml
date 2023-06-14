@@ -7,19 +7,19 @@
         d:DataContext="{d:DesignInstance Type=local:MainWindow}"
         mc:Ignorable="d"
         Background="#FFE5E5E5"
-        Title="MainWindow" Height="580" Width="820">
+        Title="MainWindow" Height="600" Width="840">
 
     <TabControl Background="#FFE5E5E5" >
 
         <TabItem Header="Лазерная печать">
-            <Grid Opacity="1" Background="#FFE5E5E5" VerticalAlignment="Top" Height="538" Margin="2,0,-2,0">
+            <Grid x:Name="GR_Laser" Opacity="1" Background="#FFE5E5E5" VerticalAlignment="Top" Height="538" Margin="2,0,-2,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="90*"/>
                     <ColumnDefinition Width="317*"/>
                 </Grid.ColumnDefinitions>
 
 
-                <Label x:Name="LB_price_per_circulation" Content="ЦЕНА ЗА ТИРАЖ" Margin="319,416,0,0" HorizontalAlignment="Left" Width="128" Height="28" VerticalAlignment="Top" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center" Grid.Column="1" />
+                <Label x:Name="LB_price_per_circulation" Content="ЦЕНА ЗА ТИРАЖ" Margin="328,416,0,0" HorizontalAlignment="Left" Width="128" Height="28" VerticalAlignment="Top" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center" Grid.Column="1" />
                 <Button x:Name="But_Price" Content="РАСЧЕТ" Margin="193,454,0,0" Click="But_Price_Click" Height="28" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" Width="68" Grid.Column="1" />
                 <Label x:Name="LB_price_per_sheet" Content="ЦЕНА ЗА ЛИСТ" Margin="11,416,0,0" RenderTransformOrigin="0.486,0.672" HorizontalAlignment="Left" Width="116" Height="28" VerticalAlignment="Top" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center" Grid.Column="1"/>
                 <TextBox x:Name="TB_price_per_sheet"  Margin="20,460,0,0" HorizontalAlignment="Left" Width="96" Height="21" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Column="1" />
@@ -52,6 +52,7 @@
                 <Label x:Name="LB_ProductFormat_Copy" Content="ЛИСТЫ" Margin="33,269,0,0" HorizontalAlignment="Left" Width="59" Height="25" VerticalAlignment="Top" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center"/>
                 <TextBox x:Name="TB_Sheets" Text="{Binding SheetsCount, UpdateSourceTrigger=PropertyChanged}" Margin="127,273,0,0" RenderTransformOrigin="0.505,0.416" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="99"  FontSize="13" FontWeight="SemiBold" GotFocus="TB_Sheets_GotFocus" Grid.ColumnSpan="2"/>
                 <TextBox x:Name="TB_Products" Text="{Binding product, UpdateSourceTrigger=PropertyChanged}" TextChanged="TB_Products_TextChanged" Margin="127,320,0,0" HorizontalAlignment="Left" Width="99" Height="21" VerticalAlignment="Top"  FontSize="13" FontWeight="SemiBold" Grid.ColumnSpan="2"/>
+                
                 <RadioButton x:Name="RB_4_0" Content="4+0" GroupName="Color" Margin="112,273,0,0" HorizontalAlignment="Left" Width="57" Height="19" VerticalAlignment="Top"  FontSize="13" VerticalContentAlignment="Center" FontWeight="SemiBold" Checked="RB_Color_Checked" Grid.Column="1"/>
                 <RadioButton x:Name="RB_4_4" Content="4+4" GroupName="Color" Margin="172,273,0,0" HorizontalAlignment="Left" Width="57" Height="19" VerticalAlignment="Top"  FontSize="13" VerticalContentAlignment="Center" FontWeight="SemiBold" Checked="RB_Color_Checked" Grid.Column="1"/>
                 <RadioButton x:Name="RB_1_0" Content="1+0" GroupName="Color" Margin="112,322,0,0" HorizontalAlignment="Left" Width="57" Height="17" VerticalAlignment="Top"  FontSize="13" VerticalContentAlignment="Center" FontWeight="SemiBold" Checked="RB_Color_Checked" Grid.Column="1"/>
@@ -66,6 +67,7 @@
                 <Label Content="шт" HorizontalAlignment="Left" Margin="47,274,0,0" VerticalAlignment="Top" Grid.Column="1"/>
                 <Label Content="шт" HorizontalAlignment="Left" Margin="46,319,0,0" VerticalAlignment="Top" Grid.Column="1"/>
                 <Label Content="шт" HorizontalAlignment="Left" Margin="458,155,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                <Button x:Name="But_Reset" Content="СБРОС" Margin="193,491,0,0" Height="28" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" Width="68" Grid.Column="1" Click="But_Reset_Click" />
             </Grid>
         </TabItem>
 
