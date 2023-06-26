@@ -62,7 +62,8 @@ namespace Logic
             else if (tirag >= 5 && tirag < 20) i = 2;
             else if (tirag >= 20 && tirag < 50) i = 3;
             else if (tirag >= 50 && tirag < 100) i = 4;
-            else if (tirag >= 100) i = 5;
+            else if (tirag >= 100 && tirag < 200) i = 5;
+            else if (tirag >= 200) i = 6;
 
             //проверка а4 лист или увеличеный
             if (a4) list = GetList(priceClass)[i] / 2;
