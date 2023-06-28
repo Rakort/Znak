@@ -217,17 +217,22 @@ namespace Znak
         /// <param name="e"></param>
         private void CB_bleeds_Checked(object sender, RoutedEventArgs e) 
         {
-            //устанавливаем значение дилерской цены в зависимости от активности checkBox
+            //устанавливаем значение блидов в зависимости от активности checkBox
             calculations.bleeds = CB_bleeds.IsChecked ?? false;
 
             //устанавливаем значение блидов в зависимости от активности checkBox
             if (calculations.bleeds == true)
             {
                 WidthProducts += 4; HeightProducts += 4;
+
+				// при включенном чек-боксе меняет цвет текста на красный
+                CB_bleeds.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF71313"));
             }
             else if (calculations.bleeds == false)
             {
                 WidthProducts -= 4; HeightProducts -= 4;
+                // при выключенном чек-боксе меняет цвет текста на черный
+				CB_bleeds.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF000000"));
             }
             Tirag();
         }
@@ -283,23 +288,6 @@ namespace Znak
 		/// <param name="e"></param>
 		private void But_Reset_Click(object sender, RoutedEventArgs e)
 		{
-           //цикл по всем элементам грида
-			foreach (var control in GR_Laser.Children)
-            {
-			   //выключаем все RadioButton
-			   if (control is RadioButton)
-			     {
-				    RadioButton radioButton = (RadioButton)control;
-				    radioButton.IsChecked = false;
-			     }      
-              //возвращаем видимость звездочкам обязательных для заполнения полей
-               if (control is Label)
-			     {
-				    Label label = (Label)control;
-				    label.Visibility = Visibility;
-			     }   
-            }
-
           // убираем галочки из чекбоксов
           CB_bleeds.IsChecked = false;
           CB_Dealers.IsChecked = false;
@@ -315,6 +303,23 @@ namespace Znak
 
        // очищение комбобокс с типом бумаги
        CB_Materials.SelectedIndex = -1;
-	   		}
+
+       //цикл по всем элементам грида
+			foreach (var control in GR_Laser.Children)
+            {
+			   //выключаем все RadioButton
+			   if (control is RadioButton)
+			     {
+				    RadioButton radioButton = (RadioButton)control;
+				    radioButton.IsChecked = false;
+			     }      
+              //возвращаем видимость звездочкам обязательных для заполнения полей
+               if (control is Label)
+			     {
+				    Label label = (Label)control;
+				    label.Visibility = Visibility;
+			     }   
+            }
+	   	}
 	}
 }
