@@ -29,6 +29,7 @@ namespace Znak
             // загружает прайс листы
             PriceList = PriceManager.GetPrices(PriceManager.pricesPath);
             LaminationPrice = PriceManager.GetLaminationPrice(PriceManager.LaminationPath);
+			PostPechPrice = PriceManager.GetPostPechPrice(PriceManager.PostPechLacerPath);
 
             // строчка для работы биндингов
             DataContext = this;          
@@ -95,14 +96,48 @@ namespace Znak
         Calculations calculations = new Calculations();
 
         public event PropertyChangedEventHandler PropertyChanged; //???????????
-        #endregion variables
+		#endregion variables
+
+		#region  переменные пост печати
 
         /// <summary>
-        /// метод расчета стоимости
+        /// прайс лист
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void But_Price_Click(object sender, RoutedEventArgs e)
+        public List<PostPechPrice> PostPechPrice { get; set; }
+
+        /// <summary>
+        /// количество бигов
+        /// </summary>
+      //public Price PaperType { get; set; }
+        public int BigovkaQuantity { get; set; }
+
+		/// <summary>
+		/// сумма всей постпечатки
+		/// </summary>
+		public decimal SUmmPostPechPrice = 0;
+
+		#endregion
+		
+      /// <summary>
+		 /// считает всю активную постпечатку
+		 /// </summary>
+		public void PostPechPriceCalc() 
+		{
+           if (CB_Bigovka.IsChecked == true) 
+          {
+				PostPechPrice _postPechPrice = (PostPechPrice)PostPechPrice.Where(x => x.Measure.Contains("биговка")).FirstOrDefault();
+				SUmmPostPechPrice += BigovkaQuantity * _postPechPrice.PostPech_Price;
+          }
+		}
+
+
+
+		/// <summary>
+		/// метод расчета стоимости
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void But_Price_Click(object sender, RoutedEventArgs e)
         {
             //проверка выбрана ли цветность и тип бумаги
             if ((RB_4_0.IsChecked == false && RB_4_4.IsChecked == false && RB_1_0.IsChecked == false && RB_1_1.IsChecked == false)
@@ -121,6 +156,7 @@ namespace Znak
             // цена за лист
             decimal priceInList = calculations.MainPrice(PaperType, SheetsCount, a4);
 
+			PostPechPriceCalc();
 			// вычисление стоимости ламинации относительно изделий
 			decimal lamination;
 			if (LaminationType != null)
@@ -134,10 +170,11 @@ namespace Znak
 				
 			else lamination = 0;
 
-            TB_price_tirag.Text = Math.Round(priceInList * SheetsCount + lamination, 1).ToString() + " p";
+            TB_price_tirag.Text = Math.Round(priceInList * SheetsCount + lamination + SUmmPostPechPrice, 1).ToString() + " p";
 
             TB_price_per_sheet.Text = priceInList.ToString() + " p";
-            
+            //обнуляем сумму постпечатки
+            SUmmPostPechPrice = 0;
         }
 
         /// <summary>

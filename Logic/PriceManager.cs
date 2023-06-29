@@ -12,13 +12,15 @@ namespace Logic
         /// <summary>
         /// путь расположния Json
         /// </summary>
-        public const string pricesPath = "prices.json";
+        public const string pricesPath = "Lacer_Price.json";
 
-        public const string LaminationPath = "Lamination.json";
+        public const string LaminationPath = "Lamination_Price.json";
 
-        public const string pricesPlotPath = "pricesPlot.json";
+        public const string pricesPlotPath = "Ploter_Price.json";
 
-        public const string WidthPlotPath = "WidthPlot.json";
+        public const string WidthPlotPath = "WidthPloter_Price.json";
+
+        public const string PostPechLacerPath = "PostPech_Price.json";
 
         /// <summary>
         /// список цен
@@ -41,6 +43,11 @@ namespace Logic
         /// </summary>
         private static List<WidthPloterRoll> _widthPloterRoll;
 
+		/// <summary>
+		/// список цен лазерной постпечати 
+		/// </summary>
+		public static List<PostPechPrice> _postPechPrice;
+
         /// <summary>
         /// записывает цены в прайс
         /// </summary>
@@ -61,6 +68,23 @@ namespace Logic
             //Saver.Save(WidthPlotPath, DefaultWidthPloterRoll);
             return _prices;
         }
+
+        /// <summary>
+        /// записывает цены лазерной постпечати
+        /// </summary>
+        /// <returns></returns>
+        public static List<PostPechPrice> GetPostPechPrice(string path)
+        {
+            // Если цен нет
+            if (_postPechPrice == null)
+            {
+                // Читаем из файла
+                _postPechPrice = Saver.Load<List<PostPechPrice>>(path);
+               
+            }           
+            return _postPechPrice;
+        }
+
 
         /// <summary>
         /// записывает цены ламинации
