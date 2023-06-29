@@ -26,8 +26,10 @@ namespace Znak
         public MainWindow()
         {
             InitializeComponent();
-            // загружает прайс лист
+            // загружает прайс листы
             PriceList = PriceManager.GetPrices(PriceManager.pricesPath);
+            LaminationPrice = PriceManager.GetLaminationPrice(PriceManager.LaminationPath);
+
             // строчка для работы биндингов
             DataContext = this;          
         }
@@ -55,6 +57,11 @@ namespace Znak
         public Price PaperType { get; set; }
 
         /// <summary>
+        /// тип ламинации выбранный пользователем в ComboBox
+        /// </summary>
+        public LaminationPrice LaminationType { get; set; }
+
+        /// <summary>
         /// ширина изделия, поле биндится к TB_width
         /// </summary>
         public int WidthProducts { get; set; }   
@@ -79,6 +86,11 @@ namespace Znak
         /// прайс лист
         /// </summary>
         public List<Price> PriceList { get; set; }
+
+        /// <summary>
+        /// прайс ламинации
+        /// </summary>
+        public List<LaminationPrice> LaminationPrice { get; set; }
 
         Calculations calculations = new Calculations();
 
@@ -108,7 +120,22 @@ namespace Znak
             calculations.diler = CB_Dealers.IsChecked ?? false;
             // цена за лист
             decimal priceInList = calculations.MainPrice(PaperType, SheetsCount, a4);
-            TB_price_tirag.Text = Math.Round((priceInList * SheetsCount), 1).ToString() + " p";
+
+			// вычисление стоимости ламинации относительно изделий
+			decimal lamination;
+			if (LaminationType != null)
+            {
+             // проверка на допустимость формата пакетной ламинации
+            if(LaminationType.Measure.Contains("пакетный") || RB_ProductFormat_A5.IsChecked == true || RB_ProductFormat_A4.IsChecked == true ||RB_ProductFormat_A3.IsChecked == true)
+				lamination = product * LaminationType.LamPrice; 
+			else
+                lamination = SheetsCount * LaminationType.LamPrice; 
+            }
+				
+			else lamination = 0;
+
+            TB_price_tirag.Text = Math.Round(priceInList * SheetsCount + lamination, 1).ToString() + " p";
+
             TB_price_per_sheet.Text = priceInList.ToString() + " p";
             
         }
@@ -140,9 +167,15 @@ namespace Znak
             if (RB_ProductFormat_A5.IsChecked == true) { WidthProducts = 148; HeightProducts = 210; }
             if (RB_ProductFormat_A4.IsChecked == true) { WidthProducts = 210; HeightProducts = 297; }
             if (RB_ProductFormat_A3.IsChecked == true) { WidthProducts = 420; HeightProducts = 297; }
-                
+
+            int Shets = SheetsCount; // сохрянем количество листов
             QuantityOnSheet();
-            Tirag();        
+            Tirag();
+			
+            //обнуление поля с количеством изделий
+			product = 0;
+
+			SheetsCount = Shets; // востанавливаем количество листов
         }
 
         /// <summary>
@@ -163,8 +196,12 @@ namespace Znak
             //оределяет выбран лист А4 или нет
             a4 = RB_PaperFormatA4.IsChecked ?? false;
 
+            int Shets = SheetsCount; // сохрянем количество листов
             QuantityOnSheet();
             Tirag();
+            //обнуление поля с количеством изделий
+			product = 0;
+            SheetsCount = Shets; // востанавливаем количество листов
         }
         /// <summary>
         /// заполнение TextBox количество на листе
@@ -184,28 +221,39 @@ namespace Znak
         }
         
         /// <summary>
-        /// расчет тиража от количества изделий
+        /// расчет тиража от количества изделий и количества изделий от тиража
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void TB_Products_TextChanged(object sender, TextChangedEventArgs e) 
         {
-          Tirag();
+          Tirag(); 
         }
-
+		/// <summary>
+		/// заполнение ТВ с кол. изделий  ТВ с кол. листов
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+        private void TB_Sheets_TextChanged(object sender, TextChangedEventArgs e)
+		{          if (SheetsCount > 0)
+		LB_Star_Sheets.Visibility = Visibility.Collapsed;  // отключение видимости звездочки после постановки курсора в поле количества листов			
+		}
+       
         /// <summary>
-        /// расчет тиража от количества изделий
+        ///  расчет тиража от количества изделий 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Tirag()
         {
             try
-            {
-                SheetsCount = (int)Math.Ceiling((double)product / (double)quantityOnSheet);
-                if (SheetsCount <= 0) SheetsCount = 0;
-                else LB_Star_Sheets.Visibility = Visibility.Collapsed; // отключение видимости звездочки после выбора типа бумаги
-            }
+            {   
+				SheetsCount = (int)Math.Ceiling((double)product / (double)quantityOnSheet);
+
+				if (SheetsCount <= 0)
+					SheetsCount = 0;
+				else LB_Star_Sheets.Visibility = Visibility.Collapsed; // отключение видимости звездочки после выбора типа бумаги
+			}
             catch (Exception ) { }
             
         }
@@ -262,15 +310,6 @@ namespace Znak
 			LB_Star_Peper.Visibility = Visibility.Collapsed; // отключение видимости звездочки после выбора типа бумаги
 
 		}
-		/// <summary>
-		/// отключение видимости звездочки после постановки курсора в поле количества листов
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void TB_Sheets_GotFocus(object sender, RoutedEventArgs e)
-		{
-			LB_Star_Sheets.Visibility = Visibility.Collapsed;  // отключение видимости звездочки после постановки курсора в поле количества листов
-		}
 
 		/// <summary>
 		/// отключение видимости звездочки после выбора цвета печати
@@ -303,6 +342,8 @@ namespace Znak
 
        // очищение комбобокс с типом бумаги
        CB_Materials.SelectedIndex = -1;
+      // очищение комбобокс с ламинацией
+       CB_Lamination.SelectedIndex = -1;
 
        //цикл по всем элементам грида
 			foreach (var control in GR_Laser.Children)
@@ -321,5 +362,17 @@ namespace Znak
 			     }   
             }
 	   	}
+
+		/// <summary>
+		/// очищение комбобокс с ламинацией
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void But_Reset_Lam_Click(object sender, RoutedEventArgs e)
+		{
+		   // очищение комбобокс с ламинацией
+		   CB_Lamination.SelectedIndex = -1;
+		}
+
 	}
 }

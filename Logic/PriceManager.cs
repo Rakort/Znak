@@ -14,6 +14,8 @@ namespace Logic
         /// </summary>
         public const string pricesPath = "prices.json";
 
+        public const string LaminationPath = "Lamination.json";
+
         public const string pricesPlotPath = "pricesPlot.json";
 
         public const string WidthPlotPath = "WidthPlot.json";
@@ -22,6 +24,12 @@ namespace Logic
         /// список цен
         /// </summary>
         private static List<Price> _prices;
+
+        /// <summary>
+        /// список цен ламинации
+        /// </summary>
+		
+        private static List<LaminationPrice> _laminationPrice;
 
         /// <summary>
         /// список цен плотерной печати
@@ -52,6 +60,22 @@ namespace Logic
             //Saver.Save(pricesPlotPath, DefaultPricesPloter);
             //Saver.Save(WidthPlotPath, DefaultWidthPloterRoll);
             return _prices;
+        }
+
+        /// <summary>
+        /// записывает цены ламинации
+        /// </summary>
+        /// <returns></returns>
+        public static List<LaminationPrice> GetLaminationPrice(string path)
+        {
+            // Если цен нет
+            if (_laminationPrice == null)
+            {
+                // Читаем из файла
+                _laminationPrice = Saver.Load<List<LaminationPrice>>(path);
+               
+            }           
+            return _laminationPrice;
         }
 
         /// <summary>
@@ -86,18 +110,6 @@ namespace Logic
 
             return _widthPloterRoll;
         }
-
-
-
-
-
-
-
-
-
-
-
-
 
         // пример создания параметров цены бумаги лазерной печати
         private static List<Price> DefaultPrices => new List<Price>
