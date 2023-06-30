@@ -114,7 +114,7 @@ namespace Znak
 		decimal Sizings = 0;
  
 		/// <summary>
-		/// стоимость люверсов на изделие
+		/// стоимость люверсов на изделия
 		/// </summary>
 		decimal luversQuantityPrice = 0;
 
@@ -448,8 +448,8 @@ namespace Znak
 
 		{   
 
-			//количество люверсов в изделии
-			decimal luversQuantity = Math.Floor((widthP + heightP) / Interval) * 2;
+			//количество люверсов в изделиях
+			decimal luversQuantity = (Math.Floor((widthP + heightP) / Interval) * 2)* quantityP;
 
 			luversQuantityPrice = luversQuantity * PriceLuvers;
 
