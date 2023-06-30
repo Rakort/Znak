@@ -31,16 +31,43 @@ namespace Znak
 
             //загрузка цен
             PricePloter = PriceManager.GetPricesPlot(PriceManager.pricesPlotPath);
-
+            PostPechPrice = PriceManager.GetPostPechPrice(PriceManager.PostPechLacerPath);
             //загрузка параметров ширины рулонов
             WidthPloterRoll = PriceManager.GetWidthPlot(PriceManager.WidthPlotPath);
             DataContext = this;
 
             // количество изделий по умолчанию 
 			quantityP = 1;
-        }
 
-        #region Variables
+			InicialPostPehc();
+        }
+		
+		#region Variables
+
+			/// <summary>
+			/// интервал через который ставятся люверсы в мм
+			/// </summary>
+           
+			decimal Interval;
+
+			/// <summary>
+			/// цена за один люверс
+			/// </summary>
+			
+			decimal PriceLuvers;
+
+			/// <summary>
+			/// цена за погонный метр проклейки
+			/// </summary>
+           
+            decimal PriceSizings;
+
+			/// <summary>
+			/// цена за м кв ламинации
+			/// </summary>
+            
+            decimal PriceLam = 350;
+
         public decimal widthP { get; set; }
         public decimal heightP { get; set; }
 
@@ -90,6 +117,7 @@ namespace Znak
 		/// стоимость люверсов на изделие
 		/// </summary>
 		decimal luversQuantityPrice = 0;
+
 		/// <summary>
 		/// ламинация пленки стоиммость на изделие
 		/// </summary>
@@ -112,10 +140,30 @@ namespace Znak
         /// </summary>
         public List<WidthPloterRoll> WidthPloterRoll { get; set; }
 
+	    /// <summary>
+		/// прайс лист постпечати
+		/// </summary>
+		public List<PostPechPrice> PostPechPrice { get; set; }
+
         /// <summary>
         /// штрина рулона выбранная пользователем в ComboBox
         /// </summary>
         public WidthPloterRoll PloterWidthType { get; set; }
+
+		/// <summary>
+		/// инициализация цен постпечати
+		/// </summary>
+		public void InicialPostPehc()
+		{
+			PostPechPrice _postPechPrice = (PostPechPrice)PostPechPrice.Where(x => x.Measure.Contains("люверсы банерные")).FirstOrDefault();
+			PriceLuvers = _postPechPrice.PostPech_Price;
+            PostPechPrice _postPechPrice1 = (PostPechPrice)PostPechPrice.Where(x => x.Measure.Contains("интервал люверсов")).FirstOrDefault();
+			Interval = _postPechPrice1.PostPech_Price;
+			PostPechPrice _postPechPrice2 = (PostPechPrice)PostPechPrice.Where(x => x.Measure.Contains("проклейка")).FirstOrDefault();
+			PriceSizings = _postPechPrice2.PostPech_Price;
+            PostPechPrice _postPechPrice3 = (PostPechPrice)PostPechPrice.Where(x => x.Measure.Contains("ламинация пленки")).FirstOrDefault();
+			PriceLam = _postPechPrice3.PostPech_Price;
+		}
 
         /// <summary>
         /// заполнение полей высоты и ширины изделия отностиельно активных radioButton
@@ -399,11 +447,6 @@ namespace Znak
 		private void CB_Luvers_Checked(object sender, RoutedEventArgs e)
 
 		{   
-			//интервал через который ставятся люверсы в мм
-			decimal Interval = 300;
-
-			//цена за один люверс
-			decimal PriceLuvers = 25;
 
 			//количество люверсов в изделии
 			decimal luversQuantity = Math.Floor((widthP + heightP) / Interval) * 2;
@@ -439,8 +482,6 @@ namespace Znak
 		/// <param name="e"></param>
 		private void CB_Sizing_Perim_Copy_Checked(object sender, RoutedEventArgs e)
 		{
-            // цена за погонный метр проклейки
-            decimal PriceSizings = 200;
 
 			// стоимость проклейки 
 			Sizings = (((widthP + heightP) * 2)/1000) * PriceSizings;
@@ -471,9 +512,7 @@ namespace Znak
 		/// <param name="e"></param>
 		private void CB_Lam_Checked(object sender, RoutedEventArgs e)
 		{   
-            //цена за м кв ламинации
-            decimal PriceLam = 350;
-
+           
             lam = (widthP/1000 * heightP/1000) * PriceLam;
 
             //заполнение TB
@@ -495,6 +534,7 @@ namespace Znak
 				CB_Lam.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF000000"));
 			}
 		}
+
 		 /// <summary>
 		 /// добавление свободного поля к стоимости заказа
 		 /// </summary>

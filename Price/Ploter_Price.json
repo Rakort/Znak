@@ -1,0 +1,78 @@
+[
+  {
+    "NamePloter": "Банер",
+    "Price": 600.0,
+    "FreeFieldPrice": 150.0,
+    "PriceDiller": 200.0
+  },
+  
+  {
+    "NamePloter": "Пленка: мат. глянец. прозр.",
+    "Price": 780.0,
+    "FreeFieldPrice": 150.0,
+    "PriceDiller": 200.0
+  },
+  
+  {
+    "NamePloter": "Постер Blueback",
+    "Price": 420.0,
+    "FreeFieldPrice": 150.0,
+    "PriceDiller": 200.0
+  },
+  
+  {
+    "NamePloter": "Постер белый",
+    "Price": 540.0,
+    "FreeFieldPrice": 150.0,
+    "PriceDiller": 200.0
+  },
+  
+  {
+    "NamePloter": "Перфо пленка",
+    "Price": 870.0,
+    "FreeFieldPrice": 150.0,
+    "PriceDiller": 200.0
+  },
+  
+  {
+    "NamePloter": "Фотобумага",
+    "Price": 900.0,
+    "FreeFieldPrice": 150.0,
+    "PriceDiller": 200.0
+  },
+  
+  {
+    "NamePloter": "Холст",
+    "Price": 2400.0,
+    "FreeFieldPrice": 400.0,
+    "PriceDiller": 200.0
+  },
+  
+  {
+    "NamePloter": "Банерная сетка",
+    "Price": 975.0,
+    "FreeFieldPrice": 150.0,
+    "PriceDiller": 200.0
+  },
+  
+   {
+    "NamePloter": "Транслюцентная пленка",
+    "Price": 975.0,
+    "FreeFieldPrice": 150.0,
+    "PriceDiller": 200.0
+  },
+  
+  {
+    "NamePloter": "Фотообои",
+    "Price": 825.0,
+    "FreeFieldPrice": 150.0,
+    "PriceDiller": 200.0
+  },
+  
+  {
+    "NamePloter": "Флаговая ткань",
+    "Price": 1600.0,
+    "FreeFieldPrice": 150.0,
+    "PriceDiller": 200.0
+  }
+]

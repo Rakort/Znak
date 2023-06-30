@@ -8,8 +8,8 @@
          Height="549" Width="705">
     <Grid x:Name="Ploter_Grid" Height="549" VerticalAlignment="Center"
           >
-        <ComboBox x:Name="CB_MaterialsPloter" ItemsSource="{Binding PricePloter}" SelectedItem="{Binding PloterPeperType}"  DisplayMemberPath="NamePloter" HorizontalAlignment="Left" Margin="69,117,0,0" VerticalAlignment="Top" Width="163" FontSize="14" FontWeight="SemiBold" VerticalContentAlignment="Center" SelectionChanged="CB_MaterialsPloter_SelectionChanged" Foreground="#FFF71313"/>
-        <ComboBox x:Name="CB_WidthPloterRoll" ItemsSource="{Binding WidthPloterRoll}" SelectedItem="{Binding PloterWidthType}"  DisplayMemberPath="Measure" HorizontalAlignment="Left" Margin="471,120,0,0" VerticalAlignment="Top" Width="172" FontSize="13" VerticalContentAlignment="Center" SelectionChanged="CB_WidthPloterRoll_SelectionChanged" Foreground="#FFF71313" FontWeight="SemiBold"/>
+        <ComboBox x:Name="CB_MaterialsPloter" ItemsSource="{Binding PricePloter}" SelectedItem="{Binding PloterPeperType}"  DisplayMemberPath="NamePloter" HorizontalAlignment="Left" Margin="31,117,0,0" VerticalAlignment="Top" Width="210" FontSize="14" FontWeight="SemiBold" VerticalContentAlignment="Center" SelectionChanged="CB_MaterialsPloter_SelectionChanged" Foreground="#FFF71313"/>
+        <ComboBox x:Name="CB_WidthPloterRoll" ItemsSource="{Binding WidthPloterRoll}" SelectedItem="{Binding PloterWidthType}"  DisplayMemberPath="Measure" HorizontalAlignment="Left" Margin="455,120,0,0" VerticalAlignment="Top" Width="210" FontSize="13" VerticalContentAlignment="Center" SelectionChanged="CB_WidthPloterRoll_SelectionChanged" Foreground="#FFF71313" FontWeight="SemiBold"/>
 
         <Label Content="СТАНДАРТНЫЕ ФОРМАТЫ" HorizontalAlignment="Center" Margin="0,33,0,0" VerticalAlignment="Top" Width="184" FontSize="14" FontWeight="SemiBold"/>
 

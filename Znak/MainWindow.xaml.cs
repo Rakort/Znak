@@ -32,7 +32,17 @@ namespace Znak
 			PostPechPrice = PriceManager.GetPostPechPrice(PriceManager.PostPechLacerPath);
 
             // строчка для работы биндингов
-            DataContext = this;          
+            DataContext = this;
+
+           // значения по умолчанию для переменных количества услуг постпечати
+			BigovkaQuantity = 1;
+            FalcovkaQuantity = 1;
+            SkruglenieQuantity = 4;
+            NumeraciaQuantity = 1;
+			PerforaciaQuantity = 1;
+			LuversyQuantity = 1;
+			DirokolQuantity = 1;
+			SteplerQuantity = 2;
         }
 
         #region variables
@@ -101,19 +111,54 @@ namespace Znak
 		#region  переменные пост печати
 
         /// <summary>
-        /// прайс лист
+        /// прайс лист постпечати
         /// </summary>
         public List<PostPechPrice> PostPechPrice { get; set; }
 
         /// <summary>
         /// количество бигов
         /// </summary>
-      //public Price PaperType { get; set; }
-        public int BigovkaQuantity { get; set; }
+        public int BigovkaQuantity { get; set; }  
+     
+        /// <summary>
+        /// количество фальцев
+        /// </summary>
+        public int FalcovkaQuantity { get; set; }
+
+        /// <summary>
+        /// количество скруглений углов на 1 изделие
+        /// </summary>
+        public int SkruglenieQuantity { get; set; }
+
+        /// <summary>
+        /// количество скруглений номеров на 1 изделие
+        /// </summary>
+        public int NumeraciaQuantity { get; set; }
+
+        /// <summary>
+        /// количество перфораций на 1 изделие
+        /// </summary>
+        public int PerforaciaQuantity { get; set; }
+
+        /// <summary>
+        /// количество люверсов на 1 изделие
+        /// </summary>
+        public int LuversyQuantity { get; set; }
+
+        /// <summary>
+        /// количество отверстий на 1 изделие
+        /// </summary>
+        public int DirokolQuantity { get; set; }
+
+       /// <summary>
+        /// количество скрепок на 1 изделие
+        /// </summary>
+        public int SteplerQuantity { get; set; }
 
 		/// <summary>
 		/// сумма всей постпечатки
 		/// </summary>
+		
 		public decimal SUmmPostPechPrice = 0;
 
 		#endregion
@@ -123,11 +168,69 @@ namespace Znak
 		 /// </summary>
 		public void PostPechPriceCalc() 
 		{
+		
+           //биговка
            if (CB_Bigovka.IsChecked == true) 
-          {
+			{
 				PostPechPrice _postPechPrice = (PostPechPrice)PostPechPrice.Where(x => x.Measure.Contains("биговка")).FirstOrDefault();
-				SUmmPostPechPrice += BigovkaQuantity * _postPechPrice.PostPech_Price;
-          }
+
+				SUmmPostPechPrice += (BigovkaQuantity * _postPechPrice.PostPech_Price) * product;
+			}
+
+           //фальцовка
+           if (CB_Falcovka.IsChecked == true) 
+			{
+				PostPechPrice _postPechPrice = (PostPechPrice)PostPechPrice.Where(x => x.Measure.Contains("фальцовка")).FirstOrDefault();
+
+				SUmmPostPechPrice += (FalcovkaQuantity * _postPechPrice.PostPech_Price) * product;
+			}
+
+           //скругление углов
+           if (CB_Skruglenie.IsChecked == true) 
+			{
+				PostPechPrice _postPechPrice = (PostPechPrice)PostPechPrice.Where(x => x.Measure.Contains("скругление")).FirstOrDefault();
+
+				SUmmPostPechPrice += (SkruglenieQuantity * _postPechPrice.PostPech_Price) * product;
+			}
+
+           //нумерация
+           if (CB_Numeracia.IsChecked == true) 
+			{
+				PostPechPrice _postPechPrice = (PostPechPrice)PostPechPrice.Where(x => x.Measure.Contains("нумерация")).FirstOrDefault();
+
+				SUmmPostPechPrice += (NumeraciaQuantity * _postPechPrice.PostPech_Price) * product;
+			}
+
+           //перфорация
+           if (CB_Perforacia.IsChecked == true) 
+			{
+				PostPechPrice _postPechPrice = (PostPechPrice)PostPechPrice.Where(x => x.Measure.Contains("перфорация")).FirstOrDefault();
+
+				SUmmPostPechPrice += (PerforaciaQuantity * _postPechPrice.PostPech_Price) * product;
+			}
+			//люверсы
+           if (CB_Luversy.IsChecked == true) 
+			{
+				PostPechPrice _postPechPrice = (PostPechPrice)PostPechPrice.Where(x => x.Measure.Contains("люверсы маленькикие")).FirstOrDefault();
+
+				SUmmPostPechPrice += (LuversyQuantity * _postPechPrice.PostPech_Price) * product;
+			}
+
+			//дырокол
+           if (CB_Dirokol.IsChecked == true) 
+			{
+				PostPechPrice _postPechPrice = (PostPechPrice)PostPechPrice.Where(x => x.Measure.Contains("дырокол")).FirstOrDefault();
+
+				SUmmPostPechPrice += (DirokolQuantity * _postPechPrice.PostPech_Price) * product;
+			}
+
+			//степлирование
+           if (CB_Stepler.IsChecked == true) 
+			{
+				PostPechPrice _postPechPrice = (PostPechPrice)PostPechPrice.Where(x => x.Measure.Contains("степлирование")).FirstOrDefault();
+
+				SUmmPostPechPrice += (SteplerQuantity * _postPechPrice.PostPech_Price) * product;
+			}
 		}
 
 
@@ -157,15 +260,27 @@ namespace Znak
             decimal priceInList = calculations.MainPrice(PaperType, SheetsCount, a4);
 
 			PostPechPriceCalc();
+
 			// вычисление стоимости ламинации относительно изделий
 			decimal lamination;
 			if (LaminationType != null)
-            {
-             // проверка на допустимость формата пакетной ламинации
-            if(LaminationType.Measure.Contains("пакетный") || RB_ProductFormat_A5.IsChecked == true || RB_ProductFormat_A4.IsChecked == true ||RB_ProductFormat_A3.IsChecked == true)
-				lamination = product * LaminationType.LamPrice; 
-			else
-                lamination = SheetsCount * LaminationType.LamPrice; 
+			{
+				// проверка на допустимость формата пакетной ламинации
+				if (LaminationType.Measure.Contains("пакетный")&&(RB_ProductFormat_A5.IsChecked == true || RB_ProductFormat_A4.IsChecked == true || RB_ProductFormat_A3.IsChecked == true))
+				{   
+                    if(
+                        (LaminationType.Measure.Contains("А5") && RB_ProductFormat_A5.IsChecked == true) ||
+						(LaminationType.Measure.Contains("А4") && RB_ProductFormat_A4.IsChecked == true) ||
+						(LaminationType.Measure.Contains("А3") && RB_ProductFormat_A3.IsChecked == true) 
+                      )
+				    lamination = product * LaminationType.LamPrice;
+                   else lamination = 0;
+			    }
+
+			    else if(LaminationType.Measure.Contains("рулонный"))
+				    lamination = SheetsCount * LaminationType.LamPrice; 
+
+                else lamination = 0;
             }
 				
 			else lamination = 0;
@@ -397,6 +512,13 @@ namespace Znak
 				    Label label = (Label)control;
 				    label.Visibility = Visibility;
 			     }   
+
+              //выключаем все чекбоксы
+			   if (control is CheckBox)
+			     {
+				    CheckBox checkBox = (CheckBox)control;
+				    checkBox.IsChecked = false;
+			     }
             }
 	   	}
 
@@ -411,5 +533,26 @@ namespace Znak
 		   CB_Lamination.SelectedIndex = -1;
 		}
 
+		/// <summary>
+		/// сканирует все СВ и делает их красными при активности
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void CB_Checked(object sender, RoutedEventArgs e)
+		{
+
+			foreach (var control in GR_Laser.Children)
+			{
+			   if (control is CheckBox)
+			     {
+				    CheckBox checkBox = (CheckBox)control;
+
+				   if( checkBox.IsChecked == true)
+                   checkBox.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF71313"));
+                   else
+                   checkBox.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF000000"));
+			     }			
+			}
+		}
 	}
 }

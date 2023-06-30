@@ -1,0 +1,62 @@
+[
+  {
+    "PostPech_Price": 1.5,
+    "Measure": "биговка"
+  },
+  
+  {
+    "PostPech_Price": 1.5,
+    "Measure": "фальцовка"
+  },
+  
+  {
+    "PostPech_Price": 1.0,
+    "Measure": "скругление углов"
+  },
+  
+  {
+    "PostPech_Price": 1.0,
+    "Measure": "нумерация"
+  },
+  
+  {
+    "PostPech_Price": 1.5,
+    "Measure": "перфорация"
+  },
+  
+  {
+    "PostPech_Price": 5.0,
+    "Measure": "люверсы маленькикие"
+  },
+  
+  {
+    "PostPech_Price": 1.0,
+    "Measure": "дырокол"
+  },
+  
+  {
+    "PostPech_Price": 0.75,
+    "Measure": "степлирование"
+  },
+  
+ 
+  {
+    "PostPech_Price": 25.0,
+    "Measure": "люверсы банерные"
+  },
+  
+  {
+    "PostPech_Price": 200.0,
+    "Measure": "проклейка"
+  },
+  
+  {
+    "PostPech_Price": 350.0,
+    "Measure": "ламинация пленки"
+  },
+  
+  {
+    "PostPech_Price": 300.0,
+    "Measure": "интервал люверсов"
+  },
+]
