@@ -6,10 +6,10 @@
         xmlns:local="clr-namespace:Znak"
         mc:Ignorable="d"
          Height="549" Width="705">
-    <Grid x:Name="Ploter_Grid" Height="549" VerticalAlignment="Center" Margin="0,0,-11,0"
+    <Grid x:Name="Ploter_Grid" Height="549" VerticalAlignment="Center"
           >
         <ComboBox x:Name="CB_MaterialsPloter" ItemsSource="{Binding PricePloter}" SelectedItem="{Binding PloterPeperType}"  DisplayMemberPath="NamePloter" HorizontalAlignment="Left" Margin="31,69,0,0" VerticalAlignment="Top" Width="210" FontSize="14" FontWeight="SemiBold" VerticalContentAlignment="Center" SelectionChanged="CB_MaterialsPloter_SelectionChanged" Foreground="#FFF71313"/>
-        <ComboBox x:Name="CB_WidthPloterRoll" ItemsSource="{Binding WidthPloterRoll}" SelectedItem="{Binding PloterWidthType}"  DisplayMemberPath="Measure" HorizontalAlignment="Left" Margin="455,72,0,0" VerticalAlignment="Top" Width="210" FontSize="13" VerticalContentAlignment="Center" SelectionChanged="CB_WidthPloterRoll_SelectionChanged" Foreground="#FFF71313" FontWeight="SemiBold"/>
+        <ComboBox x:Name="CB_WidthPloterRoll" ItemsSource="{Binding WidthPloterRoll}" SelectedItem="{Binding PloterWidthType}"  DisplayMemberPath="Measure" HorizontalAlignment="Left" Margin="464,72,0,0" VerticalAlignment="Top" Width="210" FontSize="13" VerticalContentAlignment="Center" SelectionChanged="CB_WidthPloterRoll_SelectionChanged" Foreground="#FFF71313" FontWeight="SemiBold"/>
 
         <Label Content="СТАНДАРТНЫЕ ФОРМАТЫ" HorizontalAlignment="Center" Margin="0,33,0,0" VerticalAlignment="Top" Width="184" FontSize="14" FontWeight="SemiBold"/>
 
@@ -22,56 +22,56 @@
         <TextBox x:Name="TB_widthP" Text="{Binding widthP, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="262,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center" GotFocus="TB_widthP_GotFocus" />
         <TextBox x:Name="TB_heightP" Text="{Binding heightP, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="358,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center" GotFocus="TB_widthP_GotFocus"/>
 
-        <TextBox x:Name="TB_quantityP" Text="{Binding quantityP, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" VerticalAlignment="Top" Margin="315,221,0,0" HorizontalAlignment="Left" Width="62" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center" TextAlignment="Center" GotFocus="TB_widthP_GotFocus"/>
+        <TextBox x:Name="TB_quantityP" Text="{Binding quantityP, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" VerticalAlignment="Top" Margin="515,150,0,0" HorizontalAlignment="Left" Width="62" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center" TextAlignment="Center" GotFocus="TB_widthP_GotFocus"/>
 
-        <TextBox x:Name="TB_PrintArea" Text="{Binding printArea, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Margin="162,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="TB_printingPrice" Text="{Binding printingPrice, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Margin="162,297,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="TB_PrintArea" Text="{Binding printArea, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Margin="162,238,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="TB_printingPrice" Text="{Binding printingPrice, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Margin="162,313,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
 
-        <TextBox x:Name="TB_freeFieldPrice" IsReadOnly="True" HorizontalAlignment="Left" Margin="632,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="71" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="TB_freeFieldPrice" IsReadOnly="True" HorizontalAlignment="Left" Margin="629,202,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
 
-        <TextBox x:Name="TB_PricePlot" Text="{Binding PricePlot, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Margin="162,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center" Foreground="#FFF71313"/>
-        <TextBox x:Name="TB_freeFieldArea" Text="{Binding freeFieldArea, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Margin="162,183,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="TB_priceMeter" Text="{Binding priceMeter, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Margin="162,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="TB_PricePlot" Text="{Binding PricePlot, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Margin="162,356,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center" Foreground="#FFF71313"/>
+        <TextBox x:Name="TB_freeFieldArea" Text="{Binding freeFieldArea, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Margin="162,199,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="TB_priceMeter" Text="{Binding priceMeter, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Left" Margin="162,271,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
 
         <CheckBox x:Name="CB_dillerPlot" Content="ДИЛЛЕРСКАЯ ЦЕНА" Visibility="Collapsed" HorizontalAlignment="Center" Margin="0,385,0,0" VerticalAlignment="Top" FontSize="14" VerticalContentAlignment="Center" FontWeight="SemiBold" Height="21"/>
 
-        <Label Content="КОЛИЧЕСТВО ИЗДЕЛИЙ" HorizontalAlignment="Left" Margin="258,181,0,0" VerticalAlignment="Top" Width="174" FontSize="14" FontWeight="SemiBold"/>
-        <Label Content="ЦЕНА ПЕЧАТИ" HorizontalAlignment="Left" Margin="6,293,0,0" VerticalAlignment="Top" Width="114" FontSize="14" FontWeight="SemiBold" Foreground="Black"/>
-        <Label Content="ЦЕНА ОБЩАЯ" HorizontalAlignment="Left" Margin="6,334,0,0" VerticalAlignment="Top" Width="114" FontSize="14" FontWeight="SemiBold" />
-        <Label Content="ПЛОЩАДЬ ПЕЧАТИ" HorizontalAlignment="Left" Margin="0,217,0,0" VerticalAlignment="Top" Width="142" FontSize="14" FontWeight="SemiBold"/>
-        <Label Content="ПЛОЩАДЬ СВ. ПОЛЯ" HorizontalAlignment="Left" Margin="-2,177,0,0" VerticalAlignment="Top" Width="152" FontSize="14" FontWeight="SemiBold"/>
-        <Label Content="ЦЕНА ЗА МЕТР" HorizontalAlignment="Left" Margin="4,252,0,0" VerticalAlignment="Top" Width="124" FontSize="14" FontWeight="SemiBold"/>
-        <Button x:Name="BT_Calculation" Content="РАСЧЕТ" HorizontalAlignment="Center" Margin="0,424,0,0" VerticalAlignment="Top" Width="76" FontSize="14" FontWeight="SemiBold" Click="BT_Calculation_Click" Height="29"/>
-        <Button x:Name="But_Reset" Content="СБРОС" Margin="0,490,0,0" Height="28" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Center" Width="76" Foreground="#FFF71313" Click="But_Reset_Click" />
+        <Label Content="КОЛИЧЕСТВО ИЗДЕЛИЙ" HorizontalAlignment="Left" Margin="458,110,0,0" VerticalAlignment="Top" Width="174" FontSize="14" FontWeight="SemiBold"/>
+        <Label Content="ЦЕНА ПЕЧАТИ" HorizontalAlignment="Left" Margin="6,309,0,0" VerticalAlignment="Top" Width="114" FontSize="14" FontWeight="SemiBold" Foreground="Black"/>
+        <Label Content="ЦЕНА ОБЩАЯ" HorizontalAlignment="Left" Margin="6,350,0,0" VerticalAlignment="Top" Width="114" FontSize="14" FontWeight="SemiBold" />
+        <Label Content="ПЛОЩАДЬ ПЕЧАТИ" HorizontalAlignment="Left" Margin="0,233,0,0" VerticalAlignment="Top" Width="142" FontSize="14" FontWeight="SemiBold"/>
+        <Label Content="ПЛОЩАДЬ СВ. ПОЛЯ" HorizontalAlignment="Left" Margin="-2,193,0,0" VerticalAlignment="Top" Width="152" FontSize="14" FontWeight="SemiBold"/>
+        <Label Content="ЦЕНА ЗА МЕТР" HorizontalAlignment="Left" Margin="4,268,0,0" VerticalAlignment="Top" Width="124" FontSize="14" FontWeight="SemiBold"/>
+        <Button x:Name="BT_Calculation" Content="РАСЧЕТ" HorizontalAlignment="Left" Margin="308,387,0,0" VerticalAlignment="Top" Width="76" FontSize="14" FontWeight="SemiBold" Click="BT_Calculation_Click" Height="29"/>
+        <Button x:Name="But_Reset" Content="СБРОС" Margin="308,476,0,0" Height="28" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" Width="76" Foreground="#FFF71313" Click="But_Reset_Click" />
 
 
-        <Label Content="ШИРИНА РУЛОНА" HorizontalAlignment="Left" Margin="491,33,0,0" VerticalAlignment="Top" Width="137" FontSize="14" FontWeight="SemiBold"/>
-        <Label Content="МАТЕРИАЛ" HorizontalAlignment="Left" Margin="103,33,0,0" VerticalAlignment="Top" Width="89" FontSize="14" FontWeight="SemiBold"/>
+        <Label Content="ШИРИНА РУЛОНА" HorizontalAlignment="Left" Margin="494,33,0,0" VerticalAlignment="Top" Width="137" FontSize="14" FontWeight="SemiBold"/>
+        <Label Content="МАТЕРИАЛ" HorizontalAlignment="Left" Margin="98,33,0,0" VerticalAlignment="Top" Width="89" FontSize="14" FontWeight="SemiBold"/>
         <Label Content="мм" HorizontalAlignment="Left" Margin="324,148,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.542,0.513" />
         <Label Content="мм" HorizontalAlignment="Left" Margin="420,148,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.542,0.513" />
-        <Label Content="шт" HorizontalAlignment="Left" Margin="377,219,0,0" VerticalAlignment="Top" />
-        <Label Content="м²" HorizontalAlignment="Left" Margin="224,219,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.542,0.513" />
-        <Label Content="м²" HorizontalAlignment="Left" Margin="224,180,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.511,3.386" />
-        <Label Content="р" HorizontalAlignment="Left" Margin="224,252,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.542,0.513" />
-        <Label Content="р" HorizontalAlignment="Left" Margin="224,293,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.542,0.513" />
-        <Label Content="р" HorizontalAlignment="Left" Margin="224,336,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.542,0.513" />
-        <Label x:Name="LB_Star_Material" Content="*" HorizontalAlignment="Left" Margin="93,22,0,0" VerticalAlignment="Top" FontSize="22" Height="31" Foreground="#FFF71313" RenderTransformOrigin="0.558,0.504"/>
-        <Label x:Name="LB_Star_Roll_Width" Content="*" HorizontalAlignment="Left" Margin="481,22,0,0" VerticalAlignment="Top" FontSize="22" Height="31" Foreground="#FFF71313" RenderTransformOrigin="0.589,0.553"/>
+        <Label Content="шт" HorizontalAlignment="Left" Margin="577,148,0,0" VerticalAlignment="Top" />
+        <Label Content="м²" HorizontalAlignment="Left" Margin="224,235,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.542,0.513" />
+        <Label Content="м²" HorizontalAlignment="Left" Margin="224,196,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.511,3.386" />
+        <Label Content="р" HorizontalAlignment="Left" Margin="224,268,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.542,0.513" />
+        <Label Content="р" HorizontalAlignment="Left" Margin="224,309,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.542,0.513" />
+        <Label Content="р" HorizontalAlignment="Left" Margin="224,352,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.542,0.513" />
+        <Label x:Name="LB_Star_Material" Content="*" HorizontalAlignment="Left" Margin="88,22,0,0" VerticalAlignment="Top" FontSize="22" Height="31" Foreground="#FFF71313" RenderTransformOrigin="0.558,0.504"/>
+        <Label x:Name="LB_Star_Roll_Width" Content="*" HorizontalAlignment="Left" Margin="484,22,0,0" VerticalAlignment="Top" FontSize="22" Height="31" Foreground="#FFF71313" RenderTransformOrigin="0.589,0.553"/>
         <Label x:Name="LB_Star_Roll_Product_Format" Content="*" HorizontalAlignment="Left" Margin="272,99,0,0" VerticalAlignment="Top" FontSize="22" Height="31" Foreground="#FFF71313" RenderTransformOrigin="0.589,0.553"/>
 
-        <CheckBox x:Name="CB_Luvers"  Content="Добавить люверсы" Margin="446,242,0,0" HorizontalAlignment="Left" Width="163" Height="17" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_Luvers_Checked" Unchecked="CB_Luvers_Checked"/>
+        <CheckBox x:Name="CB_Luvers"  Content="Добавить люверсы" Margin="442,258,0,0" HorizontalAlignment="Left" Width="163" Height="17" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_Luvers_Checked" Unchecked="CB_Luvers_Checked"/>
 
-        <TextBox x:Name="TB_LuversQuantity" HorizontalAlignment="Left" Margin="633,229,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" FontSize="13" FontWeight="SemiBold"/>
-        <TextBox x:Name="TB_LuversPrice" HorizontalAlignment="Left" Margin="633,253,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" FontSize="13" FontWeight="SemiBold"/>
+        <TextBox x:Name="TB_LuversQuantity" HorizontalAlignment="Left" Margin="629,245,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" FontSize="13" FontWeight="SemiBold"/>
+        <TextBox x:Name="TB_LuversPrice" HorizontalAlignment="Left" Margin="629,269,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" FontSize="13" FontWeight="SemiBold"/>
 
-        <CheckBox x:Name="CB_Sizing_Perim"  Content="Проклейка по периметру" Margin="446,293,0,0" HorizontalAlignment="Left" Width="190" Height="18" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_Sizing_Perim_Copy_Checked" Unchecked="CB_Sizing_Perim_Copy_Checked" />
+        <CheckBox x:Name="CB_Sizing_Perim"  Content="Проклейка по периметру" Margin="442,309,0,0" HorizontalAlignment="Left" Width="190" Height="18" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_Sizing_Perim_Copy_Checked" Unchecked="CB_Sizing_Perim_Copy_Checked" />
 
-        <TextBox x:Name="TB_Price_Sizing_Perim"  IsReadOnly="True" HorizontalAlignment="Left" Margin="633,295,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="TB_Price_Sizing_Perim"  IsReadOnly="True" HorizontalAlignment="Left" Margin="629,311,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
 
-        <CheckBox x:Name="CB_Lam"  Content="Ламинация пленки" Margin="446,344,0,0" HorizontalAlignment="Left" Width="190" Height="18" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_Lam_Checked" Unchecked="CB_Lam_Checked"/>
+        <CheckBox x:Name="CB_Lam"  Content="Ламинация пленки" Margin="442,360,0,0" HorizontalAlignment="Left" Width="190" Height="18" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_Lam_Checked" Unchecked="CB_Lam_Checked"/>
 
-        <TextBox x:Name="TB_Price_Lam"  IsReadOnly="True" HorizontalAlignment="Left" Margin="633,344,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
-        <CheckBox x:Name="CB_SvP"  Content="Добавить свободное поле" Margin="446,187,0,0" HorizontalAlignment="Left" Width="190" Height="17" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_SvP_Checked" Unchecked="CB_SvP_Checked"/>
+        <TextBox x:Name="TB_Price_Lam"  IsReadOnly="True" HorizontalAlignment="Left" Margin="629,360,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
+        <CheckBox x:Name="CB_SvP"  Content="Добавить свободное поле" Margin="442,203,0,0" HorizontalAlignment="Left" Width="190" Height="17" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_SvP_Checked" Unchecked="CB_SvP_Checked"/>
 
     </Grid>
 </UserControl>
