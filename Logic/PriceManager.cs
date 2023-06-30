@@ -12,15 +12,15 @@ namespace Logic
         /// <summary>
         /// путь расположния Json
         /// </summary>
-        public const string pricesPath = "Lacer_Price.json";
+        public const string pricesPath = "Price/Lacer_Price.json";
 
-        public const string LaminationPath = "Lamination_Price.json";
+        public const string LaminationPath = "Price/Lamination_Price.json";
 
-        public const string pricesPlotPath = "Ploter_Price.json";
+        public const string pricesPlotPath = "Price/Ploter_Price.json";
 
-        public const string WidthPlotPath = "WidthPloter_Price.json";
+        public const string WidthPlotPath = "Price/WidthPloter_Price.json";
 
-        public const string PostPechLacerPath = "PostPech_Price.json";
+        public const string PostPechLacerPath = "Price/PostPech_Price.json";
 
         /// <summary>
         /// список цен
