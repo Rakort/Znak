@@ -27,19 +27,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_446D6F1D79F54B63BA7A280EC6FDC3F6"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_508326DC89724AB490F8C68A1248640F"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6F2F66EDFCB94715A1BC92BD29DFB4A2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -51,25 +39,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_7867D14ED29F425BA9AAE02634A80ED7"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8B70E9CC496C4DF88E95E2BE6168B62E"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_A51D5E4219394AABBA56A3F93C666D4A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B90B3928B52B400D85AE6DB95054776D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -184,26 +154,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_446D6F1D79F54B63BA7A280EC6FDC3F6"
-            {
-            "SourcePath" = "8:..\\Price\\WidthPloter_Price.json"
-            "TargetName" = "8:WidthPloter_Price.json"
-            "Tag" = "8:"
-            "Folder" = "8:_39F48B2D56B447B3B940662554029060"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_508326DC89724AB490F8C68A1248640F"
             {
             "SourcePath" = "8:..\\Price\\Lacer_Price.json"
@@ -224,92 +174,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6F2F66EDFCB94715A1BC92BD29DFB4A2"
-            {
-            "SourcePath" = "8:..\\Price\\Ploter_Price.json"
-            "TargetName" = "8:Ploter_Price.json"
-            "Tag" = "8:"
-            "Folder" = "8:_39F48B2D56B447B3B940662554029060"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_74A0969D5DBB41ECAAF2EACE390552E5"
             {
             "SourcePath" = "8:..\\Price\\Lamination_Price.json"
             "TargetName" = "8:Lamination_Price.json"
             "Tag" = "8:"
             "Folder" = "8:_445EC9E5510848B28CB8A70D2FB6409F"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7867D14ED29F425BA9AAE02634A80ED7"
-            {
-            "SourcePath" = "8:..\\Price\\Lacer_Price.json"
-            "TargetName" = "8:Lacer_Price.json"
-            "Tag" = "8:"
-            "Folder" = "8:_39F48B2D56B447B3B940662554029060"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8B70E9CC496C4DF88E95E2BE6168B62E"
-            {
-            "SourcePath" = "8:..\\Price\\PostPech_Price.json"
-            "TargetName" = "8:PostPech_Price.json"
-            "Tag" = "8:"
-            "Folder" = "8:_39F48B2D56B447B3B940662554029060"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B90B3928B52B400D85AE6DB95054776D"
-            {
-            "SourcePath" = "8:..\\Price\\Lamination_Price.json"
-            "TargetName" = "8:Lamination_Price.json"
-            "Tag" = "8:"
-            "Folder" = "8:_39F48B2D56B447B3B940662554029060"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -412,7 +282,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Setup"
         "ProductCode" = "8:{55F9FD9E-C8DA-4B5B-9300-0830BD100ED2}"
-        "PackageCode" = "8:{51BDF095-1E07-4B64-B586-D921473B1809}"
+        "PackageCode" = "8:{CF19ADAD-5F51-4C3F-B600-C8B9B53F28C9}"
         "UpgradeCode" = "8:{19C4C4B2-3F12-4437-A172-608A220B7D8D}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
