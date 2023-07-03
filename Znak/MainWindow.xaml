@@ -19,9 +19,9 @@
                 </Grid.ColumnDefinitions>
 
 
-                <Label x:Name="LB_price_per_circulation" Content="ЦЕНА ЗА ТИРАЖ" Margin="208,416,0,0" HorizontalAlignment="Left" Width="128" Height="28" VerticalAlignment="Top" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center" />
+                <Label x:Name="LB_price_per_circulation" Content="ЦЕНА ЗА ТИРАЖ" Margin="210,416,0,0" HorizontalAlignment="Left" Width="128" Height="28" VerticalAlignment="Top" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center" />
                 <Button x:Name="But_Price" Content="РАСЧЕТ" Margin="377,430,0,0" Click="But_Price_Click" Height="28" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" Width="68" />
-                <Label x:Name="LB_price_per_sheet" Content="ЦЕНА ПЕЧАТИ ЗА ЛИСТ" Margin="17,416,0,0" RenderTransformOrigin="0.486,0.672" HorizontalAlignment="Left" Width="168" Height="28" VerticalAlignment="Top" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center"/>
+                <Label x:Name="LB_price_per_sheet" Content="ЦЕНА ПЕЧАТИ ЗА ЛИСТ" Margin="16,416,0,0" RenderTransformOrigin="0.486,0.672" HorizontalAlignment="Left" Width="168" Height="28" VerticalAlignment="Top" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center"/>
                 <TextBox x:Name="TB_price_per_sheet" IsReadOnly="True"  Margin="50,460,0,0" HorizontalAlignment="Left" Width="96" Height="21" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
 
                 <TextBox x:Name="TB_price_tirag" IsReadOnly="True" Margin="219,460,0,0" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Width="111" Height="21" VerticalAlignment="Top" Foreground="#FFF71313"/>

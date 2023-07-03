@@ -36,17 +36,17 @@
         <CheckBox x:Name="CB_dillerPlot" Content="ДИЛЛЕРСКАЯ ЦЕНА" Visibility="Collapsed" HorizontalAlignment="Center" Margin="0,385,0,0" VerticalAlignment="Top" FontSize="14" VerticalContentAlignment="Center" FontWeight="SemiBold" Height="21"/>
 
         <Label Content="КОЛИЧЕСТВО ИЗДЕЛИЙ" HorizontalAlignment="Left" Margin="458,110,0,0" VerticalAlignment="Top" Width="174" FontSize="14" FontWeight="SemiBold"/>
-        <Label Content="ЦЕНА ПЕЧАТИ" HorizontalAlignment="Left" Margin="11,309,0,0" VerticalAlignment="Top" Width="114" FontSize="14" FontWeight="SemiBold" Foreground="Black"/>
-        <Label Content="ЦЕНА ОБЩАЯ" HorizontalAlignment="Left" Margin="11,350,0,0" VerticalAlignment="Top" Width="114" FontSize="14" FontWeight="SemiBold" />
+        <Label Content="ЦЕНА ПЕЧАТИ" HorizontalAlignment="Left" Margin="5,309,0,0" VerticalAlignment="Top" Width="114" FontSize="14" FontWeight="SemiBold" Foreground="Black"/>
+        <Label Content="ЦЕНА ОБЩАЯ" HorizontalAlignment="Left" Margin="6,350,0,0" VerticalAlignment="Top" Width="114" FontSize="14" FontWeight="SemiBold" />
         <Label Content="ПЛОЩАДЬ ПЕЧАТИ" HorizontalAlignment="Left" Margin="5,233,0,0" VerticalAlignment="Top" Width="142" FontSize="14" FontWeight="SemiBold"/>
         <Label Content="ПЛОЩАДЬ СВ. ПОЛЯ" HorizontalAlignment="Left" Margin="3,193,0,0" VerticalAlignment="Top" Width="152" FontSize="14" FontWeight="SemiBold"/>
-        <Label Content="ЦЕНА ЗА МЕТР" HorizontalAlignment="Left" Margin="9,268,0,0" VerticalAlignment="Top" Width="124" FontSize="14" FontWeight="SemiBold"/>
+        <Label Content="ЦЕНА ЗА МЕТР" HorizontalAlignment="Left" Margin="4,268,0,0" VerticalAlignment="Top" Width="124" FontSize="14" FontWeight="SemiBold"/>
         <Button x:Name="BT_Calculation" Content="РАСЧЕТ" HorizontalAlignment="Left" Margin="308,387,0,0" VerticalAlignment="Top" Width="76" FontSize="14" FontWeight="SemiBold" Click="BT_Calculation_Click" Height="29"/>
         <Button x:Name="But_Reset" Content="СБРОС" Margin="308,476,0,0" Height="28" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" Width="76" Foreground="#FFF71313" Click="But_Reset_Click" />
 
 
-        <Label Content="ШИРИНА РУЛОНА" HorizontalAlignment="Left" Margin="494,33,0,0" VerticalAlignment="Top" Width="137" FontSize="14" FontWeight="SemiBold"/>
-        <Label Content="МАТЕРИАЛ" HorizontalAlignment="Left" Margin="98,33,0,0" VerticalAlignment="Top" Width="89" FontSize="14" FontWeight="SemiBold"/>
+        <Label Content="ШИРИНА РУЛОНА" HorizontalAlignment="Left" Margin="497,33,0,0" VerticalAlignment="Top" Width="137" FontSize="14" FontWeight="SemiBold"/>
+        <Label Content="МАТЕРИАЛ" HorizontalAlignment="Left" Margin="90,33,0,0" VerticalAlignment="Top" Width="89" FontSize="14" FontWeight="SemiBold"/>
         <Label Content="мм" HorizontalAlignment="Left" Margin="324,148,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.542,0.513" />
         <Label Content="мм" HorizontalAlignment="Left" Margin="420,148,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.542,0.513" />
         <Label Content="шт" HorizontalAlignment="Left" Margin="577,148,0,0" VerticalAlignment="Top" />
@@ -55,8 +55,8 @@
         <Label Content="р" HorizontalAlignment="Left" Margin="229,268,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.542,0.513" />
         <Label Content="р" HorizontalAlignment="Left" Margin="229,309,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.542,0.513" />
         <Label Content="р" HorizontalAlignment="Left" Margin="229,352,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.542,0.513" />
-        <Label x:Name="LB_Star_Material" Content="*" HorizontalAlignment="Left" Margin="88,22,0,0" VerticalAlignment="Top" FontSize="22" Height="31" Foreground="#FFF71313" RenderTransformOrigin="0.558,0.504"/>
-        <Label x:Name="LB_Star_Roll_Width" Content="*" HorizontalAlignment="Left" Margin="484,22,0,0" VerticalAlignment="Top" FontSize="22" Height="31" Foreground="#FFF71313" RenderTransformOrigin="0.589,0.553"/>
+        <Label x:Name="LB_Star_Material" Content="*" HorizontalAlignment="Left" Margin="80,22,0,0" VerticalAlignment="Top" FontSize="22" Height="31" Foreground="#FFF71313" RenderTransformOrigin="0.558,0.504"/>
+        <Label x:Name="LB_Star_Roll_Width" Content="*" HorizontalAlignment="Left" Margin="487,22,0,0" VerticalAlignment="Top" FontSize="22" Height="31" Foreground="#FFF71313" RenderTransformOrigin="0.589,0.553"/>
         <Label x:Name="LB_Star_Roll_Product_Format" Content="*" HorizontalAlignment="Left" Margin="272,99,0,0" VerticalAlignment="Top" FontSize="22" Height="31" Foreground="#FFF71313" RenderTransformOrigin="0.589,0.553"/>
 
         <CheckBox x:Name="CB_Luvers"  Content="Добавить люверсы" Margin="429,258,0,0" HorizontalAlignment="Left" Width="163" Height="17" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_Luvers_Checked" Unchecked="CB_Luvers_Checked"/>
