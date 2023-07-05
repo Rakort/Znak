@@ -74,7 +74,7 @@
                 <Label Content="шт" HorizontalAlignment="Left" Margin="370,119,0,0" VerticalAlignment="Top"/>
                 <Button x:Name="But_Reset" Content="СБРОС" Margin="377,491,0,0" Height="28" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" Width="68" Foreground="#FFF71313" Click="But_Reset_Click" />
                 <ComboBox x:Name="CB_Lamination" ItemsSource="{Binding LaminationPrice}" SelectedItem="{Binding LaminationType}" DisplayMemberPath="Measure" Foreground="#FFF71313"
-                    Margin="515,48,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="217" FontSize="14" FontWeight="SemiBold" VerticalContentAlignment="Center" SelectionChanged="CB_Materials_SelectionChanged"/>
+                    Margin="515,48,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="217" FontSize="14" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
                 <Button x:Name="But_Reset_Lam" Content="СБРОС" Margin="747,48,0,0" Height="28" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" Width="57" Foreground="#FFF71313" Click="But_Reset_Lam_Click" />
                 <Label x:Name="LB_ProductFormat_Copy1" Content="ДОБАВЛЕНИЕ ЛАМИНАЦИИ" Margin="515,15,0,0" HorizontalAlignment="Left" Width="217" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center"/>
                 <CheckBox x:Name="CB_Bigovka" Content="Биговка" Margin="515,87,0,0" HorizontalAlignment="Left" Width="146" Height="17" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_Checked" Unchecked="CB_Checked"/>
@@ -105,7 +105,7 @@
         </TabItem>
 
         <TabItem Header="Плоттерная печать">
-            <local:WindowPloter Loaded="WindowPloter_Loaded" Background="#FFE5E5E5" Margin="64,0,64,0"/>
+            <local:WindowPloter Background="#FFE5E5E5" Margin="64,0,64,0"/>
         </TabItem>
     </TabControl>
 </Window>

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
@@ -162,84 +163,78 @@ namespace Znak
 		public decimal SUmmPostPechPrice = 0;
 
 		#endregion
-		
-      /// <summary>
-		 /// считает всю активную постпечатку
-		 /// </summary>
-		public void PostPechPriceCalc() 
-		{
-		
-           //биговка
-           if (CB_Bigovka.IsChecked == true) 
-			{
-				PostPechPrice _postPechPrice = (PostPechPrice)PostPechPrice.Where(x => x.Measure.Contains("биговка")).FirstOrDefault();
-
-				SUmmPostPechPrice += (BigovkaQuantity * _postPechPrice.PostPech_Price) * product;
-			}
-
-           //фальцовка
-           if (CB_Falcovka.IsChecked == true) 
-			{
-				PostPechPrice _postPechPrice = (PostPechPrice)PostPechPrice.Where(x => x.Measure.Contains("фальцовка")).FirstOrDefault();
-
-				SUmmPostPechPrice += (FalcovkaQuantity * _postPechPrice.PostPech_Price) * product;
-			}
-
-           //скругление углов
-           if (CB_Skruglenie.IsChecked == true) 
-			{
-				PostPechPrice _postPechPrice = (PostPechPrice)PostPechPrice.Where(x => x.Measure.Contains("скругление")).FirstOrDefault();
-
-				SUmmPostPechPrice += (SkruglenieQuantity * _postPechPrice.PostPech_Price) * product;
-			}
-
-           //нумерация
-           if (CB_Numeracia.IsChecked == true) 
-			{
-				PostPechPrice _postPechPrice = (PostPechPrice)PostPechPrice.Where(x => x.Measure.Contains("нумерация")).FirstOrDefault();
-
-				SUmmPostPechPrice += (NumeraciaQuantity * _postPechPrice.PostPech_Price) * product;
-			}
-
-           //перфорация
-           if (CB_Perforacia.IsChecked == true) 
-			{
-				PostPechPrice _postPechPrice = (PostPechPrice)PostPechPrice.Where(x => x.Measure.Contains("перфорация")).FirstOrDefault();
-
-				SUmmPostPechPrice += (PerforaciaQuantity * _postPechPrice.PostPech_Price) * product;
-			}
-			//люверсы
-           if (CB_Luversy.IsChecked == true) 
-			{
-				PostPechPrice _postPechPrice = (PostPechPrice)PostPechPrice.Where(x => x.Measure.Contains("люверсы маленькикие")).FirstOrDefault();
-
-				SUmmPostPechPrice += (LuversyQuantity * _postPechPrice.PostPech_Price) * product;
-			}
-
-			//дырокол
-           if (CB_Dirokol.IsChecked == true) 
-			{
-				PostPechPrice _postPechPrice = (PostPechPrice)PostPechPrice.Where(x => x.Measure.Contains("дырокол")).FirstOrDefault();
-
-				SUmmPostPechPrice += (DirokolQuantity * _postPechPrice.PostPech_Price) * product;
-			}
-
-			//степлирование
-           if (CB_Stepler.IsChecked == true) 
-			{
-				PostPechPrice _postPechPrice = (PostPechPrice)PostPechPrice.Where(x => x.Measure.Contains("степлирование")).FirstOrDefault();
-
-				SUmmPostPechPrice += (SteplerQuantity * _postPechPrice.PostPech_Price) * product;
-			}
-		}
-
-
 
 		/// <summary>
-		/// метод расчета стоимости
+		/// считает всю активную постпечатку
 		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
+		public void PostPechPriceCalc()
+		{   
+            //список всех позиций постпечати
+			Dictionary<string, string> measures = new()
+			{ {"биговка", "BigovkaQuantity"}, {"фальцовка", "FalcovkaQuantity"}, {"скругление", "SkruglenieQuantity"}, 
+			  {"нумерация", "NumeraciaQuantity"}, {"перфорация", "PerforaciaQuantity"}, {"люверсы маленькикие", "LuversyQuantity"},
+			  {"дырокол", "DirokolQuantity"}, {"степлирование", "SteplerQuantity"} };
+
+			foreach (KeyValuePair<string, string> measure in measures)
+			{
+				if (IsChecked(measure.Key))
+				{
+					PostPechPrice _postPechPrice = GetPostPechPriceByMeasure(measure.Key); // находим цену
+
+					int quantity = GetQuantityByPropertyName(measure.Value); // находим колличество
+
+					SUmmPostPechPrice += (quantity * _postPechPrice.PostPech_Price) * product; //прибавляем стоиомть услуги к сумме всей постпечатки
+				}
+			}
+			// определяем активность CB
+			bool IsChecked(string measure)
+			{
+				switch (measure)
+				{
+					case "биговка": return CB_Bigovka.IsChecked == true;
+					case "фальцовка": return CB_Falcovka.IsChecked == true;
+					case "скругление": return CB_Skruglenie.IsChecked == true;
+					case "нумерация": return CB_Numeracia.IsChecked == true;
+					case "перфорация": return CB_Perforacia.IsChecked == true;
+					case "люверсы маленькикие": return CB_Luversy.IsChecked == true;
+					case "дырокол": return CB_Dirokol.IsChecked == true;
+					case "степлирование": return CB_Stepler.IsChecked == true;
+					default: return false;
+				}
+			}
+			//вытаскиваем цену
+			PostPechPrice GetPostPechPriceByMeasure(string measure) { return PostPechPrice.Where(x => x.Measure.Contains(measure)).FirstOrDefault(); }
+			//вытаскиваем колличество
+			int GetQuantityByPropertyName(string propertyName) { PropertyInfo propertyInfo = this.GetType().GetProperty(propertyName); return (int)propertyInfo.GetValue(this); }
+		}
+
+		/// <summary>
+		/// расчет стоимости ламинации
+		/// </summary>
+		public void Laminat() 
+		{			
+			if (LaminationType != null)
+			{
+				// проверка на допустимость формата пакетной ламинации
+				if (LaminationType.Measure.Contains("пакетный")&&
+				(RB_ProductFormat_A5.IsChecked == true || RB_ProductFormat_A4.IsChecked == true || RB_ProductFormat_A3.IsChecked == true))
+				{   
+					//проверка, списывается ламинат тоько того формата изделия который выбран
+                    if((LaminationType.Measure.Contains("А5") && RB_ProductFormat_A5.IsChecked == true) ||
+						(LaminationType.Measure.Contains("А4") && RB_ProductFormat_A4.IsChecked == true) ||
+						(LaminationType.Measure.Contains("А3") && RB_ProductFormat_A3.IsChecked == true))
+
+				        SUmmPostPechPrice += product * LaminationType.LamPrice;                 
+			    }
+			    else if(LaminationType.Measure.Contains("рулонный"))
+
+				    SUmmPostPechPrice += SheetsCount * LaminationType.LamPrice;                
+            }
+		}
+
+		/// <summary>
+		/// метод расчета общей стоимости тиража
+		/// </summary>
 		private void But_Price_Click(object sender, RoutedEventArgs e)
         {
             //проверка выбрана ли цветность и тип бумаги
@@ -250,44 +245,24 @@ namespace Znak
             if ((RB_PaperFormatA4.IsChecked == false && RB_PaperFormatA3.IsChecked == false && RB_PaperFormatSRA3.IsChecked == false && RB_PaperFormat_325X470.IsChecked == false && RB_PaperFormat_330X485.IsChecked == false)
                 || PaperType is null)
                 return;
+
             //устанавливаем значение цветности и сторонности в зависимости от активных radioButton
             calculations.color = (RB_4_0.IsChecked ?? false) || (RB_4_4.IsChecked ?? false);
             calculations.sidePrint = (RB_1_1.IsChecked ?? false) || (RB_4_4.IsChecked ?? false);
 
             //устанавливаем значение дилерской цены в зависимости от активности checkBox
             calculations.diler = CB_Dealers.IsChecked ?? false;
+
             // цена за лист
             decimal priceInList = calculations.MainPrice(PaperType, SheetsCount, a4);
 
 			PostPechPriceCalc();
+			Laminat();
 
-			// вычисление стоимости ламинации относительно изделий
-			decimal lamination;
-			if (LaminationType != null)
-			{
-				// проверка на допустимость формата пакетной ламинации
-				if (LaminationType.Measure.Contains("пакетный")&&(RB_ProductFormat_A5.IsChecked == true || RB_ProductFormat_A4.IsChecked == true || RB_ProductFormat_A3.IsChecked == true))
-				{   
-                    if(
-                        (LaminationType.Measure.Contains("А5") && RB_ProductFormat_A5.IsChecked == true) ||
-						(LaminationType.Measure.Contains("А4") && RB_ProductFormat_A4.IsChecked == true) ||
-						(LaminationType.Measure.Contains("А3") && RB_ProductFormat_A3.IsChecked == true) 
-                      )
-				    lamination = product * LaminationType.LamPrice;
-                   else lamination = 0;
-			    }
-
-			    else if(LaminationType.Measure.Contains("рулонный"))
-				    lamination = SheetsCount * LaminationType.LamPrice; 
-
-                else lamination = 0;
-            }
-				
-			else lamination = 0;
-
-            TB_price_tirag.Text = Math.Round(priceInList * SheetsCount + lamination + SUmmPostPechPrice, 1).ToString() + " p";
+            TB_price_tirag.Text = Math.Round(priceInList * SheetsCount + SUmmPostPechPrice, 1).ToString() + " p";
 
             TB_price_per_sheet.Text = priceInList.ToString() + " p";
+
             //обнуляем сумму постпечатки
             SUmmPostPechPrice = 0;
         }
@@ -295,20 +270,16 @@ namespace Znak
         /// <summary>
         /// определение формата изделия
         /// </summary>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        /// <returns></returns>
         public FormatPaper ProductFormat()
         {                             
             FormatPaper formatPaper = new FormatPaper(WidthProducts,HeightProducts);
 
             return formatPaper;
         }
+
         /// <summary>
         /// заполнение полей высоты и ширины изделия отностиельно активных radioButton
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// </summary> 
         private void RB_ProductFormat_Checked(object sender, RoutedEventArgs e)
         {    
             CB_bleeds.IsChecked = false; // выключаем блиды после каждого изменения формата изделия
@@ -321,6 +292,7 @@ namespace Znak
             if (RB_ProductFormat_A3.IsChecked == true) { WidthProducts = 420; HeightProducts = 297; }
 
             int Shets = SheetsCount; // сохрянем количество листов
+
             QuantityOnSheet();
             Tirag();
 			
@@ -333,8 +305,6 @@ namespace Znak
         /// <summary>
         /// определение формата бумаги отностиельно активных radioButton
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void RB_PaperFormat_Checked(object sender, RoutedEventArgs e)
         {          
             if (RB_PaperFormatA4.IsChecked == true) formatPaper = new FormatPaper(200, 287);
@@ -349,12 +319,15 @@ namespace Znak
             a4 = RB_PaperFormatA4.IsChecked ?? false;
 
             int Shets = SheetsCount; // сохрянем количество листов
+
             QuantityOnSheet();
             Tirag();
+
             //обнуление поля с количеством изделий
 			product = 0;
             SheetsCount = Shets; // востанавливаем количество листов
         }
+
         /// <summary>
         /// заполнение TextBox количество на листе
         /// </summary>
@@ -375,27 +348,14 @@ namespace Znak
         /// <summary>
         /// расчет тиража от количества изделий и количества изделий от тиража
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void TB_Products_TextChanged(object sender, TextChangedEventArgs e) 
         {
           Tirag(); 
         }
-		/// <summary>
-		/// заполнение ТВ с кол. изделий  ТВ с кол. листов
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-        private void TB_Sheets_TextChanged(object sender, TextChangedEventArgs e)
-		{          if (SheetsCount > 0)
-		LB_Star_Sheets.Visibility = Visibility.Collapsed;  // отключение видимости звездочки после постановки курсора в поле количества листов			
-		}
-       
+  
         /// <summary>
         ///  расчет тиража от количества изделий 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Tirag()
         {
             try
@@ -406,15 +366,12 @@ namespace Znak
 					SheetsCount = 0;
 				else LB_Star_Sheets.Visibility = Visibility.Collapsed; // отключение видимости звездочки после выбора типа бумаги
 			}
-            catch (Exception ) { }
-            
+            catch (Exception ) { }        
         }
 
         /// <summary>
         /// прибавление блидов к изделию относительно активности CB
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void CB_bleeds_Checked(object sender, RoutedEventArgs e) 
         {
             //устанавливаем значение блидов в зависимости от активности checkBox
@@ -440,93 +397,43 @@ namespace Znak
         /// <summary>
         /// событие постановки курсора в TB_height сбрасывает диллерскую галочку при каждом изменении параметров изделия
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void TB_height_GotFocus(object sender, RoutedEventArgs e)
         {
             CB_bleeds.IsChecked = false;
         }
 
-        private void WindowPloter_Loaded(object sender, RoutedEventArgs e) //НАЙТИ ГДЕ ОН ЕСТЬ И УДАЛИТЬ НАХУЙ!!!!!!!
-        {
-
-        }
-
-		/// <summary>
-		/// отключение видимости звездочки после типа бумаги
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void CB_Materials_SelectionChanged(object sender, SelectionChangedEventArgs e)
-		{
-			LB_Star_Peper.Visibility = Visibility.Collapsed; // отключение видимости звездочки после выбора типа бумаги
-
-		}
-
-		/// <summary>
-		/// отключение видимости звездочки после выбора цвета печати
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void RB_Color_Checked(object sender, RoutedEventArgs e)
-		{
-			LB_Star_Color.Visibility = Visibility.Collapsed; // отключение видимости звездочки после выбора цвета печати
-		}
 		/// <summary>
 		/// Сброс всех данных
 		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
 		private void But_Reset_Click(object sender, RoutedEventArgs e)
 		{
-          // убираем галочки из чекбоксов
-          CB_bleeds.IsChecked = false;
-          CB_Dealers.IsChecked = false;
-			
-       //обнуляем поля с данными и текстбоксы
-       product = 0;
-	   quantityOnSheet = 0;
-       WidthProducts  = 0;   
-       HeightProducts  = 0;     
-       SheetsCount  = 0;
-	   TB_price_per_sheet.Clear();
-       TB_price_tirag.Clear();
+        //цикл по всем элементам грида
+		foreach (var control in GR_Laser.Children) 
+        {
+			if (control is RadioButton radioButton)
+				{ radioButton.IsChecked = false; }         //выключаем все RadioButton
+			else if (control is CheckBox checkBox)
+				{ checkBox.IsChecked = false; }            //выключаем все чекбоксы
+			else if (control is ComboBox comboBox)
+				{ comboBox.SelectedIndex = -1; }	       //очищаем все комбо-боксы
+			else if (control is Label label)		
+				{ label.Visibility = Visibility.Visible; } //возвращаем видимость звездочкам обязательных для заполнения полей
+        }
 
-       // очищение комбобокс с типом бумаги
-       CB_Materials.SelectedIndex = -1;
-      // очищение комбобокс с ламинацией
-       CB_Lamination.SelectedIndex = -1;
+		   //обнуляем поля с данными и текстбоксы
+		   product = 0;
+		   quantityOnSheet = 0;
+		   WidthProducts  = 0;   
+		   HeightProducts  = 0;     
+		   SheetsCount  = 0;
+		   TB_price_per_sheet.Clear();
+		   TB_price_tirag.Clear();
 
-       //цикл по всем элементам грида
-			foreach (var control in GR_Laser.Children)
-            {
-			   //выключаем все RadioButton
-			   if (control is RadioButton)
-			     {
-				    RadioButton radioButton = (RadioButton)control;
-				    radioButton.IsChecked = false;
-			     }      
-              //возвращаем видимость звездочкам обязательных для заполнения полей
-               if (control is Label)
-			     {
-				    Label label = (Label)control;
-				    label.Visibility = Visibility;
-			     }   
-
-              //выключаем все чекбоксы
-			   if (control is CheckBox)
-			     {
-				    CheckBox checkBox = (CheckBox)control;
-				    checkBox.IsChecked = false;
-			     }
-            }
-	   	}
+		}
 
 		/// <summary>
 		/// очищение комбобокс с ламинацией
 		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
 		private void But_Reset_Lam_Click(object sender, RoutedEventArgs e)
 		{
 		   // очищение комбобокс с ламинацией
@@ -536,11 +443,8 @@ namespace Znak
 		/// <summary>
 		/// сканирует все СВ и делает их красными при активности
 		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
 		private void CB_Checked(object sender, RoutedEventArgs e)
 		{
-
 			foreach (var control in GR_Laser.Children)
 			{
 			   if (control is CheckBox)
@@ -553,6 +457,32 @@ namespace Znak
                    checkBox.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF000000"));
 			     }			
 			}
+		}
+
+		/// <summary>
+		/// отключение видимости звездочки после постановки курсора в поле количества листов
+		/// </summary>
+        private void TB_Sheets_TextChanged(object sender, TextChangedEventArgs e)
+		{    
+			if (SheetsCount > 0)
+			LB_Star_Sheets.Visibility = Visibility.Collapsed; 			
+		}
+
+		/// <summary>
+		/// отключение видимости звездочки после типа бумаги
+		/// </summary>
+		private void CB_Materials_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			LB_Star_Peper.Visibility = Visibility.Collapsed; // отключение видимости звездочки после выбора типа бумаги
+
+		}
+
+		/// <summary>
+		/// отключение видимости звездочки после выбора цвета печати
+		/// </summary>
+		private void RB_Color_Checked(object sender, RoutedEventArgs e)
+		{
+			LB_Star_Color.Visibility = Visibility.Collapsed; // отключение видимости звездочки после выбора цвета печати
 		}
 	}
 }

@@ -32,6 +32,7 @@ namespace Logic
                     list = priceClass.Price_4_4;
                 }
                 else if (sidePrint == false && diler == false)
+
                     list = priceClass.Price_4_0;
 
 
@@ -40,11 +41,11 @@ namespace Logic
                     list = priceClass.Price_4_4_Diler;
                 }
                 else if (sidePrint == false && diler == true)
+
                     list = priceClass.Price_4_0_Diler;
 
 
                 return list;
-
         }
 
         /// <summary>
@@ -54,8 +55,8 @@ namespace Logic
         /// <returns></returns>
         public decimal MainPrice(Price priceClass, int tirag,bool a4) 
         {
-            decimal list =1;// цена за 1 лист
-            int i = 0;//номер элемента массива
+            decimal list = 1; // цена за 1 лист
+            int i = 0; //номер элемента массива
 
             //проверка стоимости печати относительно тиража
             if (tirag > 0 && tirag < 5) i = 1;
