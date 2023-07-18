@@ -179,6 +179,8 @@ namespace Znak
 			{
 				if (IsChecked(measure.Key))
 				{
+                    if(product<1){ MessageBox messageBox = new("Выбрана постпечать. Укажите количество изделий!"); messageBox.ShowDialog(); return; }
+
 					PostPechPrice _postPechPrice = GetPostPechPriceByMeasure(measure.Key); // находим цену
 
 					int quantity = GetQuantityByPropertyName(measure.Value); // находим колличество
@@ -202,7 +204,7 @@ namespace Znak
 					default: return false;
 				}
 			}
-            if(product<1){ MessageBox messageBox = new("Выбрана постпечать. Укажите количество изделий!"); messageBox.ShowDialog(); return; }
+           
 			//вытаскиваем цену
 			PostPechPrice GetPostPechPriceByMeasure(string measure) { return PostPechPrice.Where(x => x.Measure.Contains(measure)).FirstOrDefault(); }
 			//вытаскиваем колличество
