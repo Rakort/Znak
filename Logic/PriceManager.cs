@@ -12,6 +12,7 @@ namespace Logic
         /// <summary>
         /// путь расположния Json
         /// </summary>
+		
         public const string pricesPath = "Price/Lacer_Price.json";
 
         public const string LaminationPath = "Price/Lamination_Price.json";
@@ -25,6 +26,7 @@ namespace Logic
         /// <summary>
         /// список цен
         /// </summary>
+		 
         private static List<Price> _prices;
 
         /// <summary>
@@ -36,16 +38,19 @@ namespace Logic
         /// <summary>
         /// список цен плотерной печати
         /// </summary>
+		 
         private static List<PricePloter> _pricePloter;
 
         /// <summary>
         /// список размеров рулонов плотера
         /// </summary>
+		 
         private static List<WidthPloterRoll> _widthPloterRoll;
 
 		/// <summary>
 		/// список цен лазерной постпечати 
 		/// </summary>
+		
 		public static List<PostPechPrice> _postPechPrice;
 
         /// <summary>
@@ -68,7 +73,7 @@ namespace Logic
             //Saver.Save(WidthPlotPath, DefaultWidthPloterRoll);
             return _prices;
         }
-
+		
         /// <summary>
         /// записывает цены лазерной постпечати
         /// </summary>

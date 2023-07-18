@@ -202,6 +202,7 @@ namespace Znak
 					default: return false;
 				}
 			}
+            if(product<1){ MessageBox messageBox = new("Выбрана постпечать. Укажите количество изделий!"); messageBox.ShowDialog(); return; }
 			//вытаскиваем цену
 			PostPechPrice GetPostPechPriceByMeasure(string measure) { return PostPechPrice.Where(x => x.Measure.Contains(measure)).FirstOrDefault(); }
 			//вытаскиваем колличество
@@ -216,19 +217,21 @@ namespace Znak
 			if (LaminationType != null)
 			{
 				// проверка на допустимость формата пакетной ламинации
-				if (LaminationType.Measure.Contains("пакетный")&&
+				if (LaminationType.Measure.ToLower().Contains("пакетный")&&
 				(RB_ProductFormat_A5.IsChecked == true || RB_ProductFormat_A4.IsChecked == true || RB_ProductFormat_A3.IsChecked == true))
-				{   
+				{
 					//проверка, списывается ламинат тоько того формата изделия который выбран
-                    if((LaminationType.Measure.Contains("А5") && RB_ProductFormat_A5.IsChecked == true) ||
+					if ((LaminationType.Measure.Contains("А5") && RB_ProductFormat_A5.IsChecked == true) ||
 						(LaminationType.Measure.Contains("А4") && RB_ProductFormat_A4.IsChecked == true) ||
 						(LaminationType.Measure.Contains("А3") && RB_ProductFormat_A3.IsChecked == true))
 
-				        SUmmPostPechPrice += product * LaminationType.LamPrice;                 
+						SUmmPostPechPrice += product * LaminationType.LamPrice;
+					else { MessageBox messageBox = new("формат изделия и ламината не соответствуют"); messageBox.ShowDialog(); return; }
 			    }
-			    else if(LaminationType.Measure.Contains("рулонный"))
+			    else if(LaminationType.Measure.ToLower().Contains("рулонный"))
 
-				    SUmmPostPechPrice += SheetsCount * LaminationType.LamPrice;                
+				    SUmmPostPechPrice += SheetsCount * LaminationType.LamPrice;   
+			else { MessageBox messageBox = new("выберите формат изделия из стандартных"); messageBox.ShowDialog(); return; }
             }
 		}
 
@@ -237,14 +240,16 @@ namespace Znak
 		/// </summary>
 		private void But_Price_Click(object sender, RoutedEventArgs e)
         {
-            //проверка выбрана ли цветность и тип бумаги
-            if ((RB_4_0.IsChecked == false && RB_4_4.IsChecked == false && RB_1_0.IsChecked == false && RB_1_1.IsChecked == false)
-                || PaperType is null)
-                return;
+			// проверка указано ли количество листов
+			if(SheetsCount<1){ MessageBox messageBox = new("укажите количество листов"); messageBox.ShowDialog(); return; }
+			//проверка выбрана ли цветность и тип бумаги
+			if ((RB_4_0.IsChecked == false && RB_4_4.IsChecked == false && RB_1_0.IsChecked == false && RB_1_1.IsChecked == false)
+				|| PaperType is null)
+			{ MessageBox messageBox = new("не выбрана цветность или тип бумаги"); messageBox.ShowDialog(); return; }
             //проверка выбран ли формат бумаги
             if ((RB_PaperFormatA4.IsChecked == false && RB_PaperFormatA3.IsChecked == false && RB_PaperFormatSRA3.IsChecked == false && RB_PaperFormat_325X470.IsChecked == false && RB_PaperFormat_330X485.IsChecked == false)
                 || PaperType is null)
-                return;
+                { MessageBox messageBox = new("не выбран формат бумаги"); messageBox.ShowDialog(); return; }
 
             //устанавливаем значение цветности и сторонности в зависимости от активных radioButton
             calculations.color = (RB_4_0.IsChecked ?? false) || (RB_4_4.IsChecked ?? false);

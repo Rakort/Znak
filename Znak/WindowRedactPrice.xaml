@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="Znak.WindowRedactPrice"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Znak"
+        mc:Ignorable="d"
+         Height="549" Width="840">
+    <Grid x:Name="RedactPrice_Grid" Height="549" VerticalAlignment="Center" HorizontalAlignment="Left" Width="840">
+        <TabControl>
+            <TabItem Header="Лазерная печать"  Margin="-2,1,-2,-3">
+                <Grid Name="LaserRedactPrice_Grid"  Background="#FFE5E5E5" Margin="-2,0,-2,0" Height="535">
+                    <TextBox x:Name="TB_4_0_1"  Margin="376,140,0,0" HorizontalAlignment="Left" Width="54" Height="22" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold"  />
+                    <Label x:Name="LB_ProductFormat" Content="ВЫБОР МАТЕРИАЛА ДЛЯ РЕДАКТИРОВАНИЯ" Margin="10,33,0,0" HorizontalAlignment="Left" Width="338" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center"/>
+                    <Label x:Name="LB_ProductFormat_Copy" Content="4+0" Margin="383,102,0,0" HorizontalAlignment="Left" Width="39" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center"/>
+                    <Label x:Name="LB_ProductFormat_Copy1" Content="4+4" Margin="469,102,0,0" HorizontalAlignment="Left" Width="39" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center" RenderTransformOrigin="0.205,0.576"/>
+                    <TextBox x:Name="TB_4_0_2"   Margin="376,175,0,0" HorizontalAlignment="Left" Width="54" Height="22" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold"  />
+                    <TextBox x:Name="TB_4_0_3"   Margin="376,210,0,0" HorizontalAlignment="Left" Width="54" Height="22" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold"  />
+                    <TextBox x:Name="TB_4_0_4"   Margin="376,248,0,0" HorizontalAlignment="Left" Width="54" Height="22" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold"  />
+                    <TextBox x:Name="TB_4_0_5"   Margin="376,288,0,0" HorizontalAlignment="Left" Width="54" Height="22" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold"  />
+                    <TextBox x:Name="TB_4_0_6"   Margin="376,324,0,0" HorizontalAlignment="Left" Width="54" Height="22" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold"  />
+                    <TextBox x:Name="TB_4_4_1"   Margin="461,140,0,0" HorizontalAlignment="Left" Width="54" Height="22" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold"  />
+                    <TextBox x:Name="TB_4_4_2"   Margin="461,175,0,0" HorizontalAlignment="Left" Width="54" Height="22" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold"  />
+                    <TextBox x:Name="TB_4_4_3"   Margin="461,210,0,0" HorizontalAlignment="Left" Width="54" Height="22" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold"  />
+                    <TextBox x:Name="TB_4_4_4"   Margin="461,248,0,0" HorizontalAlignment="Left" Width="54" Height="22" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold"  />
+                    <TextBox x:Name="TB_4_4_5"   Margin="461,288,0,0" HorizontalAlignment="Left" Width="54" Height="22" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold"  />
+                    <TextBox x:Name="TB_4_4_6"   Margin="461,324,0,0" HorizontalAlignment="Left" Width="54" Height="22" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold"  />
+                    <Label x:Name="LB_ProductFormat_Copy2" Content="Цена тиража 5-19 листа" Margin="545,172,0,0" HorizontalAlignment="Left" Width="166" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold" HorizontalContentAlignment="Left"/>
+                    <Label x:Name="LB_ProductFormat_Copy3" Content="Цена тиража 20-49 листа" Margin="545,207,0,0" HorizontalAlignment="Left" Width="166" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold" HorizontalContentAlignment="Left"/>
+                    <Label x:Name="LB_ProductFormat_Copy4" Content="Цена тиража 50-99 листа" Margin="545,244,0,0" HorizontalAlignment="Left" Width="177" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold" HorizontalContentAlignment="Left"/>
+
+                    <Label x:Name="LB_ProductFormat_Copy6" Content="Цена тиража 100-199 листов" Margin="545,283,0,0" HorizontalAlignment="Left" Width="187" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold" HorizontalContentAlignment="Left"/>
+
+                    <Label x:Name="LB_ProductFormat_Copy7" Content="Цена тиража 200+ листов" Margin="546,319,0,0" HorizontalAlignment="Left" Width="176" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold" HorizontalContentAlignment="Left"/>
+
+                    <ComboBox x:Name="CB_Materials" ItemsSource="{Binding PriceList}" SelectedItem="{Binding PriceSelectedItem}" DisplayMemberPath="NamePaper" Foreground="#FFF71313"
+                    Margin="80,69,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="211" FontSize="14" FontWeight="SemiBold" VerticalContentAlignment="Center" SelectionChanged="CB_Materials_SelectionChanged"/>
+                    <Label x:Name="LB_ProductFormat_Copy5" Content="Цена тиража 1-4 листа" Margin="545,136,0,0" HorizontalAlignment="Left" Width="159" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold" HorizontalContentAlignment="Left"/>
+                    <Button x:Name="But_Price" Content="СОХРАНИТЬ ИЗМЕНЕНИЯ" Margin="350,378,0,0" Height="28" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" Width="193" Click="But_Price_Click" />
+                    <Button x:Name="But_Price_Copy" Content="ДОБАВЛЕНИЕ МАТЕРИАЛА" Margin="80,160,0,0" Height="28" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" Width="211" Click="But_Price_Copy_Click" />
+                    <TextBox x:Name="TB_NameMat"   Margin="376,72,0,0" HorizontalAlignment="Left" Width="346" Height="22" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold" RenderTransformOrigin="0.5,0.53"  />
+                    <Label x:Name="LB_ProductFormat_Copy8" Content="НАЗВАНИЕ МАТЕРИАЛА" Margin="447,33,0,0" HorizontalAlignment="Left" Width="177" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center"/>
+                    <Button x:Name="But_Price_Delete" Content="УДАЛИТЬ МАТЕРИАЛ" Margin="80,246,0,0" Height="28" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" Width="211" Click="But_Price_Delete_Click" Foreground="#FFF71313"/>
+
+                    <Label Content="р" HorizontalAlignment="Left" Margin="430,141,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.564" />
+                    <Label Content="р" HorizontalAlignment="Left" Margin="514,141,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.564" />
+                    <Label Content="р" HorizontalAlignment="Left" Margin="430,176,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.564" />
+                    <Label Content="р" HorizontalAlignment="Left" Margin="514,176,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.564" />
+                    <Label Content="р" HorizontalAlignment="Left" Margin="430,211,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.564" />
+                    <Label Content="р" HorizontalAlignment="Left" Margin="514,211,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.564" />
+                    <Label Content="р" HorizontalAlignment="Left" Margin="430,249,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.564" />
+                    <Label Content="р" HorizontalAlignment="Left" Margin="514,249,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.564" />
+                    <Label Content="р" HorizontalAlignment="Left" Margin="430,289,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.564" />
+                    <Label Content="р" HorizontalAlignment="Left" Margin="514,289,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.564" />
+                    <Label Content="р" HorizontalAlignment="Left" Margin="430,325,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.564" />
+                    <Label Content="р" HorizontalAlignment="Left" Margin="514,325,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.564" />
+                    <Label x:Name="LB_ProductFormat_Copy9" Content="Заполняйте ценами все поля, в противном случае расчет при указанном тираже будет равен нулю" Margin="0,440,0,0" HorizontalAlignment="Center" Width="680" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Ламинация (лазер)" Margin="-2,1,-2,-3">
+                <local:WindowRedactLaminat Background="#FFE5E5E5" Margin="-2,0,-3,0" Height="524" Width="840"/>
+            </TabItem>
+            <TabItem Header="Постпечатка" Margin="-2,1,-2,-3">
+                <local:WindowRedactPostPech Background="#FFE5E5E5" Margin="-2,0,-3,0" Height="524" Width="840"/>
+            </TabItem>
+            <TabItem Header="Широкоформатка" Margin="-2,1,-2,-3">
+                <local:WindowRedactPloter Background="#FFE5E5E5" Margin="-2,0,-3,0" Height="524" Width="840"/>
+            </TabItem>
+            <TabItem Header="ширины рулонов" Margin="-2,1,-2,-3">
+                <local:WindowRedactWTPlot Background="#FFE5E5E5" Margin="-2,0,-3,0" Height="524" Width="840"/>
+            </TabItem>
+        </TabControl>
+        
+    </Grid>
+</UserControl>

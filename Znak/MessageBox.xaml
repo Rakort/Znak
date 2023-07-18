@@ -1,0 +1,14 @@
+﻿<Window x:Class="Znak.MessageBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Znak"
+        mc:Ignorable="d"
+        Title="MessageBox" Height="200" Width="400" WindowStartupLocation="CenterScreen" Icon="/Error.png">
+    <Grid x:Name="Grid_MessageBox" Height="171" VerticalAlignment="Center" HorizontalAlignment="Center" Width="400">
+        <Image HorizontalAlignment="Left" Height="119" Margin="136,0,0,0" VerticalAlignment="Top" Width="135" Source="/Error.png" Opacity="0.2"/>
+        <TextBlock x:Name="TB_MessageBox" HorizontalAlignment="Center" Margin="0,52,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="380" Height="56" TextAlignment="Center" FontSize="14" FontWeight="SemiBold"/>
+        <Button x:Name="BT_MessageBoxClose" Content="OK" Margin="0,124,0,0" FontSize="14" FontWeight="SemiBold" HorizontalAlignment="Center" Width="76" Height="29" VerticalAlignment="Top" Click="BT_MessageBoxClose_Click"/>
+    </Grid>
+</Window>

@@ -7,7 +7,7 @@
         d:DataContext="{d:DesignInstance Type=local:MainWindow}"
         mc:Ignorable="d"
         Background="#FFE5E5E5"
-        Title="Znak Price" Height="600" Width="840"     
+        Title="Znak Price" Height="600" Width="840" WindowStartupLocation="CenterScreen"     
         >
 
     <TabControl Background="#FFE5E5E5" >
@@ -51,6 +51,7 @@
                 <RadioButton x:Name="RB_PaperFormat_325X470" Content="325x470" GroupName="PaperFormat" Checked="RB_PaperFormat_Checked" Margin="278,216,0,0" HorizontalAlignment="Left" Width="82" Height="17" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
                 <RadioButton x:Name="RB_PaperFormat_330X485" Content="330x485" GroupName="PaperFormat" Checked="RB_PaperFormat_Checked" Margin="372,216,0,0" HorizontalAlignment="Left" Width="81" Height="17" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
                 <Label x:Name="LB" Content="ВЫБОР БУМАГИ" Margin="74,245,0,0" HorizontalAlignment="Left" Width="119" Height="25" VerticalAlignment="Top" FontSize="14" FontWeight="SemiBold"/>
+                
                 <ComboBox x:Name="CB_Materials" ItemsSource="{Binding PriceList}" SelectedItem="{Binding PaperType}" DisplayMemberPath="NamePaper" Foreground="#FFF71313"
                  Margin="39,276,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="186" FontSize="14" FontWeight="SemiBold" VerticalContentAlignment="Center" SelectionChanged="CB_Materials_SelectionChanged"/>
 
@@ -106,6 +107,9 @@
 
         <TabItem Header="Плоттерная печать">
             <local:WindowPloter Background="#FFE5E5E5" Margin="64,0,64,0"/>
+        </TabItem>
+        <TabItem Header="Редактирования цен" Margin="470,-2,-475,0" Foreground="#FFF71313">
+            <local:WindowRedactPrice Background="#FFE5E5E5" Margin="-2,0,-4,0"/> 
         </TabItem>
     </TabControl>
 </Window>
