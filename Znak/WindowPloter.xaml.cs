@@ -592,48 +592,47 @@ namespace Znak
 		{
 			//устанавливаем значение проклейки в зависимости от активности checkBox
 
-			Cleaner(CB_Sizing_Line, TB_SkleiPrice,GluingLength , SKleyka,TB_Price_Sizing_Line);
+			//Cleaner(CB_Sizing_Line, TB_SkleiPrice,GluingLength , SKleyka,TB_Price_Sizing_Line);
 
-			//if (CB_Sizing_Line.IsChecked == true)
-			//{
+			if (CB_Sizing_Line.IsChecked == true)
+			{
 
-			//	// при включенном чек-боксе меняет цвет текста на красный
-			//	CB_Sizing_Line.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF71313"));
-			//}
-			//else
-			//{   //очищаем TB с данными проклейке
-			//	GluingLength = 0;
-			//	TB_SkleiPrice.Clear();
-			//	SKleyka = 0;
+				// при включенном чек-боксе меняет цвет текста на красный
+				CB_Sizing_Line.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF71313"));
+			}
+			else
+			{   //очищаем TB с данными проклейке
+				GluingLength = 0;
+				TB_SkleiPrice.Clear();
+				SKleyka = 0;
 
-			//	// при выключенном чек-боксе меняет цвет текста на черный
-			//	CB_Sizing_Line.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF000000"));
-			//}
+				// при выключенном чек-боксе меняет цвет текста на черный
+				CB_Sizing_Line.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF000000"));
+			}
 		}
 
-/// <summary>
-/// устанавливает цвет СВ и очищает все параметры пи отклюцении СВ
-/// </summary>
-		public static void Cleaner(CheckBox checkBox, TextBox textBox1, decimal Sum1 = 0,decimal Sum2 = 0, TextBox textBox2 = null) 
-		{
-			//устанавливаем цвет в зависимости от активности checkBox
-            if (checkBox.IsChecked == true)
-            {
-                // при включенном чек-боксе меняет цвет текста на красный
-                checkBox.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF71313"));
-            }
-            else
-            {   
-				//очищаем TB и поляс данными	
-				textBox1.Clear();
-				//if(textBox2!=null)textBox2.Clear();
-				Sum1 = 0;
-							Sum1 -= Sum1;	
-                Sum2 = 0;
+///// <summary>
+///// устанавливает цвет СВ и очищает все параметры пи отклюцении СВ
+///// </summary>
+//		public static void Cleaner(CheckBox checkBox, TextBox textBox1, decimal Sum1 = 0,decimal Sum2 = 0, TextBox textBox2 = null) 
+//		{
+//			//устанавливаем цвет в зависимости от активности checkBox
+//            if (checkBox.IsChecked == true)
+//            {
+//                // при включенном чек-боксе меняет цвет текста на красный
+//                checkBox.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF71313"));
+//            }
+//            else
+//            {   
+//				//очищаем TB и поляс данными	
+//				textBox1.Clear();
+//				//if(textBox2!=null)textBox2.Clear();
+//				Sum1 = 0;
+//                Sum2 = 0;
 
-                // при выключенном чек-боксе меняет цвет текста на черный
-                checkBox.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF000000"));
-            }
-		}
+//                // при выключенном чек-боксе меняет цвет текста на черный
+//                checkBox.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF000000"));
+//            }
+//		}
 	}
 }
