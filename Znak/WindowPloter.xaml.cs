@@ -42,7 +42,7 @@ namespace Znak
             InicialPostPehc();
         }
 
-        #region Variables
+#region Variables
 
         /// <summary>
         /// интервал через который ставятся люверсы в мм
@@ -113,6 +113,11 @@ namespace Znak
         /// </summary>
         decimal Sizings = 0;
 
+		/// <summary>
+        /// стоимость склейки
+        /// </summary>
+        decimal SKleyka = 0;
+
         /// <summary>
         /// стоимость люверсов на изделия
         /// </summary>
@@ -123,7 +128,14 @@ namespace Znak
         /// </summary>
         decimal lam = 0;
 
-        #endregion Variables
+#endregion Variables
+
+#region Variables постпечать
+
+		/// <summary>
+		/// длинна склейки биндится к ComboBox
+		/// </summary>
+		public decimal GluingLength { get; set; }
 
         /// <summary>
         /// поле с материалами и ценами биндится к ComboBox
@@ -149,6 +161,8 @@ namespace Znak
         /// штрина рулона выбранная пользователем в ComboBox
         /// </summary>
         public WidthPloterRoll PloterWidthType { get; set; }
+
+#endregion Variables постпечати
 
         /// <summary>
         /// инициализация цен постпечати
@@ -199,8 +213,10 @@ namespace Znak
             //проверка на звполнение всех необходимах полей
             if (widthP > 0 && heightP > 0 && PloterWidthType != null && quantityP > 0)
             {
-                //проверка габариты изделия не должны быть больше ширины выбранного рулона
-                if (!(widthP > PloterWidthType.WidthRoll && heightP > PloterWidthType.WidthRoll))
+				//if (PloterPeperType.NamePloter.Contains("банер")) return;
+
+                //проверка габариты изделия не должны быть больше ширины выбранного рулона и если это не банер или сетка
+                if (PloterPeperType.NamePloter.Contains("Банер") || !(widthP > PloterWidthType.WidthRoll && heightP > PloterWidthType.WidthRoll))
                 {
                     calculationAreaPrintedField();
                     CalcfreeFieldArea();
@@ -218,7 +234,7 @@ namespace Znak
         /// <returns></returns>
         public void calculationAreaPrintedField()
         {
-            if (widthP > 1570 && heightP > 1570 || quantityP <= 0) return;
+            if ((!PloterPeperType.NamePloter.Contains("Банер") && widthP > 1570 && heightP > 1570) || quantityP <= 0) return;
             else
             {
                 printArea = Math.Round(((widthP / 1000) * (heightP / 1000)) * quantityP, 2);
@@ -281,8 +297,6 @@ namespace Znak
                 productSide = widthP;
                 productSide2 = heightP;
             }
-
-
         }
 
         /// <summary>
@@ -290,6 +304,8 @@ namespace Znak
         /// </summary>
         public void CalcfreeFieldArea()
         {
+			if (widthP > 1550 || heightP > 1550) return;
+
             Calc();
 
             decimal materialQuantity = 0; //количество полосок ширины материала нужное для размещения всего количества изделий вар1
@@ -339,16 +355,25 @@ namespace Znak
         /// </summary>
         public void CalcPricePlot()
         {
+
+			// раччет стоимости склейки
+			if (CB_Sizing_Line.IsChecked == true)
+			{
+				SKleyka = (GluingLength / 1000) * PriceSizings;
+
+				TB_SkleiPrice.Text = SKleyka.ToString() + " р";
+			}
+
             //расчет цены печати + округление до сотых
             printingPrice = Math.Round(printArea * priceMeter, 2);
 
-            //расчет цены свп + округление до сотых
-            if (CB_SvP.IsChecked == true) //проверка включен ли СB
+			//расчет цены свп + округление до сотых
+			if ((widthP < 1550 || heightP < 1550) && CB_SvP.IsChecked == true) //проверка включен ли СB
                 freeFieldPrice = Math.Round(freeFieldArea * PloterPeperType.FreeFieldPrice, 2);
             else freeFieldPrice = 0;
 
             //общая цена заказа + округление до сотых
-            PricePlot = Math.Round(printingPrice + freeFieldPrice + Sizings + luversQuantityPrice + lam, 2);
+            PricePlot = Math.Round(printingPrice + freeFieldPrice + Sizings + SKleyka + luversQuantityPrice + lam, 2);
         }
 
         /// <summary>
@@ -388,14 +413,16 @@ namespace Znak
         /// <summary>
         /// проклейка по периметру
         /// </summary>
-        private void CB_Sizing_Perim_Copy_Checked(object sender, RoutedEventArgs e)
+        private void CB_Sizing_Perim_Checked(object sender, RoutedEventArgs e)
         {
+			if (CB_Sizing_Perim.IsChecked == true)
+			{
+				// стоимость проклейки периметра
+				Sizings = (((widthP + heightP) * 2) / 1000) * PriceSizings;
 
-            // стоимость проклейки 
-            Sizings = (((widthP + heightP) * 2) / 1000) * PriceSizings;
-
-            TB_Price_Sizing_Perim.Text = Sizings.ToString() + " р";
-
+				TB_Price_Sizing_Perim.Text = Sizings.ToString() + " р";
+			}
+	
             //устанавливаем значение проклейки в зависимости от активности checkBox
             if (CB_Sizing_Perim.IsChecked == true)
             {
@@ -555,6 +582,58 @@ namespace Znak
             CB_SvP.IsChecked = false;
 
         }
-        #endregion отключение звездочек
-    }
+		#endregion отключение звездочек
+
+		/// <summary>
+		/// окрашивание проклейки и заполнение ее полей
+		/// </summary>
+
+		private void CB_Sizing_Line_Checked(object sender, RoutedEventArgs e)
+		{
+			//устанавливаем значение проклейки в зависимости от активности checkBox
+
+			Cleaner(CB_Sizing_Line, TB_SkleiPrice,GluingLength , SKleyka,TB_Price_Sizing_Line);
+
+			//if (CB_Sizing_Line.IsChecked == true)
+			//{
+
+			//	// при включенном чек-боксе меняет цвет текста на красный
+			//	CB_Sizing_Line.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF71313"));
+			//}
+			//else
+			//{   //очищаем TB с данными проклейке
+			//	GluingLength = 0;
+			//	TB_SkleiPrice.Clear();
+			//	SKleyka = 0;
+
+			//	// при выключенном чек-боксе меняет цвет текста на черный
+			//	CB_Sizing_Line.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF000000"));
+			//}
+		}
+
+/// <summary>
+/// устанавливает цвет СВ и очищает все параметры пи отклюцении СВ
+/// </summary>
+		public static void Cleaner(CheckBox checkBox, TextBox textBox1, decimal Sum1 = 0,decimal Sum2 = 0, TextBox textBox2 = null) 
+		{
+			//устанавливаем цвет в зависимости от активности checkBox
+            if (checkBox.IsChecked == true)
+            {
+                // при включенном чек-боксе меняет цвет текста на красный
+                checkBox.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF71313"));
+            }
+            else
+            {   
+				//очищаем TB и поляс данными	
+				textBox1.Clear();
+				//if(textBox2!=null)textBox2.Clear();
+				Sum1 = 0;
+							Sum1 -= Sum1;	
+                Sum2 = 0;
+
+                // при выключенном чек-боксе меняет цвет текста на черный
+                checkBox.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF000000"));
+            }
+		}
+	}
 }

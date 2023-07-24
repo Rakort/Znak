@@ -105,7 +105,7 @@
             </Grid>
         </TabItem>
 
-        <TabItem Header="Плоттерная печать">
+        <TabItem Header="Широкоформатка">
             <local:WindowPloter Background="#FFE5E5E5" Margin="64,0,64,0"/>
         </TabItem>
         <TabItem Header="Редактирования цен" Margin="470,-2,-475,0" Foreground="#FFF71313">

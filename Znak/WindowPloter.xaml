@@ -61,17 +61,22 @@
 
         <CheckBox x:Name="CB_Luvers"  Content="Добавить люверсы" Margin="429,258,0,0" HorizontalAlignment="Left" Width="163" Height="17" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_Luvers_Checked" Unchecked="CB_Luvers_Checked"/>
 
-        <TextBox x:Name="TB_LuversQuantity" HorizontalAlignment="Left" Margin="616,245,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" FontSize="13" FontWeight="SemiBold"/>
-        <TextBox x:Name="TB_LuversPrice" HorizontalAlignment="Left" Margin="616,269,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" FontSize="13" FontWeight="SemiBold"/>
+        <TextBox x:Name="TB_LuversQuantity" IsReadOnly="True" HorizontalAlignment="Left" Margin="616,245,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" FontSize="13" FontWeight="SemiBold"/>
+        <TextBox x:Name="TB_LuversPrice"  IsReadOnly="True" HorizontalAlignment="Left" Margin="616,269,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" FontSize="13" FontWeight="SemiBold"/>
 
-        <CheckBox x:Name="CB_Sizing_Perim"  Content="Проклейка по периметру" Margin="429,309,0,0" HorizontalAlignment="Left" Width="190" Height="18" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_Sizing_Perim_Copy_Checked" Unchecked="CB_Sizing_Perim_Copy_Checked" />
+        <CheckBox x:Name="CB_Sizing_Perim"  Content="Проклейка по периметру" Margin="429,309,0,0" HorizontalAlignment="Left" Width="190" Height="18" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_Sizing_Perim_Checked" Unchecked="CB_Sizing_Perim_Checked" />
 
-        <TextBox x:Name="TB_Price_Sizing_Perim"  IsReadOnly="True" HorizontalAlignment="Left" Margin="616,311,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="TB_Price_Sizing_Perim"  IsReadOnly="True" HorizontalAlignment="Left" Margin="616,309,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
 
         <CheckBox x:Name="CB_Lam"  Content="Ламинация пленки" Margin="429,360,0,0" HorizontalAlignment="Left" Width="190" Height="18" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_Lam_Checked" Unchecked="CB_Lam_Checked"/>
 
         <TextBox x:Name="TB_Price_Lam"  IsReadOnly="True" HorizontalAlignment="Left" Margin="616,360,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
         <CheckBox x:Name="CB_SvP"  Content="Добавить свободное поле" Margin="429,203,0,0" HorizontalAlignment="Left" Width="190" Height="17" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_SvP_Checked" Unchecked="CB_SvP_Checked"/>
+
+        <CheckBox x:Name="CB_Sizing_Line"  Content="Добавить склейку в мм " Margin="429,408,0,0" HorizontalAlignment="Left" Width="190" Height="18" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom"  Unchecked="CB_Sizing_Line_Checked" Checked="CB_Sizing_Line_Checked" />
+        <TextBox x:Name="TB_Price_Sizing_Line" Text="{Binding GluingLength, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="617,406,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
+        <Label x:Name="LB_ProductFormat_Copy2" Content="Введите длинну склейки в мм" Margin="425,426,0,0" HorizontalAlignment="Left" Width="202" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold" HorizontalContentAlignment="Left"/>
+        <TextBox x:Name="TB_SkleiPrice" HorizontalAlignment="Left" Margin="617,430,0,0" IsReadOnly="True" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" FontSize="13" FontWeight="SemiBold"/>
 
     </Grid>
 </UserControl>
