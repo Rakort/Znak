@@ -21,7 +21,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_196BDCC13B964F16AF595C86F8DD6D33"
+        "MsmKey" = "8:_241A25941D514E0E96C810B407843F71"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -33,19 +33,19 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_265F15F2E1AE4C2DA9F1AE03765AF15D"
+        "MsmKey" = "8:_27C29CFE5D2049069920317151D03020"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_3D18CD7422F542B0B33A729EC22D1585"
+        "MsmKey" = "8:_7B07585DFB764D3782F520DE3447FAAA"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_7CCF23ABC0484D148A606BA594B29A65"
+        "MsmKey" = "8:_C1E88674C8674020B52D9B1F84B259B0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -57,7 +57,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_D5E581C3214E44C9BF0B5071F9F968B0"
+        "MsmKey" = "8:_FD6B3CFC8809458C93FF782AED6B02F8"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -118,6 +118,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
     }
@@ -150,10 +158,10 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_196BDCC13B964F16AF595C86F8DD6D33"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_241A25941D514E0E96C810B407843F71"
             {
-            "SourcePath" = "8:..\\Price\\WidthPloter_Price.json"
-            "TargetName" = "8:WidthPloter_Price.json"
+            "SourcePath" = "8:..\\Znak\\bin\\Debug\\net6.0-windows\\Price\\PostPech_Price.json"
+            "TargetName" = "8:PostPech_Price.json"
             "Tag" = "8:"
             "Folder" = "8:_37C3049F3EA44E7B98FA22903C9CE784"
             "Condition" = "8:"
@@ -190,9 +198,9 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_265F15F2E1AE4C2DA9F1AE03765AF15D"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_27C29CFE5D2049069920317151D03020"
             {
-            "SourcePath" = "8:..\\Price\\Lamination_Price.json"
+            "SourcePath" = "8:..\\Znak\\bin\\Debug\\net6.0-windows\\Price\\Lamination_Price.json"
             "TargetName" = "8:Lamination_Price.json"
             "Tag" = "8:"
             "Folder" = "8:_37C3049F3EA44E7B98FA22903C9CE784"
@@ -210,10 +218,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3D18CD7422F542B0B33A729EC22D1585"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7B07585DFB764D3782F520DE3447FAAA"
             {
-            "SourcePath" = "8:..\\Price\\Ploter_Price.json"
-            "TargetName" = "8:Ploter_Price.json"
+            "SourcePath" = "8:..\\Znak\\bin\\Debug\\net6.0-windows\\Price\\WidthPloter_Price.json"
+            "TargetName" = "8:WidthPloter_Price.json"
             "Tag" = "8:"
             "Folder" = "8:_37C3049F3EA44E7B98FA22903C9CE784"
             "Condition" = "8:"
@@ -230,10 +238,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7CCF23ABC0484D148A606BA594B29A65"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C1E88674C8674020B52D9B1F84B259B0"
             {
-            "SourcePath" = "8:..\\Price\\PostPech_Price.json"
-            "TargetName" = "8:PostPech_Price.json"
+            "SourcePath" = "8:..\\Znak\\bin\\Debug\\net6.0-windows\\Price\\Ploter_Price.json"
+            "TargetName" = "8:Ploter_Price.json"
             "Tag" = "8:"
             "Folder" = "8:_37C3049F3EA44E7B98FA22903C9CE784"
             "Condition" = "8:"
@@ -270,9 +278,9 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D5E581C3214E44C9BF0B5071F9F968B0"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FD6B3CFC8809458C93FF782AED6B02F8"
             {
-            "SourcePath" = "8:..\\Price\\Lacer_Price.json"
+            "SourcePath" = "8:..\\Znak\\bin\\Debug\\net6.0-windows\\Price\\Lacer_Price.json"
             "TargetName" = "8:Lacer_Price.json"
             "Tag" = "8:"
             "Folder" = "8:_37C3049F3EA44E7B98FA22903C9CE784"
@@ -357,15 +365,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Znak Price"
-        "ProductCode" = "8:{14EA7D96-E9FC-4BDB-B803-37F9B4604FD3}"
-        "PackageCode" = "8:{6D420050-EB6A-45ED-9DCA-96CB09B3851B}"
+        "ProductCode" = "8:{C163ED92-FEA4-4AEA-BBA7-335154DC5428}"
+        "PackageCode" = "8:{3E2FB814-B4A4-4BEB-953F-BFADEE7DA430}"
         "UpgradeCode" = "8:{6BC4B399-3C6C-4A77-9470-511FA8ACFEC1}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
-        "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.3.0"
+        "InstallAllUsers" = "11:FALSE"
+        "ProductVersion" = "8:28.07.23"
         "Manufacturer" = "8:Znak Price"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
