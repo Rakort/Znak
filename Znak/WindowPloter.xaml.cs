@@ -380,9 +380,7 @@ namespace Znak
         /// Добавление люверсов
         /// </summary>
         private void CB_Luvers_Checked(object sender, RoutedEventArgs e)
-
         {
-
             //количество люверсов в изделиях
             decimal luversQuantity = (Math.Floor((widthP + heightP) / Interval) * 2) * quantityP;
 
@@ -395,7 +393,6 @@ namespace Znak
             //устанавливаем значение люверсов в зависимости от активности checkBox
             if (CB_Luvers.IsChecked == true)
             {
-
                 // при включенном чек-боксе меняет цвет текста на красный
                 CB_Luvers.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF71313"));
             }
@@ -426,7 +423,6 @@ namespace Znak
             //устанавливаем значение проклейки в зависимости от активности checkBox
             if (CB_Sizing_Perim.IsChecked == true)
             {
-
                 // при включенном чек-боксе меняет цвет текста на красный
                 CB_Sizing_Perim.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF71313"));
             }
@@ -445,7 +441,6 @@ namespace Znak
         /// </summary>	
         private void CB_Lam_Checked(object sender, RoutedEventArgs e)
         {
-
             lam = (widthP / 1000 * heightP / 1000) * PriceLam;
 
             //заполнение TB
@@ -497,8 +492,6 @@ namespace Znak
                 // при выключенном чек-боксе меняет цвет текста на черный
                 CB_SvP.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF000000"));
             }
-
-
         }
 
         /// <summary>
@@ -611,28 +604,50 @@ namespace Znak
 			}
 		}
 
-///// <summary>
-///// устанавливает цвет СВ и очищает все параметры пи отклюцении СВ
-///// </summary>
-//		public static void Cleaner(CheckBox checkBox, TextBox textBox1, decimal Sum1 = 0,decimal Sum2 = 0, TextBox textBox2 = null) 
-//		{
-//			//устанавливаем цвет в зависимости от активности checkBox
-//            if (checkBox.IsChecked == true)
-//            {
-//                // при включенном чек-боксе меняет цвет текста на красный
-//                checkBox.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF71313"));
-//            }
-//            else
-//            {   
-//				//очищаем TB и поляс данными	
-//				textBox1.Clear();
-//				//if(textBox2!=null)textBox2.Clear();
-//				Sum1 = 0;
-//                Sum2 = 0;
+        ///// <summary>
+        ///// устанавливает цвет СВ и очищает все параметры пи отклюцении СВ
+        ///// </summary>
+        //public void Cleaner(CheckBox checkBox, TextBox textBox1, TextBox textBox2, ref decimal Sum1, ref decimal Sum2)
+        //{
+        //    //устанавливаем цвет в зависимости от активности checkBox
+        //    if (checkBox.IsChecked == true)
+        //    {
+        //        // при включенном чек-боксе меняет цвет текста на красный
+        //        checkBox.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF71313"));
+        //    }
+        //    else
+        //    {
+        //        //очищаем TB и поляс данными	
+        //        textBox1.Clear();
+        //        textBox2.Clear();
+        //        Sum1 = 0;
+        //        Sum2 = 0;
 
-//                // при выключенном чек-боксе меняет цвет текста на черный
-//                checkBox.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF000000"));
-//            }
-//		}
-	}
+        //        // при выключенном чек-боксе меняет цвет текста на черный
+        //        checkBox.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF000000"));
+        //    }
+        //}
+
+        ///// <summary>
+        ///// устанавливает цвет СВ и очищает все параметры пи отклюцении СВ
+        ///// </summary>
+        //public void Cleaner(CheckBox checkBox, TextBox textBox1, ref decimal Sum1)
+        //{
+        //    //устанавливаем цвет в зависимости от активности checkBox
+        //    if (checkBox.IsChecked == true)
+        //    {
+        //        // при включенном чек-боксе меняет цвет текста на красный
+        //        checkBox.Foreground = new SolidColorBrush(Colors.Red);
+        //    }
+        //    else
+        //    {
+        //        //очищаем TB и поляс данными	
+        //        textBox1.Clear();
+        //        Sum1 = 0;
+
+        //        // при выключенном чек-боксе меняет цвет текста на черный
+        //        checkBox.Foreground = new SolidColorBrush(Colors.Black);
+        //    }
+        //}
+    }
 }
