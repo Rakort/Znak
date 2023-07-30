@@ -1,7 +1,7 @@
 # Printing-house-Znak
 ## Почему?
-Программа была написана по заказу типографии "Знак" .
-Из за возросшего обьема работ возникли проблемы со скоростью расчета и обработки закзов. 
+Программа была написана по заказу типографии "Знак".
+ Из за возросшего обьема работ возникли проблемы со скоростью расчета и обработки закзов. 
 Руководством типографии было принято решение, максимально оптимизировать и автоматизировать этот процесс.
 
 ## Резюме
@@ -25,8 +25,10 @@
 - Logic – содержит методы логических расчетов, сохранения и загрузки цен и материалов
 - Znak – визуальный интерфейс, использующий Logic. Содержит часть методов расчетов и методы связанные с визуалкой программы.
 
-![Znak_1](https://github.com/LeontyMishurov1/Printing-house-Znak/assets/93088323/227f415b-4db9-438f-af38-e35b23edfed9)
+![Znak_0](https://github.com/LeontyMishurov1/Printing-house-Znak/assets/93088323/46ee96ae-0134-4175-a8cc-f0c407f4d7be)
 
 ![Znak_2](https://github.com/LeontyMishurov1/Printing-house-Znak/assets/93088323/d1367fad-3cca-40a7-8943-c911203a595c)
 
 ![Znak_3](https://github.com/LeontyMishurov1/Printing-house-Znak/assets/93088323/2b2de7a2-9ba1-4687-9188-ae52297b0009)
+
+![Znak_1](https://github.com/LeontyMishurov1/Printing-house-Znak/assets/93088323/227f415b-4db9-438f-af38-e35b23edfed9)
