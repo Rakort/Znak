@@ -140,8 +140,10 @@ namespace Logic
             return _widthPloterRoll;
         }
 
-        // пример создания параметров цены бумаги лазерной печати
-        private static List<Price> DefaultPrices => new List<Price>
+		#region примеры создания
+
+		// пример создания параметров цены бумаги лазерной печати
+		private static List<Price> DefaultPrices => new List<Price>
             {
                 new Price
                 {
@@ -180,5 +182,6 @@ namespace Logic
                     Measure = "1.5 M. ",
                 },
             };
+#endregion примеры создания
     }
 }
