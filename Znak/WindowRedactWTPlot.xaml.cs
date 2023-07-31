@@ -1,34 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Runtime.ConstrainedExecution;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Logic;
 using Logic.Model;
 
 namespace Znak
 {
-    /// <summary>
-    /// Логика взаимодействия для WindowPloter.xaml
-    /// </summary>
-    public partial class WindowRedactWTPlot : UserControl, INotifyPropertyChanged
+	/// <summary>
+	/// Логика взаимодействия для WindowPloter.xaml
+	/// </summary>
+	public partial class WindowRedactWTPlot : UserControl, INotifyPropertyChanged
     {
         public WindowRedactWTPlot()
         {
              InitializeComponent();  
 			 PriceList = PriceManager.GetWidthPlot(PriceManager.WidthPlotPath);   
              DataContext = this;
-
         }
 
 		/// <summary>

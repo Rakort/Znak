@@ -7,7 +7,7 @@
         d:DataContext="{d:DesignInstance Type=local:MainWindow}"
         mc:Ignorable="d"
         Background="#FFE5E5E5"
-        Title="Znak Price" Height="600" Width="840" WindowStartupLocation="CenterScreen"     
+        Title="Znak Price" Height="600" Width="840" WindowStartupLocation="CenterScreen" Icon="/IconLB.png"     
         >
 
     <TabControl Background="#FFE5E5E5" >

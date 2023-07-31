@@ -14,19 +14,16 @@ using System.Windows.Shapes;
 
 namespace Znak
 {
-    /// <summary>
-    /// Логика взаимодействия для MessageBox.xaml
-    /// </summary>
+
     public partial class MessageBox : Window
     {
-        public MessageBox(string mess)
-        {
-            InitializeComponent();
+		public MessageBox(string mess)
+		{
+			InitializeComponent();
 
-            TB_MessageBox.Text = mess;
-        }
- 
-        private void BT_MessageBoxClose_Click(object sender, RoutedEventArgs e)
+			TB_MessageBox.Text = mess;
+		}
+private void BT_MessageBoxClose_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }

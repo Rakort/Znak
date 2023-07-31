@@ -1,32 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Runtime.ConstrainedExecution;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Logic;
 using Logic.Model;
 
 namespace Znak
 {
-   
-    public partial class WindowRedactPloter : UserControl, INotifyPropertyChanged
+	public partial class WindowRedactPloter : UserControl, INotifyPropertyChanged
     {
         public WindowRedactPloter()
         {
              InitializeComponent();    
 			 PriceList = PriceManager.GetPricesPlot(PriceManager.pricesPlotPath); 
              DataContext = this;
-
         }
 		/// <summary>
 		/// Выбранный пользователем мотериал в СВ
@@ -115,7 +103,9 @@ namespace Znak
 			CB_Materials.SelectedIndex = PriceList.Count - 1;
 		}
 
-	    //удаление материала
+	    /// <summary>
+		/// удаление материала
+		/// </summary>
 		private void But_Price_Delete_Click(object sender, RoutedEventArgs e)
 		{
 			int index = PriceList.FindIndex(p => p.NamePloter == PriceSelectedItem.NamePloter);

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <None Remove="Error.png" />
+    <None Remove="IconLB.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,6 +21,7 @@
 
   <ItemGroup>
     <Resource Include="Error.png" />
+    <Resource Include="IconLB.png" />
   </ItemGroup>
 
 </Project>
