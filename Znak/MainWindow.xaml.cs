@@ -5,13 +5,14 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 using Logic;
 using Logic.Model;
 
 namespace Znak
 {
-	public partial class MainWindow : Window, INotifyPropertyChanged
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         public MainWindow()
         {
@@ -19,65 +20,65 @@ namespace Znak
             // загружает прайс листы
             PriceList = PriceManager.GetPrices(PriceManager.pricesPath);
             LaminationPrice = PriceManager.GetLaminationPrice(PriceManager.LaminationPath);
-			PostPechPrice = PriceManager.GetPostPechPrice(PriceManager.PostPechLacerPath);
+            PostPechPrice = PriceManager.GetPostPechPrice(PriceManager.PostPechLacerPath);
 
             // строчка для работы биндингов
             DataContext = this;
 
-           // значения по умолчанию для переменных количества услуг постпечати
-			BigovkaQuantity = 1;
+            // значения по умолчанию для переменных количества услуг постпечати
+            BigovkaQuantity = 1;
             FalcovkaQuantity = 1;
             SkruglenieQuantity = 4;
             NumeraciaQuantity = 1;
-			PerforaciaQuantity = 1;
-			LuversyQuantity = 1;
-			DirokolQuantity = 1;
-			SteplerQuantity = 2;
+            PerforaciaQuantity = 1;
+            LuversyQuantity = 1;
+            DirokolQuantity = 1;
+            SteplerQuantity = 2;
         }
 
         #region Variables
 
-		/// <summary>
-		/// наличие блидов
-		/// </summary>	
-		public bool? bleeds = null;
+        /// <summary>
+        /// наличие блидов
+        /// </summary>	
+        public bool? bleeds = null;
 
-		/// <summary>
-		/// цветность
-		/// </summary>	
-        public bool? color=null; 
-		
-		/// <summary>
-		/// сторонность печати
-		/// </summary>
-        public bool sidePrint; 
+        /// <summary>
+        /// цветность
+        /// </summary>	
+        public bool? color = null;
 
-		/// <summary>
-		/// тираж      
-		/// </summary>
-        public int tirag;  
+        /// <summary>
+        /// сторонность печати
+        /// </summary>
+        public bool sidePrint;
 
-		/// <summary>
-/// цена за лист    
-/// </summary>
-/// 
-        public decimal priceSheet; 
+        /// <summary>
+        /// тираж      
+        /// </summary>
+        public int tirag;
 
-		/// <summary>
-		/// цена
-		/// </summary>
+        /// <summary>
+        /// цена за лист    
+        /// </summary>
+        /// 
+        public decimal priceSheet;
+
+        /// <summary>
+        /// цена
+        /// </summary>
         public decimal price = 0;
 
-		/// <summary>
-		/// обьект класса прайс выбранный в ComboBox
-		/// </summary>
-        public Price priceClass;  
+        /// <summary>
+        /// обьект класса прайс выбранный в ComboBox
+        /// </summary>
+        public Price priceClass;
 
-		/// <summary>
-            /// колличество изделий в тираже
-            /// </summary>
+        /// <summary>
+        /// колличество изделий в тираже
+        /// </summary>
         public int product { get; set; }
-        
+
         /// <summary>
         /// колличество изделий на листе
         /// </summary>
@@ -86,7 +87,7 @@ namespace Znak
         /// <summary>
         /// сохранение формата бумаги отностиельно активных radioButton
         /// </summary>
-		
+
         FormatPaper formatPaper = new();
 
         /// <summary>
@@ -102,12 +103,12 @@ namespace Znak
         /// <summary>
         /// ширина изделия, поле биндится к TB_width
         /// </summary>
-        public int WidthProducts { get; set; }   
+        public int WidthProducts { get; set; }
 
         /// <summary>
         /// высота изделия, поле биндится к TB_height
         /// </summary>
-        public int HeightProducts { get; set; }   
+        public int HeightProducts { get; set; }
 
         /// <summary>
         /// количество листов в тираже
@@ -118,7 +119,7 @@ namespace Znak
         /// A4 или А3 лист "false == a3"
         /// </summary>
 
-        public bool a4 = false; 
+        public bool a4 = false;
 
         /// <summary>
         /// прайс лист
@@ -132,9 +133,9 @@ namespace Znak
 
         public event PropertyChangedEventHandler PropertyChanged; //???????????
 
-#endregion variables
+        #endregion variables
 
-		#region  Variables пост печати
+        #region  Variables пост печати
 
         /// <summary>
         /// прайс лист постпечати
@@ -144,8 +145,8 @@ namespace Znak
         /// <summary>
         /// количество бигов
         /// </summary>
-        public int BigovkaQuantity { get; set; }  
-     
+        public int BigovkaQuantity { get; set; }
+
         /// <summary>
         /// количество фальцев
         /// </summary>
@@ -176,39 +177,39 @@ namespace Znak
         /// </summary>
         public int DirokolQuantity { get; set; }
 
-       /// <summary>
+        /// <summary>
         /// количество скрепок на 1 изделие
         /// </summary>
         public int SteplerQuantity { get; set; }
 
-		/// <summary>
-		/// сумма всей постпечатки
-		/// </summary>
-		
-		public decimal SUmmPostPechPrice = 0;
+        /// <summary>
+        /// сумма всей постпечатки
+        /// </summary>
 
-#endregion 
+        public decimal SUmmPostPechPrice = 0;
 
-		#region работа с ценами
+        #endregion
 
-		/// <summary>
-		/// получение списка цен
-		/// </summary>  
-		public List<decimal> GetList(Price priceClass) 
+        #region работа с ценами
+
+        /// <summary>
+        /// получение списка цен
+        /// </summary>  
+        public List<decimal> GetList(Price priceClass)
         {
-                var list = new List<decimal>();
+            var list = new List<decimal>();
 
-                if (sidePrint == true ) list = priceClass.Price_4_4;
-                
-                else if (sidePrint == false ) list = priceClass.Price_4_0;
+            if (sidePrint == true) list = priceClass.Price_4_4;
 
-                return list;
+            else if (sidePrint == false) list = priceClass.Price_4_0;
+
+            return list;
         }
 
         /// <summary>
         /// главный метод расчета цены за 1 лист
         /// </summary>
-        public decimal MainPrice(Price priceClass, int tirag,bool a4) 
+        public decimal MainPrice(Price priceClass, int tirag, bool a4)
         {
             decimal list = 1; // цена за 1 лист
             int i = 0; //номер элемента массива
@@ -231,21 +232,21 @@ namespace Znak
             return list;
         }
 
-		/// <summary>
-		/// метод расчета общей стоимости тиража
-		/// </summary>
-		private void But_Price_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// метод расчета общей стоимости тиража
+        /// </summary>
+        private void But_Price_Click(object sender, RoutedEventArgs e)
         {
-			// проверка указано ли количество листов
-			if(SheetsCount<1){ MessageBox messageBox = new("укажите количество листов"); messageBox.ShowDialog(); return; }
-			//проверка выбрана ли цветность и тип бумаги
-			if ((RB_4_0.IsChecked == false && RB_4_4.IsChecked == false && RB_1_0.IsChecked == false && RB_1_1.IsChecked == false)
-				|| PaperType is null)
-			{ MessageBox messageBox = new("не выбрана цветность или тип бумаги"); messageBox.ShowDialog(); return; }
+            // проверка указано ли количество листов
+            if (SheetsCount < 1) { MessageBox messageBox = new("укажите количество листов"); messageBox.ShowDialog(); return; }
+            //проверка выбрана ли цветность и тип бумаги
+            if ((RB_4_0.IsChecked == false && RB_4_4.IsChecked == false && RB_1_0.IsChecked == false && RB_1_1.IsChecked == false)
+                || PaperType is null)
+            { MessageBox messageBox = new("не выбрана цветность или тип бумаги"); messageBox.ShowDialog(); return; }
             //проверка выбран ли формат бумаги
             if ((RB_PaperFormatA4.IsChecked == false && RB_PaperFormatA3.IsChecked == false && RB_PaperFormatSRA3.IsChecked == false && RB_PaperFormat_325X470.IsChecked == false && RB_PaperFormat_330X485.IsChecked == false)
                 || PaperType is null)
-                { MessageBox messageBox = new("не выбран формат бумаги"); messageBox.ShowDialog(); return; }
+            { MessageBox messageBox = new("не выбран формат бумаги"); messageBox.ShowDialog(); return; }
 
             //устанавливаем значение цветности и сторонности в зависимости от активных radioButton
             color = (RB_4_0.IsChecked ?? false) || (RB_4_4.IsChecked ?? false);
@@ -254,11 +255,11 @@ namespace Znak
             // цена за лист
             decimal priceInList = MainPrice(PaperType, SheetsCount, a4);
 
-			if(priceInList==0 &&(RB_4_4.IsChecked == true || RB_1_1.IsChecked == true)) 
-			{ MessageBox messageBox = new("не выбран формат бумаги"); messageBox.ShowDialog(); return; }
+            if (priceInList == 0 && (RB_4_4.IsChecked == true || RB_1_1.IsChecked == true))
+            { MessageBox messageBox = new("не выбран формат бумаги"); messageBox.ShowDialog(); return; }
 
-			PostPechPriceCalc();
-			Laminat();
+            PostPechPriceCalc();
+            Laminat();
 
             TB_price_tirag.Text = Math.Round(priceInList * SheetsCount + SUmmPostPechPrice, 1).ToString() + " p";
 
@@ -268,47 +269,47 @@ namespace Znak
             SUmmPostPechPrice = 0;
         }
 
-		/// <summary>
-		/// расчет стоимости ламинации
-		/// </summary>
-		public void Laminat() 
-		{			
-			if (LaminationType != null)
-			{
-				// проверка на допустимость формата пакетной ламинации
-				if (LaminationType.Measure.ToLower().Contains("пакетный")&&
-				(RB_ProductFormat_A5.IsChecked == true || RB_ProductFormat_A4.IsChecked == true || RB_ProductFormat_A3.IsChecked == true))
-				{
-					//проверка, списывается ламинат тоько того формата изделия который выбран
-					if ((LaminationType.Measure.Contains("А5") && RB_ProductFormat_A5.IsChecked == true) ||
-						(LaminationType.Measure.Contains("А4") && RB_ProductFormat_A4.IsChecked == true) ||
-						(LaminationType.Measure.Contains("А3") && RB_ProductFormat_A3.IsChecked == true))
+        /// <summary>
+        /// расчет стоимости ламинации
+        /// </summary>
+        public void Laminat()
+        {
+            if (LaminationType != null)
+            {
+                // проверка на допустимость формата пакетной ламинации
+                if (LaminationType.Measure.ToLower().Contains("пакетный") &&
+                (RB_ProductFormat_A5.IsChecked == true || RB_ProductFormat_A4.IsChecked == true || RB_ProductFormat_A3.IsChecked == true))
+                {
+                    //проверка, списывается ламинат тоько того формата изделия который выбран
+                    if ((LaminationType.Measure.Contains("А5") && RB_ProductFormat_A5.IsChecked == true) ||
+                        (LaminationType.Measure.Contains("А4") && RB_ProductFormat_A4.IsChecked == true) ||
+                        (LaminationType.Measure.Contains("А3") && RB_ProductFormat_A3.IsChecked == true))
 
-						SUmmPostPechPrice += product * LaminationType.LamPrice;
-					else { MessageBox messageBox = new("формат изделия и ламината не соответствуют"); messageBox.ShowDialog(); return; }
-			    }
-			    else if(LaminationType.Measure.ToLower().Contains("рулонный"))
+                        SUmmPostPechPrice += product * LaminationType.LamPrice;
+                    else { MessageBox messageBox = new("формат изделия и ламината не соответствуют"); messageBox.ShowDialog(); return; }
+                }
+                else if (LaminationType.Measure.ToLower().Contains("рулонный"))
 
-				    SUmmPostPechPrice += SheetsCount * LaminationType.LamPrice;   
-			else { MessageBox messageBox = new("выберите формат изделия из стандартных"); messageBox.ShowDialog(); return; }
+                    SUmmPostPechPrice += SheetsCount * LaminationType.LamPrice;
+                else { MessageBox messageBox = new("выберите формат изделия из стандартных"); messageBox.ShowDialog(); return; }
             }
-		}
+        }
 
-		#endregion работа с ценами
+        #endregion работа с ценами
 
-		#region расчеты
+        #region расчеты
 
-		/// <summary>
-		/// определение формата изделия
-		/// </summary>
-		public FormatPaper ProductFormat()
-        {                             
-            FormatPaper formatPaper = new FormatPaper(WidthProducts,HeightProducts);
+        /// <summary>
+        /// определение формата изделия
+        /// </summary>
+        public FormatPaper ProductFormat()
+        {
+            FormatPaper formatPaper = new FormatPaper(WidthProducts, HeightProducts);
 
             return formatPaper;
         }
 
-		/// <summary>
+        /// <summary>
         /// количество изделий на листе
         /// </summary>
         public int QuantityProducts(FormatPaper fromatPaper, FormatPaper fromatProduct)
@@ -328,82 +329,82 @@ namespace Znak
             return Math.Max(x, y);
         }
 
-		/// <summary>
-		/// считает всю активную постпечатку
-		/// </summary>
-		public void PostPechPriceCalc()
-		{   
+        /// <summary>
+        /// считает всю активную постпечатку
+        /// </summary>
+        public void PostPechPriceCalc()
+        {
             //список всех позиций постпечати
-			Dictionary<string, string> measures = new()
-			{ {"биговка", "BigovkaQuantity"}, {"фальцовка", "FalcovkaQuantity"}, {"скругление", "SkruglenieQuantity"}, 
-			  {"нумерация", "NumeraciaQuantity"}, {"перфорация", "PerforaciaQuantity"}, {"люверсы маленькикие", "LuversyQuantity"},
-			  {"дырокол", "DirokolQuantity"}, {"степлирование", "SteplerQuantity"} };
+            Dictionary<string, string> measures = new()
+            { {"биговка", "BigovkaQuantity"}, {"фальцовка", "FalcovkaQuantity"}, {"скругление", "SkruglenieQuantity"},
+              {"нумерация", "NumeraciaQuantity"}, {"перфорация", "PerforaciaQuantity"}, {"люверсы маленькикие", "LuversyQuantity"},
+              {"дырокол", "DirokolQuantity"}, {"степлирование", "SteplerQuantity"} };
 
-			foreach (KeyValuePair<string, string> measure in measures)
-			{
-				if (IsChecked(measure.Key))
-				{
-                    if(product<1){ MessageBox messageBox = new("Выбрана постпечать. Укажите количество изделий!"); messageBox.ShowDialog(); return; }
+            foreach (KeyValuePair<string, string> measure in measures)
+            {
+                if (IsChecked(measure.Key))
+                {
+                    if (product < 1) { MessageBox messageBox = new("Выбрана постпечать. Укажите количество изделий!"); messageBox.ShowDialog(); return; }
 
-					PostPechPrice _postPechPrice = GetPostPechPriceByMeasure(measure.Key); // находим цену
+                    PostPechPrice _postPechPrice = GetPostPechPriceByMeasure(measure.Key); // находим цену
 
-					int quantity = GetQuantityByPropertyName(measure.Value); // находим колличество
+                    int quantity = GetQuantityByPropertyName(measure.Value); // находим колличество
 
-					SUmmPostPechPrice += (quantity * _postPechPrice.PostPech_Price) * product; //прибавляем стоиомть услуги к сумме всей постпечатки
-				}
-			}
-			// определяем активность CB
-			bool IsChecked(string measure)
-			{
-				switch (measure)
-				{
-					case "биговка": return CB_Bigovka.IsChecked == true;
-					case "фальцовка": return CB_Falcovka.IsChecked == true;
-					case "скругление": return CB_Skruglenie.IsChecked == true;
-					case "нумерация": return CB_Numeracia.IsChecked == true;
-					case "перфорация": return CB_Perforacia.IsChecked == true;
-					case "люверсы маленькикие": return CB_Luversy.IsChecked == true;
-					case "дырокол": return CB_Dirokol.IsChecked == true;
-					case "степлирование": return CB_Stepler.IsChecked == true;
-					default: return false;
-				}
-			}
-           
-			//вытаскиваем цену
-			PostPechPrice GetPostPechPriceByMeasure(string measure) { return PostPechPrice.Where(x => x.Measure.Contains(measure)).FirstOrDefault(); }
-			//вытаскиваем колличество
-			int GetQuantityByPropertyName(string propertyName) { PropertyInfo propertyInfo = this.GetType().GetProperty(propertyName); return (int)propertyInfo.GetValue(this); }
-		}
+                    SUmmPostPechPrice += (quantity * _postPechPrice.PostPech_Price) * product; //прибавляем стоиомть услуги к сумме всей постпечатки
+                }
+            }
+            // определяем активность CB
+            bool IsChecked(string measure)
+            {
+                switch (measure)
+                {
+                    case "биговка": return CB_Bigovka.IsChecked == true;
+                    case "фальцовка": return CB_Falcovka.IsChecked == true;
+                    case "скругление": return CB_Skruglenie.IsChecked == true;
+                    case "нумерация": return CB_Numeracia.IsChecked == true;
+                    case "перфорация": return CB_Perforacia.IsChecked == true;
+                    case "люверсы маленькикие": return CB_Luversy.IsChecked == true;
+                    case "дырокол": return CB_Dirokol.IsChecked == true;
+                    case "степлирование": return CB_Stepler.IsChecked == true;
+                    default: return false;
+                }
+            }
 
-		/// <summary>
+            //вытаскиваем цену
+            PostPechPrice GetPostPechPriceByMeasure(string measure) { return PostPechPrice.Where(x => x.Measure.Contains(measure)).FirstOrDefault(); }
+            //вытаскиваем колличество
+            int GetQuantityByPropertyName(string propertyName) { PropertyInfo propertyInfo = this.GetType().GetProperty(propertyName); return (int)propertyInfo.GetValue(this); }
+        }
+
+        /// <summary>
         /// расчет тиража от количества изделий и количества изделий от тиража
         /// </summary>
-        private void TB_Products_TextChanged(object sender, TextChangedEventArgs e) 
+        private void TB_Products_TextChanged(object sender, TextChangedEventArgs e)
         {
-          Tirag(); 
+            Tirag();
         }
-  
+
         /// <summary>
         ///  расчет тиража от количества изделий 
         /// </summary>
         private void Tirag()
         {
             try
-            {   
-				SheetsCount = (int)Math.Ceiling((double)product / (double)quantityOnSheet);
+            {
+                SheetsCount = (int)Math.Ceiling((double)product / (double)quantityOnSheet);
 
-				if (SheetsCount <= 0)
-					SheetsCount = 0;
-				else LB_Star_Sheets.Visibility = Visibility.Collapsed; // отключение видимости звездочки после выбора типа бумаги
-			}
-            catch (Exception ) { }        
+                if (SheetsCount <= 0)
+                    SheetsCount = 0;
+                else LB_Star_Sheets.Visibility = Visibility.Collapsed; // отключение видимости звездочки после выбора типа бумаги
+            }
+            catch (Exception) { }
         }
 
-		/// <summary>
+        /// <summary>
         /// определение формата бумаги отностиельно активных radioButton
         /// </summary>
         private void RB_PaperFormat_Checked(object sender, RoutedEventArgs e)
-        {          
+        {
             if (RB_PaperFormatA4.IsChecked == true) formatPaper = new FormatPaper(200, 287);
             if (RB_PaperFormatA3.IsChecked == true) formatPaper = new FormatPaper(410, 287);
             if (RB_PaperFormatSRA3.IsChecked == true) formatPaper = new FormatPaper(440, 310);
@@ -421,23 +422,23 @@ namespace Znak
             Tirag();
 
             //обнуление поля с количеством изделий
-			product = 0;
+            product = 0;
             SheetsCount = Shets; // востанавливаем количество листов
         }
 
-		#endregion расчеты
-  
-		#region работа с визуалкой
+        #endregion расчеты
 
-		/// <summary>
-		/// заполнение полей высоты и ширины изделия отностиельно активных radioButton
-		/// </summary> 
-		private void RB_ProductFormat_Checked(object sender, RoutedEventArgs e)
-        {    
+        #region работа с визуалкой
+
+        /// <summary>
+        /// заполнение полей высоты и ширины изделия отностиельно активных radioButton
+        /// </summary> 
+        private void RB_ProductFormat_Checked(object sender, RoutedEventArgs e)
+        {
             CB_bleeds.IsChecked = false; // выключаем блиды после каждого изменения формата изделия
 
             if (RB_ProductFormat_Vizitka.IsChecked == true) { WidthProducts = 50; HeightProducts = 90; }
-            if (RB_ProductFormat_A7.IsChecked == true) { WidthProducts = 74;  HeightProducts = 105; }
+            if (RB_ProductFormat_A7.IsChecked == true) { WidthProducts = 74; HeightProducts = 105; }
             if (RB_ProductFormat_A6.IsChecked == true) { WidthProducts = 105; HeightProducts = 148; }
             if (RB_ProductFormat_A5.IsChecked == true) { WidthProducts = 148; HeightProducts = 210; }
             if (RB_ProductFormat_A4.IsChecked == true) { WidthProducts = 210; HeightProducts = 297; }
@@ -447,11 +448,11 @@ namespace Znak
 
             QuantityOnSheet();
             Tirag();
-			
-            //обнуление поля с количеством изделий
-			product = 0;
 
-			SheetsCount = Shets; // востанавливаем количество листов
+            //обнуление поля с количеством изделий
+            product = 0;
+
+            SheetsCount = Shets; // востанавливаем количество листов
         }
 
         /// <summary>
@@ -468,13 +469,13 @@ namespace Znak
         /// </summary>
         private void TB_height_width_TextChanged(object sender, TextChangedEventArgs e)
         {
-           QuantityOnSheet();          
+            QuantityOnSheet();
         }
 
-		/// <summary>
-		/// прибавление блидов к изделию относительно активности CB
-		/// </summary>
-		private void CB_bleeds_Checked(object sender, RoutedEventArgs e) 
+        /// <summary>
+        /// прибавление блидов к изделию относительно активности CB
+        /// </summary>
+        private void CB_bleeds_Checked(object sender, RoutedEventArgs e)
         {
             //устанавливаем значение блидов в зависимости от активности checkBox
             bleeds = CB_bleeds.IsChecked ?? false;
@@ -484,14 +485,14 @@ namespace Znak
             {
                 WidthProducts += 4; HeightProducts += 4;
 
-				// при включенном чек-боксе меняет цвет текста на красный
+                // при включенном чек-боксе меняет цвет текста на красный
                 CB_bleeds.Foreground = new SolidColorBrush(Colors.Red);
             }
             else if (bleeds == false)
             {
                 WidthProducts -= 4; HeightProducts -= 4;
                 // при выключенном чек-боксе меняет цвет текста на черный
-				CB_bleeds.Foreground = new SolidColorBrush(Colors.Black);
+                CB_bleeds.Foreground = new SolidColorBrush(Colors.Black);
             }
             Tirag();
         }
@@ -504,90 +505,100 @@ namespace Znak
             CB_bleeds.IsChecked = false;
         }
 
-		/// <summary>
-		/// Сброс всех данных
-		/// </summary>
-		private void But_Reset_Click(object sender, RoutedEventArgs e)
-		{
-        //цикл по всем элементам грида
-		foreach (var control in GR_Laser.Children) 
+        /// <summary>
+        /// Сброс всех данных
+        /// </summary>
+        private void But_Reset_Click(object sender, RoutedEventArgs e)
         {
-			if (control is RadioButton radioButton)
-				{ radioButton.IsChecked = false; }         //выключаем все RadioButton
-			else if (control is CheckBox checkBox)
-				{ checkBox.IsChecked = false; }            //выключаем все чекбоксы
-			else if (control is ComboBox comboBox)
-				{ comboBox.SelectedIndex = -1; }	       //очищаем все комбо-боксы
-			else if (control is Label label)		
-				{ label.Visibility = Visibility.Visible; } //возвращаем видимость звездочкам обязательных для заполнения полей
+            //цикл по всем элементам грида
+            foreach (var control in GR_Laser.Children)
+            {
+                if (control is RadioButton radioButton)
+                { radioButton.IsChecked = false; }         //выключаем все RadioButton
+                else if (control is CheckBox checkBox)
+                { checkBox.IsChecked = false; }            //выключаем все чекбоксы
+                else if (control is ComboBox comboBox)
+                { comboBox.SelectedIndex = -1; }           //очищаем все комбо-боксы
+                else if (control is Label label)
+                { label.Visibility = Visibility.Visible; } //возвращаем видимость звездочкам обязательных для заполнения полей
+            }
+
+            //обнуляем поля с данными и текстбоксы
+            product = 0;
+            quantityOnSheet = 0;
+            WidthProducts = 0;
+            HeightProducts = 0;
+            SheetsCount = 0;
+            TB_price_per_sheet.Clear();
+            TB_price_tirag.Clear();
+
         }
 
-		   //обнуляем поля с данными и текстбоксы
-		   product = 0;
-		   quantityOnSheet = 0;
-		   WidthProducts  = 0;   
-		   HeightProducts  = 0;     
-		   SheetsCount  = 0;
-		   TB_price_per_sheet.Clear();
-		   TB_price_tirag.Clear();
+        /// <summary>
+        /// очищение комбобокс с ламинацией
+        /// </summary>
+        private void But_Reset_Lam_Click(object sender, RoutedEventArgs e)
+        {
+            // очищение комбобокс с ламинацией
+            CB_Lamination.SelectedIndex = -1;
+        }
 
-		}
+        /// <summary>
+        /// сканирует все СВ и делает их красными при активности
+        /// </summary>
+        private void CB_Checked(object sender, RoutedEventArgs e)
+        {
+            foreach (var control in GR_Laser.Children)
+            {
+                if (control is CheckBox)
+                {
+                    CheckBox checkBox = (CheckBox)control;
 
-		/// <summary>
-		/// очищение комбобокс с ламинацией
-		/// </summary>
-		private void But_Reset_Lam_Click(object sender, RoutedEventArgs e)
-		{
-		   // очищение комбобокс с ламинацией
-		   CB_Lamination.SelectedIndex = -1;
-		}
+                    if (checkBox.IsChecked == true)
+                        checkBox.Foreground = new SolidColorBrush(Colors.Red);
+                    else
+                        checkBox.Foreground = new SolidColorBrush(Colors.Black);
+                }
+            }
+        }
 
-		/// <summary>
-		/// сканирует все СВ и делает их красными при активности
-		/// </summary>
-		private void CB_Checked(object sender, RoutedEventArgs e)
-		{
-			foreach (var control in GR_Laser.Children)
-			{
-			   if (control is CheckBox)
-			     {
-				    CheckBox checkBox = (CheckBox)control;
-
-				   if( checkBox.IsChecked == true)
-                   checkBox.Foreground = new SolidColorBrush(Colors.Red);
-                   else
-                   checkBox.Foreground = new SolidColorBrush(Colors.Black);
-			     }			
-			}
-		}
-
-		/// <summary>
-		/// отключение видимости звездочки после постановки курсора в поле количества листов
-		/// </summary>
+        /// <summary>
+        /// отключение видимости звездочки после постановки курсора в поле количества листов
+        /// </summary>
         private void TB_Sheets_TextChanged(object sender, TextChangedEventArgs e)
-		{    
-			if (SheetsCount > 0)
-			LB_Star_Sheets.Visibility = Visibility.Collapsed; 			
-		}
+        {
+            if (SheetsCount > 0)
+                LB_Star_Sheets.Visibility = Visibility.Collapsed;
+        }
 
-		/// <summary>
-		/// отключение видимости звездочки после типа бумаги
-		/// </summary>
-		private void CB_Materials_SelectionChanged(object sender, SelectionChangedEventArgs e)
-		{
-			LB_Star_Peper.Visibility = Visibility.Collapsed; // отключение видимости звездочки после выбора типа бумаги
+        /// <summary>
+        /// отключение видимости звездочки после типа бумаги
+        /// </summary>
+        private void CB_Materials_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            LB_Star_Paper.Visibility = Visibility.Collapsed; // отключение видимости звездочки после выбора типа бумаги
 
-		}
+        }
 
-		/// <summary>
-		/// отключение видимости звездочки после выбора цвета печати
-		/// </summary>
-		private void RB_Color_Checked(object sender, RoutedEventArgs e)
-		{
-			LB_Star_Color.Visibility = Visibility.Collapsed; // отключение видимости звездочки после выбора цвета печати
-		}
+        /// <summary>
+        /// отключение видимости звездочки после выбора цвета печати
+        /// </summary>
+        private void RB_Color_Checked(object sender, RoutedEventArgs e)
+        {
+            LB_Star_Color.Visibility = Visibility.Collapsed; // отключение видимости звездочки после выбора цвета печати
+        }
 
-#endregion работа с визуалкой
+        #endregion работа с визуалкой
 
-	}
+        public record FormatPaperSource(FormatPaper FormatPaper, string Name);
+        public CollectionView FormatPaperItemSource => new CollectionView(new List<FormatPaperSource>()
+        {
+            new FormatPaperSource(new FormatPaper(200, 287), "A4"),
+            new FormatPaperSource(new FormatPaper(410, 287), "A3"),
+            new FormatPaperSource(new FormatPaper(440, 310), "SRA3"),
+            new FormatPaperSource(new FormatPaper(315, 460), "325X470"),
+            new FormatPaperSource(new FormatPaper(320, 475), "330X485"),
+        });
+        public FormatPaperSource CurrentFormatPaperSource { get; set; }
+    }
 }

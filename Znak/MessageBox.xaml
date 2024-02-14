@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="MessageBox" Height="200" Width="400" WindowStartupLocation="CenterScreen" Icon="/Error.png">
     <Grid x:Name="Grid_MessageBox" Height="171" VerticalAlignment="Center" HorizontalAlignment="Center" Width="400">
-        <Image HorizontalAlignment="Left" Height="119" Margin="136,0,0,0" VerticalAlignment="Top" Width="135" Source="/Error.png" Opacity="0.2"/>
-        <TextBlock x:Name="TB_MessageBox" HorizontalAlignment="Center" Margin="0,52,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="380" Height="56" TextAlignment="Center" FontSize="14" FontWeight="SemiBold"/>
-        <Button x:Name="BT_MessageBoxClose" Content="OK" Margin="0,124,0,0" FontSize="14" FontWeight="SemiBold" HorizontalAlignment="Center" Width="76" Height="29" VerticalAlignment="Top" Click="BT_MessageBoxClose_Click"/>
+        <Image HorizontalAlignment="Center" VerticalAlignment="Top" Width="135" Source="/Error.png" Opacity="0.2"/>
+        <TextBlock x:Name="TB_MessageBox" Margin="10,52,10,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" TextAlignment="Center" FontSize="14"/>
+        <Button x:Name="BT_MessageBoxClose" Content="OK" Margin="0,0,0,10" FontSize="14" HorizontalAlignment="Center" Width="76" Height="29" VerticalAlignment="Bottom" Click="BT_MessageBoxClose_Click"/>
     </Grid>
 </Window>

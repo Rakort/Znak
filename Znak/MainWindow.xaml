@@ -9,99 +9,185 @@
         Background="#FFE5E5E5"
         Title="Znak Price" Height="600" Width="840" WindowStartupLocation="CenterScreen" Icon="/IconLB.png"     
         >
-
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style TargetType="RadioButton">
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+            </Style>
+            <Style TargetType="Label" x:Key="Star">
+                <Setter Property="FontSize" Value="22"/>
+                <Setter Property="Content" Value="*"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+                <Setter Property="Foreground" Value="#FFF71313"/>
+                <Setter Property="Padding" Value="-5"/>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
     <TabControl Background="#FFE5E5E5" >
 
         <TabItem Header="Лазерная печать">
             <Grid x:Name="GR_Laser" Opacity="1" Background="#FFE5E5E5" VerticalAlignment="Center" Height="552" Margin="2,0,-2,0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
+                <StackPanel >
+                    <Label x:Name="LB_ProductFormat" Content="ФОРМАТ ИЗДЕЛИЯ" HorizontalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                        <RadioButton x:Name="RB_ProductFormat_Vizitka" Content="90x50" GroupName="ProductFormat" Checked="RB_ProductFormat_Checked" />
+                        <RadioButton x:Name="RB_ProductFormat_A7" Content="A7" GroupName="ProductFormat" Margin="20,0"/>
+                        <RadioButton x:Name="RB_ProductFormat_A6" Content="A6" GroupName="ProductFormat" Margin="20,0"/>
+                        <RadioButton x:Name="RB_ProductFormat_A5" Content="A5" GroupName="ProductFormat" Margin="20,0"/>
+                        <RadioButton x:Name="RB_ProductFormat_A4" Content="A4" GroupName="ProductFormat" Margin="20,0"/>
+                        <RadioButton x:Name="RB_ProductFormat_A3" Content="A3" GroupName="ProductFormat" Margin="20,0"/>
+                    </StackPanel>
+                    <Grid Grid.Column="0" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                        <Label Content="СВОЙ ФОРМАТ" HorizontalAlignment="Center" Width="116" Height="25" VerticalAlignment="Top" VerticalContentAlignment="Center" FontWeight="SemiBold" FontSize="14" HorizontalContentAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBox x:Name="TB_height" Text="{Binding HeightProducts, UpdateSourceTrigger=PropertyChanged}" TextChanged="TB_height_width_TextChanged" GotFocus="TB_height_GotFocus" HorizontalAlignment="Left" Width="47" Height="21" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
+                            <Label Content="мм"/>
+                            <TextBox x:Name="TB_width" Text="{Binding WidthProducts, UpdateSourceTrigger=PropertyChanged}" TextChanged="TB_height_width_TextChanged" GotFocus="TB_height_GotFocus"  HorizontalAlignment="Left" Width="47" Height="21" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold"/>
+                            <Label Content="мм"/>
 
+                        </StackPanel>
+                        <CheckBox x:Name="CB_bleeds" Checked="CB_bleeds_Checked" Content="ДОБАВИТЬ БЛИДЫ" Unchecked="CB_bleeds_Checked" HorizontalAlignment="Center" Width="146" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" />
 
-                <Label x:Name="LB_price_per_circulation" Content="ЦЕНА ЗА ТИРАЖ" Margin="210,416,0,0" HorizontalAlignment="Left" Width="128" Height="28" VerticalAlignment="Top" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center" />
-                <Button x:Name="But_Price" Content="РАСЧЕТ" Margin="377,430,0,0" Click="But_Price_Click" Height="28" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" Width="68" />
-                <Label x:Name="LB_price_per_sheet" Content="ЦЕНА ПЕЧАТИ ЗА ЛИСТ" Margin="16,416,0,0" RenderTransformOrigin="0.486,0.672" HorizontalAlignment="Left" Width="168" Height="28" VerticalAlignment="Top" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center"/>
-                <TextBox x:Name="TB_price_per_sheet" IsReadOnly="True"  Margin="50,460,0,0" HorizontalAlignment="Left" Width="96" Height="21" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-
-                <TextBox x:Name="TB_price_tirag" IsReadOnly="True" Margin="219,460,0,0" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Width="111" Height="21" VerticalAlignment="Top" Foreground="#FFF71313"/>
-                <TextBox x:Name="TB_height" Text="{Binding HeightProducts, UpdateSourceTrigger=PropertyChanged}" TextChanged="TB_height_width_TextChanged" GotFocus="TB_height_GotFocus" Margin="38,120,0,0" HorizontalAlignment="Left" Width="47" Height="21" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
-                <TextBox x:Name="TB_width"  Text="{Binding WidthProducts, UpdateSourceTrigger=PropertyChanged}" TextChanged="TB_height_width_TextChanged" GotFocus="TB_height_GotFocus" Margin="119,120,0,0" HorizontalAlignment="Left" Width="47" Height="21" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold"/>
-                <Label x:Name="LB_SpecialFormat" Content="СВОЙ ФОРМАТ" Margin="55,82,0,0" HorizontalAlignment="Left" Width="116" Height="25" VerticalAlignment="Top" VerticalContentAlignment="Center" FontWeight="SemiBold" FontSize="14" HorizontalContentAlignment="Center"/>
-                <CheckBox x:Name="CB_bleeds" Checked="CB_bleeds_Checked" Content="ДОБАВИТЬ БЛИДЫ" Unchecked="CB_bleeds_Checked" Margin="39,150,0,0" HorizontalAlignment="Left" Width="146" Height="17" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom"/>
-                <Label x:Name="LB_Number_of_products_per_sheet" Content="КОЛИЧЕСТВО ИЗДЕЛИЙ НА ЛИСТЕ" Margin="223,82,0,0" HorizontalAlignment="Left" Width="253" Height="30" VerticalAlignment="Top" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center" />
-
-
-                <TextBox x:Name="Quantity_per_sheet" Text="{Binding quantityOnSheet, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Margin="323,120,0,0" HorizontalAlignment="Left" Width="47" Height="21" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold"  />
-
-                <CheckBox x:Name="CB_Dealers" Content="ДЛЯ ДИЛЛЕРОВ" Visibility="Collapsed" Margin="350,422,0,0" Height="16" VerticalAlignment="Top" VerticalContentAlignment="Bottom" FontSize="13" FontWeight="SemiBold" HorizontalAlignment="Left" Width="122"/>
-
-                <Label x:Name="LB_ProductFormat" Content="ФОРМАТ ИЗДЕЛИЯ" Margin="230,12,0,0" HorizontalAlignment="Left" Width="138" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center"/>
-                <RadioButton x:Name="RB_ProductFormat_Vizitka" Content="90x50" GroupName="ProductFormat" Checked="RB_ProductFormat_Checked" Margin="69,51,0,0" HorizontalAlignment="Left" Width="57" Height="17" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
-                <RadioButton x:Name="RB_ProductFormat_A7" Content="A7" GroupName="ProductFormat" Checked="RB_ProductFormat_Checked" Margin="142,51,0,0" HorizontalAlignment="Left" Width="48" Height="17" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
-                <RadioButton x:Name="RB_ProductFormat_A6" Content="A6" GroupName="ProductFormat" Checked="RB_ProductFormat_Checked" Margin="213,51,0,0" HorizontalAlignment="Left" Width="50" Height="17" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
-                <RadioButton x:Name="RB_ProductFormat_A5" Content="A5" GroupName="ProductFormat" Checked="RB_ProductFormat_Checked" Margin="285,50,0,0" HorizontalAlignment="Left" Width="52" Height="17" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
-                <RadioButton x:Name="RB_ProductFormat_A4" Content="A4" GroupName="ProductFormat" Checked="RB_ProductFormat_Checked" Margin="359,50,0,0" HorizontalAlignment="Left" Width="46" Height="17" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
-                <RadioButton x:Name="RB_ProductFormat_A3" Content="A3" GroupName="ProductFormat" Checked="RB_ProductFormat_Checked" Margin="429,50,0,0" Width="50" Height="17" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center"/>
-
-                <Label x:Name="PaperFormat" Content="ФОРМАТ БУМАГИ" Margin="230,177,0,0" HorizontalAlignment="Left" Width="128" Height="27" VerticalAlignment="Top" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center"/>
-                <RadioButton x:Name="RB_PaperFormatA4" Content="A4" GroupName="PaperFormat" Checked="RB_PaperFormat_Checked" Margin="70,216,0,0" HorizontalAlignment="Left" Width="47" Height="17" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
-                <RadioButton x:Name="RB_PaperFormatA3" Content="A3" GroupName="PaperFormat" Checked="RB_PaperFormat_Checked" Margin="133,216,0,0" HorizontalAlignment="Left" Width="52" Height="17" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
-                <RadioButton x:Name="RB_PaperFormatSRA3" Content="SRA3" GroupName="PaperFormat" Checked="RB_PaperFormat_Checked" Margin="202,216,0,0" HorizontalAlignment="Left" Width="64" Height="17" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
-                <RadioButton x:Name="RB_PaperFormat_325X470" Content="325x470" GroupName="PaperFormat" Checked="RB_PaperFormat_Checked" Margin="278,216,0,0" HorizontalAlignment="Left" Width="82" Height="17" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
-                <RadioButton x:Name="RB_PaperFormat_330X485" Content="330x485" GroupName="PaperFormat" Checked="RB_PaperFormat_Checked" Margin="372,216,0,0" HorizontalAlignment="Left" Width="81" Height="17" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
-                <Label x:Name="LB" Content="ВЫБОР БУМАГИ" Margin="74,245,0,0" HorizontalAlignment="Left" Width="119" Height="25" VerticalAlignment="Top" FontSize="14" FontWeight="SemiBold"/>
+                    </StackPanel>
+                        <StackPanel Grid.Column="1" >
+                        <Label Content="КОЛИЧЕСТВО ИЗДЕЛИЙ НА ЛИСТЕ" HorizontalAlignment="Center"/>
+                        <TextBox x:Name="Quantity_per_sheet" Text="{Binding quantityOnSheet, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" HorizontalAlignment="Center" Width="47" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold" />
+                    </StackPanel>
+                </Grid>
                 
-                <ComboBox x:Name="CB_Materials" ItemsSource="{Binding PriceList}" SelectedItem="{Binding PaperType}" DisplayMemberPath="NamePaper" Foreground="#FFF71313"
-                 Margin="39,276,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="186" FontSize="14" FontWeight="SemiBold" VerticalContentAlignment="Center" SelectionChanged="CB_Materials_SelectionChanged"/>
+                <StackPanel >
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label Style="{StaticResource Star}" x:Name="LB_Star_FormatPeper"/>
+                        <Label Content="ФОРМАТ БУМАГИ" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <RadioButton x:Name="RB_PaperFormatA4" Content="A4" GroupName="PaperFormat" Margin="15,0"/>
+                        <RadioButton x:Name="RB_PaperFormatA3" Content="A3" GroupName="PaperFormat" Margin="15,0"/>
+                        <RadioButton x:Name="RB_PaperFormatSRA3" Content="SRA3" GroupName="PaperFormat" Margin="15,0" />
+                        <RadioButton x:Name="RB_PaperFormat_325X470" Content="325x470" GroupName="PaperFormat" Margin="15,0" />
+                        <RadioButton x:Name="RB_PaperFormat_330X485" Content="330x485" GroupName="PaperFormat" Margin="15,0" />
+                    </StackPanel>
+                </StackPanel>
+                    <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
+                        <Label Content="*" FontSize="22" Padding="-5" Foreground="#FFF71313" x:Name="LB_Star_Paper"/>
+                        <Label Content="ВЫБОР БУМАГИ" />     
+                    </StackPanel>                    
+                    <ComboBox x:Name="CB_Materials" ItemsSource="{Binding PriceList}" SelectedItem="{Binding PaperType}" DisplayMemberPath="NamePaper" Foreground="#FFF71313"
+   HorizontalAlignment="Center" Width="186" FontSize="14" FontWeight="SemiBold" SelectionChanged="CB_Materials_SelectionChanged"/>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="10" Width="80">
+                            <Label Content="*" FontSize="22" Padding="-5" Foreground="#FFF71313" x:Name="LB_Star_Sheets"/>
+                            <Label Content="ЛИСТЫ" />
+                        </StackPanel>
+                        <TextBox x:Name="TB_Sheets" Text="{Binding SheetsCount, UpdateSourceTrigger=PropertyChanged}" Margin="10" Width="80" TextChanged="TB_Sheets_TextChanged"/>
+                        <Label Content="шт" VerticalAlignment="Center"/>
+                        <Label Style="{StaticResource Star}" x:Name="LB_Star_Color"/>
+                        <RadioButton x:Name="RB_4_0" Content="4+0" GroupName="Color" Margin="10" VerticalAlignment="Center"/>
+                        <RadioButton x:Name="RB_4_4" Content="4+4" GroupName="Color" Margin="10" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="ИЗДЕЛИЯ" Margin="10" Width="80"/>
+                        <TextBox x:Name="TB_Products"  Text="{Binding product, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="10" Width="80"  TextChanged="TB_Products_TextChanged"/>
+                        <Label Content="шт" VerticalAlignment="Center"/>
+                        <RadioButton x:Name="RB_1_0" Content="1+0" GroupName="Color" Margin="10" VerticalAlignment="Center"/>
+                        <RadioButton x:Name="RB_1_1" Content="1+1" GroupName="Color" Margin="10" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <Label Content="ЦЕНА ПЕЧАТИ ЗА ЛИСТ" HorizontalAlignment="Center"/>
+                            <TextBox x:Name="TB_price_per_sheet" IsReadOnly="True" HorizontalAlignment="Center" Width="96" Height="21" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="1" />
 
-                <Label x:Name="LB_ProductFormat_Copy" Content="ЛИСТЫ" Margin="33,319,0,0" HorizontalAlignment="Left" Width="59" Height="25" VerticalAlignment="Top" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center"/>
-                <TextBox x:Name="TB_Sheets" Text="{Binding SheetsCount, UpdateSourceTrigger=PropertyChanged}" Margin="127,323,0,0" RenderTransformOrigin="0.505,0.416" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="99"  FontSize="13" FontWeight="SemiBold" TextChanged="TB_Sheets_TextChanged"/>
-                <TextBox x:Name="TB_Products" Text="{Binding product, UpdateSourceTrigger=PropertyChanged}"  Margin="127,370,0,0" RenderTransformOrigin="0.505,0.416" Width="99" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="13" FontWeight="SemiBold" TextChanged="TB_Products_TextChanged"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <Label Content="ЦЕНА ЗА ТИРАЖ"  HorizontalAlignment="Center"/>
+                            <TextBox x:Name="TB_price_tirag" IsReadOnly="True" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Width="111" Height="21" VerticalAlignment="Top" Foreground="#FFF71313" Grid.ColumnSpan="2" Grid.Row="1"/>
 
-                <RadioButton x:Name="RB_4_0" Content="4+0" GroupName="Color" Margin="296,323,0,0" HorizontalAlignment="Left" Width="57" Height="19" VerticalAlignment="Top"  FontSize="13" VerticalContentAlignment="Center" FontWeight="SemiBold" Checked="RB_Color_Checked"/>
-                <RadioButton x:Name="RB_4_4" Content="4+4" GroupName="Color" Margin="356,323,0,0" HorizontalAlignment="Left" Width="57" Height="19" VerticalAlignment="Top"  FontSize="13" VerticalContentAlignment="Center" FontWeight="SemiBold" Checked="RB_Color_Checked"/>
-                <RadioButton x:Name="RB_1_0" Content="1+0" GroupName="Color" Margin="296,372,0,0" HorizontalAlignment="Left" Width="57" Height="17" VerticalAlignment="Top"  FontSize="13" VerticalContentAlignment="Center" FontWeight="SemiBold" Checked="RB_Color_Checked"/>
-                <RadioButton x:Name="RB_1_1" Content="1+1" GroupName="Color" Margin="356,372,0,0" HorizontalAlignment="Left" Width="57" Height="17" VerticalAlignment="Top"  FontSize="13" VerticalContentAlignment="Center" FontWeight="SemiBold" Checked="RB_Color_Checked"/>
-                <Label Content="ИЗДЕЛИЯ" HorizontalAlignment="Left" Margin="31,365,0,0" VerticalAlignment="Top" Width="78" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center"/>
-                <Label Content="мм" HorizontalAlignment="Left" Margin="85,119,0,0" VerticalAlignment="Top"/>
-                <Label Content="мм" HorizontalAlignment="Left" Margin="166,119,0,0" VerticalAlignment="Top"/>
-                <Label x:Name="LB_Star_FormatPeper" Content="*" HorizontalAlignment="Left" Margin="219,168,0,0" VerticalAlignment="Top" FontSize="22" Height="31" Foreground="#FFF71313"/>
-                <Label x:Name="LB_Star_Peper" Content="*" HorizontalAlignment="Left" Margin="60,235,0,0" VerticalAlignment="Top" FontSize="22" Height="31" Foreground="#FFF71313"/>
-                <Label x:Name="LB_Star_Sheets" Content="*" HorizontalAlignment="Left" Margin="24,308,0,0" VerticalAlignment="Top" FontSize="22" Height="32" Foreground="#FFF71313"/>
-                <Label x:Name="LB_Star_Color" Content="*" HorizontalAlignment="Left" Margin="276,308,0,0" VerticalAlignment="Top" FontSize="22" Height="32" Foreground="#FFF71313"/>
-                <Label Content="шт" HorizontalAlignment="Left" Margin="231,324,0,0" VerticalAlignment="Top"/>
-                <Label Content="шт" HorizontalAlignment="Left" Margin="230,369,0,0" VerticalAlignment="Top"/>
-                <Label Content="шт" HorizontalAlignment="Left" Margin="370,119,0,0" VerticalAlignment="Top"/>
-                <Button x:Name="But_Reset" Content="СБРОС" Margin="377,491,0,0" Height="28" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" Width="68" Foreground="#FFF71313" Click="But_Reset_Click" />
-                <ComboBox x:Name="CB_Lamination" ItemsSource="{Binding LaminationPrice}" SelectedItem="{Binding LaminationType}" DisplayMemberPath="Measure" Foreground="#FFF71313"
-                    Margin="515,48,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="217" FontSize="14" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
-                <Button x:Name="But_Reset_Lam" Content="СБРОС" Margin="747,48,0,0" Height="28" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" Width="57" Foreground="#FFF71313" Click="But_Reset_Lam_Click" />
-                <Label x:Name="LB_ProductFormat_Copy1" Content="ДОБАВЛЕНИЕ ЛАМИНАЦИИ" Margin="515,15,0,0" HorizontalAlignment="Left" Width="217" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center"/>
-                <CheckBox x:Name="CB_Bigovka" Content="Биговка" Margin="515,87,0,0" HorizontalAlignment="Left" Width="146" Height="17" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_Checked" Unchecked="CB_Checked"/>
-                <CheckBox x:Name="CB_Falcovka" Content="Фальцовка" Margin="515,133,0,0" HorizontalAlignment="Left" Width="146" Height="17" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_Checked" Unchecked="CB_Checked"/>
-                <CheckBox x:Name="CB_Skruglenie" Content="Скругление углов" Margin="515,179,0,0" HorizontalAlignment="Left" Width="146" Height="17" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_Checked" Unchecked="CB_Checked"/>
-                <CheckBox x:Name="CB_Numeracia" Content="Нумерация" Margin="515,234,0,0" HorizontalAlignment="Left" Width="146" Height="18" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_Checked" Unchecked="CB_Checked"/>
-                <CheckBox x:Name="CB_Perforacia" Content="Перфорация" Margin="514,291,0,0" HorizontalAlignment="Left" Width="146" Height="17" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_Checked" Unchecked="CB_Checked"/>
-                <CheckBox x:Name="CB_Luversy" Content="Люверсы" Margin="515,350,0,0" HorizontalAlignment="Left" Width="158" Height="17" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_Checked" Unchecked="CB_Checked"/>
-                <CheckBox x:Name="CB_Dirokol" Content="Дырокол" Margin="515,409,0,0" HorizontalAlignment="Left" Width="158" Height="17" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_Checked" Unchecked="CB_Checked"/>
-                <CheckBox x:Name="CB_Stepler" Content="Степлирование" Margin="514,464,0,0" HorizontalAlignment="Left" Width="158" Height="17" VerticalAlignment="Top" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_Checked" Unchecked="CB_Checked"/>
-                <Label x:Name="LB_ProductFormat_Copy2" Content="Количество бигов на 1 изделие" Margin="510,99,0,0" HorizontalAlignment="Left" Width="203" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold" HorizontalContentAlignment="Left"/>
-                <Label x:Name="LB_ProductFormat_Copy3" Content="Количество фальцов на 1 изделие" Margin="511,145,0,0" HorizontalAlignment="Left" Width="229" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold" HorizontalContentAlignment="Left"/>
-                <Label x:Name="LB_ProductFormat_Copy4" Content="Количество углов на 1 изделие" Margin="510,194,0,0" HorizontalAlignment="Left" Width="229" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold" HorizontalContentAlignment="Left"/>
-                <Label x:Name="LB_ProductFormat_Copy5" Content="Количество номеров на 1 изделие" Margin="511,248,0,0" HorizontalAlignment="Left" Width="229" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold" HorizontalContentAlignment="Left"/>
-                <Label x:Name="LB_ProductFormat_Copy6" Content="Количество перфо на 1 изделие" Margin="509,305,0,0" HorizontalAlignment="Left" Width="229" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold" HorizontalContentAlignment="Left"/>
-                <Label x:Name="LB_ProductFormat_Copy7" Content="Количество люверсов на 1 изделие" Margin="510,366,0,0" HorizontalAlignment="Left" Width="229" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold" HorizontalContentAlignment="Left"/>
-                <Label x:Name="LB_ProductFormat_Copy8" Content="Количество отверстий на 1 изделие" Margin="510,424,0,0" HorizontalAlignment="Left" Width="229" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold" HorizontalContentAlignment="Left"/>
-                <Label x:Name="LB_ProductFormat_Copy9" Content="Количество скоб на 1 изделие" Margin="509,478,0,0" HorizontalAlignment="Left" Width="229" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold" HorizontalContentAlignment="Left"/>
-                <TextBox x:Name="TB_BigovkaQuantity" Text="{Binding BigovkaQuantity, UpdateSourceTrigger=PropertyChanged}"  Margin="664,86,0,0" HorizontalAlignment="Left" Width="42" Height="21" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold"  />
-                <TextBox x:Name="TB_FalcovkaQuantity" Text="{Binding FalcovkaQuantity, UpdateSourceTrigger=PropertyChanged}"  Margin="664,132,0,0" HorizontalAlignment="Left" Width="42" Height="21" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold"  />
-                <TextBox x:Name="TB_SkruglenieQuantity" Text="{Binding SkruglenieQuantity, UpdateSourceTrigger=PropertyChanged}"  Margin="664,179,0,0" HorizontalAlignment="Left" Width="42" Height="21" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold"  />
-                <TextBox x:Name="TB_NumeraciaQuantity" Text="{Binding NumeraciaQuantity, UpdateSourceTrigger=PropertyChanged}"  Margin="664,233,0,0" HorizontalAlignment="Left" Width="42" Height="21" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold"  />
-                <TextBox x:Name="TB_PerforaciaQuantity" Text="{Binding PerforaciaQuantity, UpdateSourceTrigger=PropertyChanged}"  Margin="664,288,0,0" HorizontalAlignment="Left" Width="42" Height="22" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold"  />
-                <TextBox x:Name="TB_LuversyQuantity" Text="{Binding LuversyQuantity, UpdateSourceTrigger=PropertyChanged}"  Margin="664,350,0,0" HorizontalAlignment="Left" Width="42" Height="22" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold"  />
-                <TextBox x:Name="TB_DirokolQuantity" Text="{Binding DirokolQuantity, UpdateSourceTrigger=PropertyChanged}"  Margin="664,407,0,0" HorizontalAlignment="Left" Width="42" Height="22" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold"  />
-                <TextBox x:Name="TB_SteplerQuantity" Text="{Binding SteplerQuantity, UpdateSourceTrigger=PropertyChanged}"  Margin="664,462,0,0" HorizontalAlignment="Left" Width="42" Height="22" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="13" FontWeight="SemiBold"  />
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <Button x:Name="But_Price" Content="РАСЧЕТ" Click="But_Price_Click" Height="28" FontSize="14" FontWeight="SemiBold" HorizontalAlignment="Center" Width="68" />
+                            <Button x:Name="But_Reset" Content="СБРОС" Height="28" FontSize="14" FontWeight="SemiBold"  HorizontalAlignment="Center" Width="68" Foreground="#FFF71313" Click="But_Reset_Click"  />
+
+                        </StackPanel>
+                    </Grid>
+                    
+                    
+                
+                </StackPanel>
+                                
+            <StackPanel Grid.Column="1">
+                    <Label x:Name="LB_ProductFormat_Copy1" Content="ДОБАВЛЕНИЕ ЛАМИНАЦИИ" Margin="10"  Width="217" Height="28" VerticalAlignment="Top" VerticalContentAlignment="Center" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center"/>
+                    <ComboBox x:Name="CB_Lamination" ItemsSource="{Binding LaminationPrice}" SelectedItem="{Binding LaminationType}" DisplayMemberPath="Measure" Foreground="#FFF71313"
+                        Height="28"  Width="217" FontSize="14" FontWeight="SemiBold" VerticalContentAlignment="Center"/>
+                    <Button x:Name="But_Reset_Lam" Content="СБРОС" Height="28" FontSize="14" FontWeight="SemiBold" HorizontalAlignment="Center" Width="57" Foreground="#FFF71313" Click="But_Reset_Lam_Click"  />
+
+                    <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                        <CheckBox x:Name="CB_Bigovka" Content="Биговка"  Width="146" FontSize="13" FontWeight="SemiBold" Checked="CB_Checked" Unchecked="CB_Checked"/>
+                        <TextBox Text="{Binding BigovkaQuantity, UpdateSourceTrigger=PropertyChanged}" Width="42" FontSize="13" FontWeight="SemiBold"  />
+                    </StackPanel>
+                    <Label Content="Количество бигов на 1 изделие" Margin="5,-5,0,0" FontSize="13" FontWeight="SemiBold" />
+
+                    <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                        <CheckBox x:Name="CB_Falcovka" Content="Фальцовка" Width="146" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_Checked" Unchecked="CB_Checked"/>
+                        <TextBox Text="{Binding FalcovkaQuantity, UpdateSourceTrigger=PropertyChanged}" Width="42" FontSize="13" FontWeight="SemiBold"  />
+                    </StackPanel>
+                    <Label Content="Количество фальцов на 1 изделие" Margin="5,-5,0,0" FontSize="13" FontWeight="SemiBold"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                        <CheckBox x:Name="CB_Skruglenie" Content="Скругление углов" Width="146" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_Checked" Unchecked="CB_Checked"/>
+                        <TextBox Text="{Binding SkruglenieQuantity, UpdateSourceTrigger=PropertyChanged}" Width="42" FontSize="13" FontWeight="SemiBold"  />
+                    </StackPanel>
+                    <Label Content="Количество углов на 1 изделие" Margin="5,-5,0,0" FontSize="13" FontWeight="SemiBold"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                        <CheckBox x:Name="CB_Numeracia" Content="Нумерация" Width="146" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_Checked" Unchecked="CB_Checked"/>
+                        <TextBox Text="{Binding NumeraciaQuantity, UpdateSourceTrigger=PropertyChanged}" Width="42" FontSize="13" FontWeight="SemiBold"  />
+                    </StackPanel>
+                    <Label Content="Количество номеров на 1 изделие" Margin="5,-5,0,0" FontSize="13" FontWeight="SemiBold"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                        <CheckBox x:Name="CB_Perforacia" Content="Перфорация" Width="146" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_Checked" Unchecked="CB_Checked"/>
+                        <TextBox Text="{Binding PerforaciaQuantity, UpdateSourceTrigger=PropertyChanged}" Width="42" FontSize="13" FontWeight="SemiBold"  />
+                    </StackPanel>
+                    <Label Content="Количество перфо на 1 изделие" Margin="5,-5,0,0" FontSize="13" FontWeight="SemiBold"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                        <CheckBox x:Name="CB_Luversy" Content="Люверсы" Width="146" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_Checked" Unchecked="CB_Checked"/>
+                        <TextBox Text="{Binding LuversyQuantity, UpdateSourceTrigger=PropertyChanged}" Width="42" FontSize="13" FontWeight="SemiBold"  />
+                    </StackPanel>
+                    <Label Content="Количество люверсов на 1 изделие" Margin="5,-5,0,0" FontSize="13" FontWeight="SemiBold"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                        <CheckBox x:Name="CB_Dirokol" Content="Дырокол" Width="146" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_Checked" Unchecked="CB_Checked"/>
+                        <TextBox Text="{Binding DirokolQuantity, UpdateSourceTrigger=PropertyChanged}" Width="42" FontSize="13" FontWeight="SemiBold"  />
+                    </StackPanel>
+                    <Label Content="Количество отверстий на 1 изделие" Margin="5,-5,0,0" FontSize="13" FontWeight="SemiBold"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                        <CheckBox x:Name="CB_Stepler" Content="Степлирование" Width="146" FontSize="13" FontWeight="SemiBold" VerticalContentAlignment="Bottom" Checked="CB_Checked" Unchecked="CB_Checked"/>
+                        <TextBox Text="{Binding SteplerQuantity, UpdateSourceTrigger=PropertyChanged}" Width="42" FontSize="13" FontWeight="SemiBold" />
+                    </StackPanel>
+                    <Label Content="Количество скоб на 1 изделие" Margin="5,-5,0,0" FontSize="13" FontWeight="SemiBold"/>
+
+                </StackPanel>
             </Grid>
         </TabItem>
 
@@ -109,7 +195,7 @@
             <local:WindowPloter Background="#FFE5E5E5" Margin="64,0,64,0"/>
         </TabItem>
         <TabItem Header="Редактирования цен" Margin="470,-2,-475,0" Foreground="#FFF71313">
-            <local:WindowRedactPrice Background="#FFE5E5E5" Margin="-2,0,-4,0"/> 
+            <local:WindowRedactPrice Background="#FFE5E5E5" Margin="-2,0,-4,0"/>
         </TabItem>
     </TabControl>
 </Window>

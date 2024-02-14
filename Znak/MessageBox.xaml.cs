@@ -23,7 +23,7 @@ namespace Znak
 
 			TB_MessageBox.Text = mess;
 		}
-private void BT_MessageBoxClose_Click(object sender, RoutedEventArgs e)
+        private void BT_MessageBoxClose_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
