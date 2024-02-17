@@ -16,10 +16,11 @@ namespace Znak.Common
 
         public Action<object> ExecuteDelegate { get; set; }
 
-        public SimpleCommand(Action p_action, Predicate<object> canExecute = null)
+        public SimpleCommand(Action p_action, Func<bool> canExecute = null)
         {
             ExecuteDelegate = o => p_action();
-            CanExecuteDelegate = canExecute;
+            if (canExecute != null)
+                CanExecuteDelegate = o => canExecute();
         }
         public SimpleCommand(Action<object> p_action, Predicate<object> canExecute = null)
         {

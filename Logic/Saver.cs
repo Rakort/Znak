@@ -20,10 +20,7 @@ namespace Logic
             var text = JsonConvert.SerializeObject(data, Formatting.Indented);            
             File.WriteAllText(path, text);
         }
-        public static void Save(IEnumerable<LaminatePrice> data)
-        {
-            Save(PriceManager.LaminatePath, data);
-        }
+        
         /// <summary>
         /// загрузка цен из Json
         /// </summary>

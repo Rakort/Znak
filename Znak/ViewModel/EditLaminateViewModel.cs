@@ -55,8 +55,8 @@ namespace Znak.ViewModel
                 PriceList.Add(EditLaminatePrice);
             }
             CurrentLaminatePrice = EditLaminatePrice;
-            Logic.Saver.Save(PriceList);
-        }, (_) => EditLaminatePrice != null && !string.IsNullOrWhiteSpace(EditLaminatePrice.Measure) && EditLaminatePrice.LamPrice > 0);
+            PriceManager.Save(PriceList);
+        }, () => EditLaminatePrice != null && !string.IsNullOrWhiteSpace(EditLaminatePrice.Measure) && EditLaminatePrice.LamPrice > 0);
 
 
         /// <summary>
@@ -80,9 +80,9 @@ namespace Znak.ViewModel
         public ICommand DeleteCommand => new SimpleCommand(() =>
         {
             PriceList.Remove(CurrentLaminatePrice);
-            Logic.Saver.Save(PriceList);
+            PriceManager.Save(PriceList);
             CurrentLaminatePrice = null;
             EditLaminatePrice = null;
-        }, (_) => CurrentLaminatePrice != null);
+        }, () => CurrentLaminatePrice != null);
     }
 }

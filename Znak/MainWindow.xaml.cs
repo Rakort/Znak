@@ -18,7 +18,7 @@ namespace Znak
         {
             InitializeComponent();
             // загружает прайс листы
-            PriceList = PriceManager.GetPrices(PriceManager.pricesPath);
+            PriceList = PriceManager.GetLaserPrices();
             LaminationPrice = PriceManager.GetLaminatePrice();
             PostPechPrice = PriceManager.GetPostPechPrice(PriceManager.PostPechLacerPath);
 
@@ -72,7 +72,7 @@ namespace Znak
         /// <summary>
         /// обьект класса прайс выбранный в ComboBox
         /// </summary>
-        public Price priceClass;
+        public LaserPrice priceClass;
 
         /// <summary>
         /// колличество изделий в тираже
@@ -93,7 +93,7 @@ namespace Znak
         /// <summary>
         /// тип бумаги выбранный пользователем в ComboBox
         /// </summary>
-        public Price PaperType { get; set; }
+        public LaserPrice PaperType { get; set; }
 
         /// <summary>
         /// тип ламинации выбранный пользователем в ComboBox
@@ -124,7 +124,7 @@ namespace Znak
         /// <summary>
         /// прайс лист
         /// </summary>
-        public List<Price> PriceList { get; set; }
+        public List<LaserPrice> PriceList { get; set; }
 
         /// <summary>
         /// прайс ламинации
@@ -193,40 +193,16 @@ namespace Znak
         #region работа с ценами
 
         /// <summary>
-        /// получение списка цен
-        /// </summary>  
-        public List<decimal> GetList(Price priceClass)
-        {
-            var list = new List<decimal>();
-
-            if (sidePrint == true) list = priceClass.Price_4_4;
-
-            else if (sidePrint == false) list = priceClass.Price_4_0;
-
-            return list;
-        }
-
-        /// <summary>
         /// главный метод расчета цены за 1 лист
         /// </summary>
-        public decimal MainPrice(Price priceClass, int tirag, bool a4)
+        public decimal MainPrice(LaserPrice priceClass, int tirag, bool a4)
         {
-            decimal list = 1; // цена за 1 лист
-            int i = 0; //номер элемента массива
+            var list = priceClass.GetPrice(tirag, sidePrint ? 2 : 1);
 
-            //проверка стоимости печати относительно тиража
-            if (tirag > 0 && tirag < 5) i = 1;
-            else if (tirag >= 5 && tirag < 20) i = 2;
-            else if (tirag >= 20 && tirag < 50) i = 3;
-            else if (tirag >= 50 && tirag < 100) i = 4;
-            else if (tirag >= 100 && tirag < 200) i = 5;
-            else if (tirag >= 200) i = 6;
+            // если A4 цена в 2 раза ниже
+            if (a4) list = list / 2;
 
-            //проверка а4 лист или увеличеный
-            if (a4) list = GetList(priceClass)[i] / 2;
-            else list = GetList(priceClass)[i];
-
-            //если печать чернобелая цена в 2 раза ниже
+            // если печать черно-белая цена в 2 раза ниже
             if (color == false) list = list / 2;
 
             return list;

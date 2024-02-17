@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Logic.Model.LaserPrice;
 
 namespace Logic
 {
@@ -13,7 +14,7 @@ namespace Logic
         /// путь расположния Json
         /// </summary>
 		
-        public const string pricesPath = "Price/Lacer_Price.json";
+        public const string LaserPrice = "Price/Laser_Price.json";
 
         public const string LaminatePath = "Price/Lamination_Price.json";
 
@@ -27,7 +28,7 @@ namespace Logic
         /// список цен
         /// </summary>
 		 
-        private static List<Price> _prices;
+        private static List<LaserPrice> _prices;
 
         /// <summary>
         /// список цен ламинации
@@ -57,10 +58,10 @@ namespace Logic
         /// записывает цены в прайс
         /// </summary>
         /// <returns></returns>
-        public static List<Price> GetPrices(string path)
+        public static List<LaserPrice> GetLaserPrices()
         {
             // Читаем из файла
-            var _prices = Saver.Load<List<Price>>(path);
+            var _prices = Saver.Load<List<LaserPrice>>(PriceManager.LaserPrice);
             // Если ничего не получили, берем стандартные
             if (!_prices.Any())
                 _prices = DefaultPrices;
@@ -105,19 +106,32 @@ namespace Logic
             return Saver.Load<List<WidthPloterRoll>>(path);
         }
 
-		#region примеры создания
+        public static void Save(IEnumerable<LaminatePrice> data)
+        {
+            Saver.Save(PriceManager.LaminatePath, data);
+        }
 
-		// пример создания параметров цены бумаги лазерной печати
-		private static List<Price> DefaultPrices => new List<Price>
+        public static void Save(IEnumerable<LaserPrice> data)
+        {
+            Saver.Save(PriceManager.LaserPrice, data);
+        }
+
+        #region примеры создания
+
+        // пример создания параметров цены бумаги лазерной печати
+        private static List<LaserPrice> DefaultPrices => new List<LaserPrice>
             {
-                new Price
+                new LaserPrice
                 {
-                    NamePaper = "Офсетная 80 гр",
-                    Price_4_0 = new List<decimal> { 0, 36, 30, 26.5m, 23.3m, 18.2m },
-                    Price_4_4 = new List<decimal> { 0, 72, 55, 48, 40, 32.2m },
-
-                    Price_4_0_Diler = new List<decimal> { 0, 14.9m, 14.9m, 12.4m, 11.2m, 9.9m },
-                    Price_4_4_Diler = new List<decimal> { 0, 27.4m, 27.4m, 22.8m, 18.2m, 16.9m },
+                    Name = "Офсетная 80 гр",
+                    Prices = new List<LaserPriceItem> {
+                        new LaserPriceItem(1,4,36,72),
+                        new LaserPriceItem(5,19,30,55),
+                        new LaserPriceItem(20,49,26.5m,48),
+                        new LaserPriceItem(50,99,23.3m,40),
+                        new LaserPriceItem(100,19,918.2m,32.2m ),
+                        new LaserPriceItem(200,0,18.2m,32.2m)
+        }
                 }
             };
 
