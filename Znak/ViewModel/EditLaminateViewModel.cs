@@ -21,9 +21,13 @@ namespace Znak.ViewModel
         }
 
         /// <summary>
-        /// Выбранный пользователем материал
-        /// </summary>
+		/// Выбранный материал
+		/// </summary>
         public LaminatePrice CurrentLaminatePrice { get; set; }
+
+        /// <summary>
+        /// Редактируемый материал
+        /// </summary>
         public LaminatePrice EditLaminatePrice { get; set; }
 
         /// <summary>

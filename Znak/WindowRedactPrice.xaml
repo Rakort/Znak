@@ -19,7 +19,7 @@
                 <local:WindowRedactPostPech Background="#FFE5E5E5" Margin="-2,0,-3,0" Height="524" Width="840"/>
             </TabItem>
             <TabItem Header="Широкоформатка" Margin="-2,1,-2,-3">
-                <local:WindowRedactPloter Background="#FFE5E5E5" Margin="-2,0,-3,0" Height="524" Width="840"/>
+                <v:EditPlotterView Background="#FFE5E5E5" Margin="-2,0,-3,0" Height="524" Width="840"/>
             </TabItem>
             <TabItem Header="ширины рулонов" Margin="-2,1,-2,-3">
                 <local:WindowRedactWTPlot Background="#FFE5E5E5" Margin="-2,0,-3,0" Height="524" Width="840"/>

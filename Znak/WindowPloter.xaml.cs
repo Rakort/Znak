@@ -20,7 +20,7 @@ namespace Znak
             InitializeComponent();
 
             //загрузка цен
-            PricePloter = PriceManager.GetPricesPlot(PriceManager.pricesPlotPath);
+            PricePloter = PriceManager.GetPricesPlot();
             PostPechPrice = PriceManager.GetPostPechPrice(PriceManager.PostPechLacerPath);
             //загрузка параметров ширины рулонов
             WidthPloterRoll = PriceManager.GetWidthPlot(PriceManager.WidthPlotPath);
@@ -131,12 +131,12 @@ namespace Znak
         /// <summary>
         /// поле с материалами и ценами биндится к ComboBox
         /// </summary>
-        public List<PricePloter> PricePloter { get; set; }
+        public List<PlotterPrice> PricePloter { get; set; }
 
         /// <summary>
         /// тип бумаги выбранный пользователем в ComboBox
         /// </summary>
-        public PricePloter PloterPeperType { get; set; }
+        public PlotterPrice PloterPeperType { get; set; }
 
         /// <summary>
         /// пареметры ширины рулонов биндится к ComboBox
@@ -217,7 +217,7 @@ namespace Znak
 				//if (PloterPeperType.NamePloter.Contains("банер")) return;
 
                 //проверка габариты изделия не должны быть больше ширины выбранного рулона и если это не банер или сетка
-                if (PloterPeperType.NamePloter.Contains("Банер") || !(widthP > PloterWidthType.WidthRoll && heightP > PloterWidthType.WidthRoll))
+                if (PloterPeperType.Name.Contains("Банер") || !(widthP > PloterWidthType.WidthRoll && heightP > PloterWidthType.WidthRoll))
                 {
                     calculationAreaPrintedField();
                     CalcfreeFieldArea();
@@ -235,7 +235,7 @@ namespace Znak
         /// <returns></returns>
         public void calculationAreaPrintedField()
         {
-            if ((!PloterPeperType.NamePloter.Contains("Банер") && widthP > 1570 && heightP > 1570) || quantityP <= 0) return;
+            if ((!PloterPeperType.Name.Contains("Банер") && widthP > 1570 && heightP > 1570) || quantityP <= 0) return;
             else
             {
                 printArea = Math.Round(((widthP / 1000) * (heightP / 1000)) * quantityP, 2);

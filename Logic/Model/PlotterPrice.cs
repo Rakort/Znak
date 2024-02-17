@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Logic.Model
 {
-    public class PricePloter
+    public class PlotterPrice : ICloneable
     {
         /// <summary>
         /// название материала
         /// </summary>
-        public string NamePloter { get; set; }
+        public string Name { get; set; }
 
         public decimal Price { get; set; }
 
@@ -20,6 +20,14 @@ namespace Logic.Model
         /// </summary>
         public decimal FreeFieldPrice { get; set; }
 
-        public decimal PriceDiller { get; set; }
+        public object Clone()
+        {
+            return new PlotterPrice
+            {
+                Name = Name,
+                Price = Price,
+                FreeFieldPrice = FreeFieldPrice
+            };
+        }
     }
 }

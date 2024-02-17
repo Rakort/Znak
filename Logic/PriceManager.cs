@@ -18,7 +18,7 @@ namespace Logic
 
         public const string LaminatePath = "Price/Lamination_Price.json";
 
-        public const string pricesPlotPath = "Price/Ploter_Price.json";
+        public const string PricesPlotPath = "Price/Ploter_Price.json";
 
         public const string WidthPlotPath = "Price/WidthPloter_Price.json";
 
@@ -40,7 +40,7 @@ namespace Logic
         /// список цен плотерной печати
         /// </summary>
 		 
-        private static List<PricePloter> _pricePloter;
+        private static List<PlotterPrice> _pricePloter;
 
         /// <summary>
         /// список размеров рулонов плотера
@@ -92,9 +92,9 @@ namespace Logic
         /// Читаем цены в прайс плотерной печати
         /// </summary>
         /// <returns></returns>
-        public static List<PricePloter> GetPricesPlot(string path)
+        public static List<PlotterPrice> GetPricesPlot()
         {
-            return Saver.Load<List<PricePloter>>(path);
+            return Saver.Load<List<PlotterPrice>>(PriceManager.PricesPlotPath);
         }
 
         /// <summary>
@@ -114,6 +114,10 @@ namespace Logic
         public static void Save(IEnumerable<LaserPrice> data)
         {
             Saver.Save(PriceManager.LaserPrice, data);
+        }
+        public static void Save(IEnumerable<PlotterPrice> data)
+        {
+            Saver.Save(PriceManager.PricesPlotPath, data);
         }
 
         #region примеры создания
@@ -136,14 +140,13 @@ namespace Logic
             };
 
         // пример создания параметров цены плотера
-        public static List<PricePloter> DefaultPricesPloter => new List<PricePloter>
+        public static List<PlotterPrice> DefaultPricesPloter => new List<PlotterPrice>
             {
-                new PricePloter
+                new PlotterPrice
                 {
-                    NamePloter = "Банер",
+                    Name = "Банер",
                     Price = 400,
-                    FreeFieldPrice = 100,
-                    PriceDiller = 200,
+                    FreeFieldPrice = 100
                 }             
             };
 
