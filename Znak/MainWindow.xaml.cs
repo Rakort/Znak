@@ -19,7 +19,7 @@ namespace Znak
             InitializeComponent();
             // загружает прайс листы
             PriceList = PriceManager.GetPrices(PriceManager.pricesPath);
-            LaminationPrice = PriceManager.GetLaminationPrice(PriceManager.LaminationPath);
+            LaminationPrice = PriceManager.GetLaminatePrice();
             PostPechPrice = PriceManager.GetPostPechPrice(PriceManager.PostPechLacerPath);
 
             // строчка для работы биндингов
@@ -98,7 +98,7 @@ namespace Znak
         /// <summary>
         /// тип ламинации выбранный пользователем в ComboBox
         /// </summary>
-        public LaminationPrice LaminationType { get; set; }
+        public LaminatePrice LaminationType { get; set; }
 
         /// <summary>
         /// ширина изделия, поле биндится к TB_width
@@ -129,7 +129,7 @@ namespace Znak
         /// <summary>
         /// прайс ламинации
         /// </summary>
-        public List<LaminationPrice> LaminationPrice { get; set; }
+        public List<LaminatePrice> LaminationPrice { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged; //???????????
 

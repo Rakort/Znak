@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Logic.Model
 {
-	public class LaminationPrice
+	public class LaminatePrice : INotifyPropertyChanged
 	{
         /// <summary>
         /// цена
@@ -14,8 +15,10 @@ namespace Logic.Model
         public decimal LamPrice { get; set; }
 
         /// <summary>
-        /// теккст описывающий ламинацию
+        /// текст описывающий ламинацию
         /// </summary>
         public string Measure { get; set; }
-	}
+
+        public event PropertyChangedEventHandler PropertyChanged;
+    }
 }

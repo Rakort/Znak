@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Znak"
+        xmlns:v="clr-namespace:Znak.View"
         mc:Ignorable="d"
          Height="549" Width="840">
     <Grid x:Name="RedactPrice_Grid" Height="549" VerticalAlignment="Center" HorizontalAlignment="Left" Width="840">
@@ -58,7 +59,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Ламинация (лазер)" Margin="-2,1,-2,-3">
-                <local:WindowRedactLaminat Background="#FFE5E5E5" Margin="-2,0,-3,0" Height="524" Width="840"/>
+                <v:EditLaminateView Background="#FFE5E5E5" Margin="-2,0,-3,0" Height="524" Width="840"/>
             </TabItem>
             <TabItem Header="Постпечатка" Margin="-2,1,-2,-3">
                 <local:WindowRedactPostPech Background="#FFE5E5E5" Margin="-2,0,-3,0" Height="524" Width="840"/>

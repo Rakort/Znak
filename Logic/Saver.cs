@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Json;
 using System.Text;
+using Logic.Model;
 using Newtonsoft.Json;
 
 namespace Logic
@@ -19,6 +20,10 @@ namespace Logic
             var text = JsonConvert.SerializeObject(data, Formatting.Indented);            
             File.WriteAllText(path, text);
         }
+        public static void Save(IEnumerable<LaminatePrice> data)
+        {
+            Save(PriceManager.LaminatePath, data);
+        }
         /// <summary>
         /// загрузка цен из Json
         /// </summary>
@@ -32,12 +37,12 @@ namespace Logic
             {
                 // чтение текста из Json
                 var text = File.ReadAllText(path);
-                // преобразование Json в обьект <T>
+                // преобразование Json в объект <T>
                 var data = JsonConvert.DeserializeObject<T>(text); 
                 return data;
             }
             else
-                return default(T);
+                return Activator.CreateInstance<T>();
         }
     }
 }

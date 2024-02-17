@@ -15,7 +15,7 @@ namespace Logic
 		
         public const string pricesPath = "Price/Lacer_Price.json";
 
-        public const string LaminationPath = "Price/Lamination_Price.json";
+        public const string LaminatePath = "Price/Lamination_Price.json";
 
         public const string pricesPlotPath = "Price/Ploter_Price.json";
 
@@ -33,7 +33,7 @@ namespace Logic
         /// список цен ламинации
         /// </summary>
 		
-        private static List<LaminationPrice> _laminationPrice;
+        private static List<LaminatePrice> _laminationPrice;
 
         /// <summary>
         /// список цен плотерной печати
@@ -59,85 +59,50 @@ namespace Logic
         /// <returns></returns>
         public static List<Price> GetPrices(string path)
         {
-            // Если цен нет
-            if (_prices == null)
-            {
-                // Читаем из файла
-                _prices = Saver.Load<List<Price>>(path);
-                // Если ничего не получили, берем стандартные
-                if (_prices == null || !_prices.Any())
-                    _prices = DefaultPrices;
-            }
-            // так я первый раз создаю json с ценами
-            //Saver.Save(pricesPlotPath, DefaultPricesPloter);
-            //Saver.Save(WidthPlotPath, DefaultWidthPloterRoll);
+            // Читаем из файла
+            var _prices = Saver.Load<List<Price>>(path);
+            // Если ничего не получили, берем стандартные
+            if (!_prices.Any())
+                _prices = DefaultPrices;
+            
             return _prices;
         }
-		
+
         /// <summary>
-        /// записывает цены лазерной постпечати
+        /// Читаем цены лазерной постпечати
         /// </summary>
         /// <returns></returns>
         public static List<PostPechPrice> GetPostPechPrice(string path)
         {
-            // Если цен нет
-            if (_postPechPrice == null)
-            {
-                // Читаем из файла
-                _postPechPrice = Saver.Load<List<PostPechPrice>>(path);
-               
-            }           
-            return _postPechPrice;
+            return Saver.Load<List<PostPechPrice>>(path);
         }
 
 
         /// <summary>
-        /// записывает цены ламинации
+        /// Читаем цены ламинации
         /// </summary>
         /// <returns></returns>
-        public static List<LaminationPrice> GetLaminationPrice(string path)
+        public static List<LaminatePrice> GetLaminatePrice()
         {
-            // Если цен нет
-            if (_laminationPrice == null)
-            {
-                // Читаем из файла
-                _laminationPrice = Saver.Load<List<LaminationPrice>>(path);
-               
-            }           
-            return _laminationPrice;
+            return Saver.Load<List<LaminatePrice>>(PriceManager.LaminatePath);
         }
 
         /// <summary>
-        /// записывает цены в прайс плотерной печати
+        /// Читаем цены в прайс плотерной печати
         /// </summary>
         /// <returns></returns>
         public static List<PricePloter> GetPricesPlot(string path)
         {
-            // Если цен нет
-            if (_pricePloter == null)
-            {
-                // Читаем из файла
-                _pricePloter = Saver.Load<List<PricePloter>>(path);
-               
-            }           
-            return _pricePloter;
+            return Saver.Load<List<PricePloter>>(path);
         }
 
         /// <summary>
-        /// записывает размеры рулонов
+        /// Читаем размеры рулонов
         /// </summary>
         /// <returns></returns>
         public static List<WidthPloterRoll> GetWidthPlot(string path)
         {
-            // Если цен нет
-            if (_widthPloterRoll == null)
-            {
-                // Читаем из файла
-                _widthPloterRoll = Saver.Load<List<WidthPloterRoll>>(path);
-
-            }
-
-            return _widthPloterRoll;
+            return Saver.Load<List<WidthPloterRoll>>(path);
         }
 
 		#region примеры создания
