@@ -46,7 +46,7 @@ namespace Logic
         /// список размеров рулонов плотера
         /// </summary>
 		 
-        private static List<WidthPloterRoll> _widthPloterRoll;
+        private static List<WidthPlotterRoll> _widthPloterRoll;
 
 		/// <summary>
 		/// список цен лазерной постпечати 
@@ -101,9 +101,9 @@ namespace Logic
         /// Читаем размеры рулонов
         /// </summary>
         /// <returns></returns>
-        public static List<WidthPloterRoll> GetWidthPlot(string path)
+        public static List<WidthPlotterRoll> GetWidthPlot()
         {
-            return Saver.Load<List<WidthPloterRoll>>(path);
+            return Saver.Load<List<WidthPlotterRoll>>(PriceManager.WidthPlotPath);
         }
 
         public static void Save(IEnumerable<LaminatePrice> data)
@@ -118,6 +118,10 @@ namespace Logic
         public static void Save(IEnumerable<PlotterPrice> data)
         {
             Saver.Save(PriceManager.PricesPlotPath, data);
+        }
+        public static void Save(IEnumerable<WidthPlotterRoll> data)
+        {
+            Saver.Save(PriceManager.WidthPlotPath, data);
         }
 
         #region примеры создания
@@ -151,17 +155,17 @@ namespace Logic
             };
 
         // пример создания параметров ширины рулонов плотера
-        public static List<WidthPloterRoll> DefaultWidthPloterRoll => new List<WidthPloterRoll>
+        public static List<WidthPlotterRoll> DefaultWidthPloterRoll => new List<WidthPlotterRoll>
             {
-                new WidthPloterRoll
+                new WidthPlotterRoll
                 {
                     WidthRoll = 1270,
-                    Measure = "1.27 M. ",
+                    Name = "1.27 M. ",
                 },
-                new WidthPloterRoll
+                new WidthPlotterRoll
                 {
                     WidthRoll = 1500,
-                    Measure = "1.5 M. ",
+                    Name = "1.5 M. ",
                 },
             };
 #endregion примеры создания

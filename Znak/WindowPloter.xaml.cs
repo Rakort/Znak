@@ -23,7 +23,7 @@ namespace Znak
             PricePloter = PriceManager.GetPricesPlot();
             PostPechPrice = PriceManager.GetPostPechPrice(PriceManager.PostPechLacerPath);
             //загрузка параметров ширины рулонов
-            WidthPloterRoll = PriceManager.GetWidthPlot(PriceManager.WidthPlotPath);
+            WidthPloterRoll = PriceManager.GetWidthPlot();
             DataContext = this;
 
             // количество изделий по умолчанию 
@@ -141,7 +141,7 @@ namespace Znak
         /// <summary>
         /// пареметры ширины рулонов биндится к ComboBox
         /// </summary>
-        public List<WidthPloterRoll> WidthPloterRoll { get; set; }
+        public List<WidthPlotterRoll> WidthPloterRoll { get; set; }
 
         /// <summary>
         /// прайс лист постпечати
@@ -151,7 +151,7 @@ namespace Znak
         /// <summary>
         /// штрина рулона выбранная пользователем в ComboBox
         /// </summary>
-        public WidthPloterRoll PloterWidthType { get; set; }
+        public WidthPlotterRoll PloterWidthType { get; set; }
 
 		#endregion Variables постпечати
 
