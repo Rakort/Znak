@@ -16,7 +16,7 @@
                 <v:EditLaminateView Background="#FFE5E5E5" Margin="-2,0,-3,0" Height="524" Width="840"/>
             </TabItem>
             <TabItem Header="Постпечатка" Margin="-2,1,-2,-3">
-                <local:WindowRedactPostPech Background="#FFE5E5E5" Margin="-2,0,-3,0" Height="524" Width="840"/>
+                <v:EditPostPrintingView Background="#FFE5E5E5" Margin="-2,0,-3,0" Height="524" Width="840"/>
             </TabItem>
             <TabItem Header="Широкоформатка" Margin="-2,1,-2,-3">
                 <v:EditPlotterView Background="#FFE5E5E5" Margin="-2,0,-3,0" Height="524" Width="840"/>

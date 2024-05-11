@@ -22,7 +22,7 @@ namespace Logic
 
         public const string WidthPlotPath = "Price/WidthPloter_Price.json";
 
-        public const string PostPechLacerPath = "Price/PostPech_Price.json";
+        public const string PostPrintingPath = "Price/PostPech_Price.json";
 
         /// <summary>
         /// список цен
@@ -52,7 +52,7 @@ namespace Logic
 		/// список цен лазерной постпечати 
 		/// </summary>
 		
-		public static List<PostPechPrice> _postPechPrice;
+		public static List<PostPrintingPrice> _postPechPrice;
 
         /// <summary>
         /// записывает цены в прайс
@@ -73,9 +73,9 @@ namespace Logic
         /// Читаем цены лазерной постпечати
         /// </summary>
         /// <returns></returns>
-        public static List<PostPechPrice> GetPostPechPrice(string path)
+        public static List<PostPrintingPrice> GetPostPrintingPrice()
         {
-            return Saver.Load<List<PostPechPrice>>(path);
+            return Saver.Load<List<PostPrintingPrice>>(PriceManager.PostPrintingPath);
         }
 
 
@@ -109,6 +109,11 @@ namespace Logic
         public static void Save(IEnumerable<LaminatePrice> data)
         {
             Saver.Save(PriceManager.LaminatePath, data);
+        }
+
+        public static void Save(IEnumerable<PostPrintingPrice> data)
+        {
+            Saver.Save(PriceManager.PostPrintingPath, data);
         }
 
         public static void Save(IEnumerable<LaserPrice> data)

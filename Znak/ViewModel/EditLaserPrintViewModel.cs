@@ -8,7 +8,7 @@ using Znak.Common;
 
 namespace Znak.ViewModel
 {
-    public class EditLaserPrintViewModel: INotifyPropertyChanged
+    public class EditLaserPrintViewModel : INotifyPropertyChanged
     {
         public EditLaserPrintViewModel()
         {

@@ -6,18 +6,21 @@ using System.Threading.Tasks;
 
 namespace Logic.Model
 {
-	public class PostPechPrice
+    public class PostPrintingPrice : ICloneable
 	{
-
         /// <summary>
         /// цена
         /// </summary>
-        public decimal PostPech_Price { get; set; }
+        public decimal Price { get; set; }
 
         /// <summary>
         /// наименование
         /// </summary>
-        public string Measure { get; set; }
+        public string Name { get; set; }
 
-	}
+        public object Clone()
+        {
+            return new PostPrintingPrice { Name = Name, Price = Price };
+        }
+    }
 }

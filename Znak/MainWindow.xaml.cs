@@ -20,7 +20,7 @@ namespace Znak
             // загружает прайс листы
             PriceList = PriceManager.GetLaserPrices();
             LaminationPrice = PriceManager.GetLaminatePrice();
-            PostPechPrice = PriceManager.GetPostPechPrice(PriceManager.PostPechLacerPath);
+            PostPechPrice = PriceManager.GetPostPrintingPrice();
 
             // строчка для работы биндингов
             DataContext = this;
@@ -140,7 +140,7 @@ namespace Znak
         /// <summary>
         /// прайс лист постпечати
         /// </summary>
-        public List<PostPechPrice> PostPechPrice { get; set; }
+        public List<PostPrintingPrice> PostPechPrice { get; set; }
 
         /// <summary>
         /// количество бигов
@@ -322,11 +322,11 @@ namespace Znak
                 {
                     if (product < 1) { MessageBox messageBox = new("Выбрана постпечать. Укажите количество изделий!"); messageBox.ShowDialog(); return; }
 
-                    PostPechPrice _postPechPrice = GetPostPechPriceByMeasure(measure.Key); // находим цену
+                    PostPrintingPrice _postPechPrice = GetPostPechPriceByMeasure(measure.Key); // находим цену
 
                     int quantity = GetQuantityByPropertyName(measure.Value); // находим колличество
 
-                    SUmmPostPechPrice += (quantity * _postPechPrice.PostPech_Price) * product; //прибавляем стоиомть услуги к сумме всей постпечатки
+                    SUmmPostPechPrice += (quantity * _postPechPrice.Price) * product; //прибавляем стоиомть услуги к сумме всей постпечатки
                 }
             }
             // определяем активность CB
@@ -347,7 +347,7 @@ namespace Znak
             }
 
             //вытаскиваем цену
-            PostPechPrice GetPostPechPriceByMeasure(string measure) { return PostPechPrice.Where(x => x.Measure.Contains(measure)).FirstOrDefault(); }
+            PostPrintingPrice GetPostPechPriceByMeasure(string measure) { return PostPechPrice.Where(x => x.Name.Contains(measure)).FirstOrDefault(); }
             //вытаскиваем колличество
             int GetQuantityByPropertyName(string propertyName) { PropertyInfo propertyInfo = this.GetType().GetProperty(propertyName); return (int)propertyInfo.GetValue(this); }
         }

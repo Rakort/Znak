@@ -21,7 +21,7 @@ namespace Znak
 
             //загрузка цен
             PricePloter = PriceManager.GetPricesPlot();
-            PostPechPrice = PriceManager.GetPostPechPrice(PriceManager.PostPechLacerPath);
+            PostPechPrice = PriceManager.GetPostPrintingPrice();
             //загрузка параметров ширины рулонов
             WidthPloterRoll = PriceManager.GetWidthPlot();
             DataContext = this;
@@ -146,7 +146,7 @@ namespace Znak
         /// <summary>
         /// прайс лист постпечати
         /// </summary>
-        public List<PostPechPrice> PostPechPrice { get; set; }
+        public List<PostPrintingPrice> PostPechPrice { get; set; }
 
         /// <summary>
         /// штрина рулона выбранная пользователем в ComboBox
@@ -251,14 +251,14 @@ namespace Znak
 		/// </summary>
 		public void InicialPostPehc()
         {
-            PostPechPrice _postPechPrice = PostPechPrice.Where(x => x.Measure.Contains("люверсы банерные")).FirstOrDefault();
-            PriceLuvers = _postPechPrice.PostPech_Price;
-            PostPechPrice _postPechPrice1 = PostPechPrice.Where(x => x.Measure.Contains("интервал люверсов")).FirstOrDefault();
-            Interval = _postPechPrice1.PostPech_Price;
-            PostPechPrice _postPechPrice2 = PostPechPrice.Where(x => x.Measure.Contains("проклейка")).FirstOrDefault();
-            PriceSizings = _postPechPrice2.PostPech_Price;
-            PostPechPrice _postPechPrice3 = PostPechPrice.Where(x => x.Measure.Contains("ламинация пленки")).FirstOrDefault();
-            PriceLam = _postPechPrice3.PostPech_Price;
+            PostPrintingPrice _postPechPrice = PostPechPrice.Where(x => x.Name.Contains("люверсы банерные")).FirstOrDefault();
+            PriceLuvers = _postPechPrice.Price;
+            PostPrintingPrice _postPechPrice1 = PostPechPrice.Where(x => x.Name.Contains("интервал люверсов")).FirstOrDefault();
+            Interval = _postPechPrice1.Price;
+            PostPrintingPrice _postPechPrice2 = PostPechPrice.Where(x => x.Name.Contains("проклейка")).FirstOrDefault();
+            PriceSizings = _postPechPrice2.Price;
+            PostPrintingPrice _postPechPrice3 = PostPechPrice.Where(x => x.Name.Contains("ламинация пленки")).FirstOrDefault();
+            PriceLam = _postPechPrice3.Price;
         }
 
 		/// <summary>
